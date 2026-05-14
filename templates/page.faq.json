@@ -1,0 +1,194 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "banner-image",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "page_alignment": "a-left"
+      }
+    },
+    "16269717761ea06eb7": {
+      "type": "accordion",
+      "blocks": {
+        "16269717761ea06eb7-0": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        },
+        "16269717761ea06eb7-1": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        },
+        "16269717761ea06eb7-2": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        }
+      },
+      "block_order": [
+        "16269717761ea06eb7-0",
+        "16269717761ea06eb7-1",
+        "16269717761ea06eb7-2"
+      ],
+      "settings": {
+        "title": "Getting Started",
+        "max_width": 80,
+        "allow_multiple": false
+      }
+    },
+    "1626971780f8294dca": {
+      "type": "accordion",
+      "blocks": {
+        "1626971780f8294dca-0": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        },
+        "1626971780f8294dca-1": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        },
+        "1626971780f8294dca-2": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        }
+      },
+      "block_order": [
+        "1626971780f8294dca-0",
+        "1626971780f8294dca-1",
+        "1626971780f8294dca-2"
+      ],
+      "settings": {
+        "title": "Shipping",
+        "max_width": 80,
+        "allow_multiple": false
+      }
+    },
+    "16269718683f95cb9e": {
+      "type": "accordion",
+      "blocks": {
+        "16269718683f95cb9e-0": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        },
+        "16269718683f95cb9e-1": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        },
+        "16269718683f95cb9e-2": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        }
+      },
+      "block_order": [
+        "16269718683f95cb9e-0",
+        "16269718683f95cb9e-1",
+        "16269718683f95cb9e-2"
+      ],
+      "settings": {
+        "title": "Payment",
+        "max_width": 80,
+        "allow_multiple": false
+      }
+    },
+    "16269718764d64ee8b": {
+      "type": "accordion",
+      "blocks": {
+        "16269718764d64ee8b-0": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        },
+        "16269718764d64ee8b-1": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        },
+        "16269718764d64ee8b-2": {
+          "type": "accordion_pane",
+          "settings": {
+            "title": "Heading",
+            "content": "<p>Accordion pane content</p>"
+          }
+        }
+      },
+      "block_order": [
+        "16269718764d64ee8b-0",
+        "16269718764d64ee8b-1",
+        "16269718764d64ee8b-2"
+      ],
+      "settings": {
+        "title": "Returns",
+        "max_width": 80,
+        "allow_multiple": false
+      }
+    },
+    "1626972241b04c253a": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "scale": 2,
+        "page_height": 300,
+        "heading": "Still need help? Send us a note.",
+        "subheading": "",
+        "button_text": "Contact Us",
+        "button_link": "shopify://pages/contact",
+        "heading_font_size": 31,
+        "subheading_font_size": 16,
+        "text_color": "#000",
+        "button_text_color": "#fff",
+        "button_color": "#000",
+        "background": "transparent",
+        "section_padding": "top"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main",
+    "16269717761ea06eb7",
+    "1626971780f8294dca",
+    "16269718683f95cb9e",
+    "16269718764d64ee8b",
+    "1626972241b04c253a"
+  ]
+}

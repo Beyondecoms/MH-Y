@@ -1,0 +1,130 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --text-color: {{ section.settings.text_color }};
+    --section-background: {{ section.settings.newsletter_background }};
+    --button-color: {{ section.settings.newsletter_button_color }};
+  }
+</style>
+
+  <section class="custom_footer__section footer-{{ section.id }}" data-aos="fade">
+    <div class="footer__section-container">
+      <div class="footer__section-contentWrapper">
+        {% unless section.settings.heading == blank %}
+          <div class="footer__section_main_heading">{{ section.settings.heading }}</div>
+        {% endunless %}
+        {% unless section.settings.newsletter_subheading == blank %}
+          <div class="footer__section-subheading rte">
+            {{ section.settings.newsletter_subheading }}
+          </div>
+        {% endunless %}
+      </div>
+      <div class="footer__section-content_wrapper">
+        {% form 'customer' %}
+          {% if form.posted_successfully? %}
+            <p class="success">{{ 'general.password_page.thanks' | t }}</p>
+          {% else %}
+            <input type="hidden" name="contact[tags]" value="prospect, newsletter">
+            <label class="visuallyhidden" for="newsletter__section-email footer__section_email">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+            <div class="footer__section_form_contents">
+              <input type="email" class="newsletter__section-email footer__section_email" name="contact[email]" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" id="newsletter__section-email">
+              <input type="submit" class="newsletter__section-submit footer__section_submit" value="{{ 'general.newsletter_form.submit' | t }}">
+            </div>
+          {% endif %}
+          {{ form.errors | default_errors }}
+        {% endform %}
+        {% if section.settings.show_social_icons %}
+          <ul class="newsletter__social-icons">
+          {% render 'social-icons', wrapper: '.newsletter__social-icons', fill_color: section.settings.text_color, hover_color: section.settings.text_color %}
+          </ul>
+        {% endif %}
+      </div>
+      <div class="footer__section_menu">
+        <ul>
+          {% for link in linklists.footer-menu.links %}
+            <li>
+              <a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+        <ul id="social-links">
+          {% render 'social-icons', wrapper: '.footer-left', fill_color: 'var(--footer-color)', hover_color: 'var(--footer-color)' %}
+        </ul>
+      </div>
+      
+      <div class="footer__section_favicon_logo">
+        <a href="{{ routes.root_url }}">
+          {% render 'basic-responsive-image',
+            type: section.settings.favicon_logo,
+            width: 1200,
+            loading: 'eager',
+            fetchpriority: 'high'
+          %}
+        </a>
+      </div>
+        
+    </div>
+  </section>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "limit": 1,
+  "settings": [{
+      "type": "paragraph",
+      "content": "Any customers who signup will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_icons",
+      "label": "Show social icons",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Subscribe to our newsletter"
+    },
+    {
+      "type": "richtext",
+      "id": "newsletter_subheading",
+      "label": "Subheading",
+      "default": "<p>Signup for our newsletter to stay up to date on sales and events.</p>"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "newsletter_background",
+      "label": "Background",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "newsletter_button_color",
+      "label": "Button text",
+      "default": "#fff"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Select the menu for the footer"
+    },
+    {
+      "type": "image_picker",
+      "id": "favicon_logo",
+      "label": "Select the logo"
+    }
+  ],
+  "presets": [{
+    "name": "Custom Footer"
+  }],
+  "disabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

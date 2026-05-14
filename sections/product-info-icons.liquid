@@ -1,0 +1,98 @@
+{% schema %}
+{
+  "name": "Product Info Icons",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Heading",
+      "default": "Product Information"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "info_item",
+      "name": "Info Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "icon_label",
+          "label": "Icon Label",
+          "default": "Fabric"
+        },
+        {
+          "type": "text",
+          "id": "icon_text",
+          "label": "Icon Text",
+          "default": "Linen"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Info Icons",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "info_item"
+        },
+        {
+          "type": "info_item"
+        },
+        {
+          "type": "info_item"
+        },
+        {
+          "type": "info_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="product-info-icons">
+  <h2>{{ section.settings.section_heading }}</h2>
+  <div class="info-icons-grid">
+    {% for block in section.blocks %}
+      <div class="info-item">
+        {% if block.settings.icon_image != blank %}
+          <img src="{{ block.settings.icon_image | img_url: '100x100' }}" alt="{{ block.settings.icon_label }}">
+        {% endif %}
+        <p class="icon-label">{{ block.settings.icon_label }}</p>
+        <p class="icon-text">{{ block.settings.icon_text }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .product-info-icons {
+    text-align: center;
+    margin: 40px 0;
+  }
+  .info-icons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+  .info-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+  .icon-label {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+  }
+</style>

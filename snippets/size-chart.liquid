@@ -1,0 +1,126 @@
+<div data-wau-modal-content="product-modal--{{ section.id }}--{{ forloop.index }}" style="display: none;">
+    <div class="rte">
+      {% assign matched = false %}
+
+      {% assign category_names_1 = settings.size_chart_category_1 | split: ',' %}
+      {% for category_name_1 in category_names_1 %}
+        {% if category_name_1 == product.type %}
+          {% render 'basic-responsive-image', 
+            type: settings.size_chart_image_1 %}
+          {% assign matched = true %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      {% unless matched %}
+        {% assign category_names_2 = settings.size_chart_category_2 | split: ',' %}
+        {% for category_name_2 in category_names_2 %}
+          {% if category_name_2 == product.type %}
+            {% render 'basic-responsive-image', 
+                type: settings.size_chart_image_2 %}
+            {% assign matched = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
+
+      {% unless matched %}
+        {% assign category_names_3 = settings.size_chart_category_3 | split: ',' %}
+        {% for category_name_3 in category_names_3 %}
+          {% if category_name_3 == product.type %}
+            {% render 'basic-responsive-image', 
+                type: settings.size_chart_image_3 %}
+            {% assign matched = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
+
+      {% unless matched %}
+        {% assign category_names_4 = settings.size_chart_category_4 | split: ',' %}
+        {% for category_name_4 in category_names_4 %}
+          {% if category_name_4 == product.type %}
+            {% render 'basic-responsive-image', 
+                type: settings.size_chart_image_4 %}
+            {% assign matched = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
+
+      {% unless matched %}
+        {% assign category_names_5 = settings.size_chart_category_5 | split: ',' %}
+        {% for category_name_5 in category_names_5 %}
+          {% if category_name_5 == product.type %}
+            {% render 'basic-responsive-image', 
+                type: settings.size_chart_image_5 %}
+            {% assign matched = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
+
+      {% unless matched %}
+        {% assign category_names_6 = settings.size_chart_category_6 | split: ',' %}
+        {% for category_name_6 in category_names_6 %}
+          {% if category_name_6 == product.type %}
+            {% render 'basic-responsive-image', 
+                type: settings.size_chart_image_6 %}
+            {% assign matched = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
+
+      {% unless matched %}
+        {% assign category_names_7 = settings.size_chart_category_7 | split: ',' %}
+        {% for category_name_7 in category_names_7 %}
+          {% if category_name_7 == product.type %}
+            {% render 'basic-responsive-image', 
+                type: settings.size_chart_image_7 %}
+            {% assign matched = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
+
+      {% unless matched %}
+        {% assign category_names_8 = settings.size_chart_category_8 | split: ',' %}
+        {% for category_name_8 in category_names_8 %}
+          {% if category_name_8 == product.type %}
+            {% render 'basic-responsive-image', 
+                type: settings.size_chart_image_8 %}
+            {% assign matched = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
+
+       {% unless matched %}
+  {% assign category_names_9 = settings.size_chart_category_9 | split: ',' %}
+  {% for category_name_9 in category_names_9 %}
+    {% assign category_name_9 = category_name_9 | strip %}
+    {% if product.tags contains category_name_9 %}
+      {% if category_name_9 == 'Shorts' or category_name_9 == 'short' %}
+        <img 
+          src="https://cdn.shopify.com/s/files/1/0653/3467/3561/files/size-chart.jpg?v=1762360497" 
+          alt="Shorts Size Chart" 
+          class="img-fluid" 
+        >
+      {% else %}
+        {% render 'basic-responsive-image', 
+          type: settings.size_chart_image_9 %}
+      {% endif %}
+      {% assign matched = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endunless %}
+
+
+      {% unless matched %}
+        {% render 'basic-responsive-image',
+        type: settings.fallback_size_chart %}
+      {% endunless %}
+    </div><!-- /.rte -->
+  </div>
