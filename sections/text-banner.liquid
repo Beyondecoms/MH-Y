@@ -17,7 +17,7 @@
       -%}
 
       <div class="usp__content usp-{{ block.id }} {{ grid }} auto">
-        <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image_alt }}" class="textcol-image" />
+        {{ block.settings.image | image_url: width: 160 | image_tag: class: 'textcol-image', loading: 'lazy', alt: block.settings.image_alt }}
         <h3>{{ block.settings.heading | escape }}</h3>
         {{ block.settings.textarea }}
       </div>

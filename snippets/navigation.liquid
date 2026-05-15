@@ -34,6 +34,7 @@
                             render 'basic-responsive-image',
                             type: block.settings.nav_image,
                             width: 1200,
+                            alt: link.title | append: ' Featured Image by MH&Y India',
                             loading: 'eager'
                           %}
                         </a>
@@ -151,6 +152,7 @@
                             render 'basic-responsive-image',
                             type: image,
                             width: 1200,
+                            alt: link.title | append: ' Menu Image ' | append: n | append: ' by MH&Y India',
                             loading: 'eager'
                           %}
                         {% if link_n != blank %}</a>{% endif %}

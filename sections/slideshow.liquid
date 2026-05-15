@@ -137,6 +137,29 @@ data-aos="fade">
           assign second_link = block.settings.second_link
           assign caption_position = block.settings.caption_position
 
+          assign alt_heading = heading | strip_html | strip
+          assign alt_subheading = subheading | strip_html | strip
+          assign slide_alt_base = alt_heading
+          if slide_alt_base == blank
+            assign slide_alt_base = alt_subheading
+          elsif alt_subheading != blank
+            assign slide_alt_base = slide_alt_base | append: ' – ' | append: alt_subheading
+          endif
+          if slide_alt_base == blank and link contains '/collections/'
+            assign collection_handle = link | split: '/collections/' | last | split: '?' | first | split: '/' | first | replace: '-', ' ' | strip
+            if collection_handle != blank
+              assign slide_alt_base = collection_handle | append: ' Collection Banner'
+            endif
+          endif
+          if slide_alt_base == blank
+            assign slide_alt_base = 'Homepage Banner ' | append: forloop.index
+          endif
+          if slide_alt_base contains 'MH&Y'
+            assign slide_alt = slide_alt_base
+          else
+            assign slide_alt = slide_alt_base | append: ' by MH&Y India'
+          endif
+
           if block.settings.link != blank and block.settings.button_text == blank
             assign image_is_link = true
           endif
@@ -207,6 +230,7 @@ data-aos="fade">
                   type: block.settings.image,
                   width: 2400,
                   class: mobile_class,
+                  alt: slide_alt,
                   loading: loading,
                   fetchpriority: fetch_priority
                 %}
@@ -221,6 +245,7 @@ data-aos="fade">
                   type: block.settings.mobile_image,
                   width: 2400,
                   class: 'md-hide desktop-hide',
+                  alt: slide_alt,
                   loading: loading,
                   fetchpriority: fetch_priority
                 %}

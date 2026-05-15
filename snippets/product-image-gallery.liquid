@@ -236,7 +236,7 @@
           </div>
           <noscript>
             
-            <img id="{{ media.id }}" class="product-main-image" src="{{ featured_media | img_url: '800x' }}" alt='{{ media.alt | escape }}'/>
+            <img id="{{ media.id }}" class="product-main-image" src="{{ media.preview_image | image_url: width: 800 }}" alt='{{ media.alt | escape }}' loading="lazy"/>
           </noscript>
         </div>
       {% endfor %}
@@ -309,4 +309,3 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
-

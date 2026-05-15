@@ -13,6 +13,7 @@ Accepts:
 - class:         {String} CSS Classes added to the parent .box-ratio element. (optional)
 - loading:       {String} Set the loading attribute. By default is 'lazy'. (optional)
 - fetch_priority {String} Set the fetchpriority attribute. By defaul is 'auto'. (optional)
+- alt:           {String} Alt text for the image. Falls back to the image's alt. (optional)
 
 Usage:
 {%
@@ -27,6 +28,7 @@ Usage:
 %}
 {% endcomment %}
 {% assign image_box_ratio = type.height | append: ".0" | times: 1 | divided_by: type.width | times: 100 | append: "%" %}
+{%- assign alt_text = alt | default: type.alt | strip_html | strip -%}
 {%- capture sizes -%}
   (min-width: 1601px) {{ lg_render | default: '2000px' }},
   (min-width: 768px) and (max-width: 1600px) {{ md_render | default: '1200px' }},
@@ -36,10 +38,11 @@ Usage:
 {% capture fetch_priority %}{{ fetchpriority | default: 'auto' }}{% endcapture %}
 <div class="box-ratio {{ class }}" style="padding-bottom: {{ image_box_ratio }};">
   {{ type | image_url: width: width | default: 1200 | image_tag:
+    alt: alt_text,
     loading: loading,
     fetchpriority: fetch_priority,
     sizes: sizes,
     widths: '200, 300, 400, 500, 600, 700, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000',
     class: img_class }}
 </div>
-<noscript>{{ type | image_url: width: width | image_tag: alt: type.alt }}</noscript>
+<noscript>{{ type | image_url: width: width | image_tag: alt: alt_text }}</noscript>

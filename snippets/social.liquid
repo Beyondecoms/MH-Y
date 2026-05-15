@@ -112,11 +112,13 @@
   {% endif %}
   
 
-    {% assign product_url = shop.url | append: product.url %}
+{% assign product_url = shop.url | append: product.url %}
 {% assign product_title = product.title %}
 {% assign encoded_title = product_title | url_encode %}
 
-<a href="https://wa.me/?text={{ encoded_title }}%20{{ product_url }}" target="_blank"><img src="https://cdn.shopify.com/s/files/1/0618/3183/9957/files/001-whatsapp.png?v=1646371846" style="width:17px;"></a>
+<a href="https://wa.me/?text={{ encoded_title }}%20{{ product_url }}" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+  <img src="https://cdn.shopify.com/s/files/1/0618/3183/9957/files/001-whatsapp.png?v=1646371846" alt="WhatsApp" loading="lazy" decoding="async" width="17" height="17" style="width:17px;">
+</a>
 
 
 </div>

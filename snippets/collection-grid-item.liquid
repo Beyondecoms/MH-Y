@@ -31,6 +31,17 @@
 {% else %}
   {% capture collection_title %}{{ collection.title }}{% endcapture %}
 {% endif %}
+{%- liquid
+  assign collection_alt_base = collection_title | strip_html | strip
+  if collection_alt_base == blank
+    assign collection_alt_base = 'Category'
+  endif
+  if collection_alt_base contains 'MH&Y'
+    assign collection_alt = collection_alt_base
+  else
+    assign collection_alt = collection_alt_base | append: ' for Men by MH&Y India'
+  endif
+-%}
 {% capture collection_details %}
   <div class="collection__item-details{% if bold %} is_bold{% endif %}">
     <a class="inline-block-full" href="{{ collection.url }}" title="{{ collection_title }}">
@@ -56,6 +67,7 @@
         render 'basic-responsive-image',
         type: block_image,
         width: 1200,
+        alt: collection_alt,
         loading: loading,
         fetchpriority: fetchpriority
       %}
@@ -64,6 +76,7 @@
         render 'basic-responsive-image',
         type: collection.image,
         width: 1200,
+        alt: collection_alt,
         loading: loading,
         fetchpriority: fetchpriority
       %}
@@ -72,6 +85,7 @@
         render 'basic-responsive-image',
         type: collection.products.first.featured_image,
         width: 1200,
+        alt: collection_alt,
         loading: loading,
         fetchpriority: fetchpriority
       %}
