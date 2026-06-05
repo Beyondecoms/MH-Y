@@ -1,75 +1,375 @@
 <style>
   #shopify-section-{{ section.id }} {
-    --text-color: {{ section.settings.text_color }};
-    --section-background: {{ section.settings.newsletter_background }};
-    --button-color: {{ section.settings.newsletter_button_color }};
+    --footer-bg: {{ section.settings.newsletter_background }};
+    --footer-text: {{ section.settings.text_color }};
+    --footer-button-text: {{ section.settings.newsletter_button_color }};
+    --footer-border: rgba(0, 0, 0, 0.12);
+    --footer-muted: rgba(0, 0, 0, 0.68);
+    --footer-card-bg: rgba(255, 255, 255, 0.72);
+  }
+
+  .custom_footer__section {
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 70px 20px 34px;
+  }
+
+  .custom_footer__section .footer__section-container {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .custom_footer__section .footer__newsletter-card {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 28px;
+    align-items: center;
+    padding: 34px;
+    border: 1px solid var(--footer-border);
+    border-radius: 28px;
+    background: var(--footer-card-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  }
+
+  .custom_footer__section .footer__section_main_heading {
+    font-size: clamp(28px, 3vw, 44px);
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    color: var(--footer-text);
+    text-wrap: balance;
+  }
+
+  .custom_footer__section .footer__section-subheading {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--footer-muted);
+    max-width: 560px;
+  }
+
+  .custom_footer__section .footer__section_form_contents {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .custom_footer__section .newsletter__section-email {
+    width: 100%;
+    min-height: 52px;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    background: transparent;
+    padding: 10px 0;
+    font-size: 15px;
+    outline: none;
+    color: var(--footer-text);
+  }
+
+  .custom_footer__section .newsletter__section-email::placeholder {
+    color: rgba(0, 0, 0, 0.55);
+  }
+
+  .custom_footer__section .newsletter__section-submit {
+    min-width: 120px;
+    min-height: 52px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--footer-text);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0 22px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .custom_footer__section .newsletter__section-submit:hover {
+    transform: translateY(-1px);
+    opacity: 0.92;
+  }
+
+  .custom_footer__section .footer__social-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+
+  .custom_footer__section .footer__social-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--footer-text);
+  }
+
+  .custom_footer__section .newsletter__social-icons {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .custom_footer__section .footer__bottom-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+    align-items: start;
+    margin-top: 34px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .custom_footer__section .footer__section_menu ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px 26px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .custom_footer__section .footer__section_menu a {
+    color: var(--footer-text);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+  }
+
+  .custom_footer__section .footer__section_menu a:hover {
+    opacity: 0.75;
+  }
+
+  .custom_footer__section .footer__branding {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .custom_footer__section .footer__section_favicon_logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .custom_footer__section .footer__section_favicon_logo img {
+    max-width: 90px;
+    height: auto;
+    display: block;
+  }
+
+  .custom_footer__section .footer__payment-methods {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .custom_footer__section .footer__payment-label {
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--footer-muted);
+  }
+
+  .custom_footer__section .footer__payment-methods img {
+   
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .custom_footer__section .footer__copyright {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--footer-muted);
+  }
+    .footer__section_favicon_logo{
+      margin: auto;
+    }
+
+  @media (max-width: 991px) {
+    .custom_footer__section .footer__newsletter-card,
+    .custom_footer__section .footer__bottom-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .custom_footer__section .footer__bottom-grid {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .custom_footer__section {
+      padding: 44px 16px 24px;
+    }
+
+    .custom_footer__section .footer__newsletter-card {
+      padding: 22px;
+      border-radius: 22px;
+    }
+
+    .custom_footer__section .footer__section_form_contents {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .custom_footer__section .newsletter__section-submit {
+      width: 100%;
+    }
+
+    .custom_footer__section .footer__section_menu ul {
+      gap: 10px 18px;
+    }
   }
 </style>
 
-  <section class="custom_footer__section footer-{{ section.id }}" data-aos="fade">
-    <div class="footer__section-container">
+<section class="custom_footer__section footer-{{ section.id }}" data-aos="fade">
+  <div class="footer__section-container">
+    <div class="footer__newsletter-card">
       <div class="footer__section-contentWrapper">
         {% unless section.settings.heading == blank %}
           <div class="footer__section_main_heading">{{ section.settings.heading }}</div>
         {% endunless %}
+
         {% unless section.settings.newsletter_subheading == blank %}
           <div class="footer__section-subheading rte">
             {{ section.settings.newsletter_subheading }}
           </div>
         {% endunless %}
       </div>
+
       <div class="footer__section-content_wrapper">
         {% form 'customer' %}
           {% if form.posted_successfully? %}
             <p class="success">{{ 'general.password_page.thanks' | t }}</p>
           {% else %}
             <input type="hidden" name="contact[tags]" value="prospect, newsletter">
-            <label class="visuallyhidden" for="newsletter__section-email footer__section_email">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+
+            <label class="visuallyhidden" for="newsletter__section-email">
+              {{ 'general.newsletter_form.newsletter_email' | t }}
+            </label>
+
             <div class="footer__section_form_contents">
-              <input type="email" class="newsletter__section-email footer__section_email" name="contact[email]" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" id="newsletter__section-email">
-              <input type="submit" class="newsletter__section-submit footer__section_submit" value="{{ 'general.newsletter_form.submit' | t }}">
+              <input
+                type="email"
+                class="newsletter__section-email footer__section_email"
+                name="contact[email]"
+                placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}"
+                id="newsletter__section-email"
+                required
+              >
+              <input
+                type="submit"
+                class="newsletter__section-submit footer__section_submit"
+                value="{{ 'general.newsletter_form.submit' | t }}"
+              >
             </div>
           {% endif %}
+
           {{ form.errors | default_errors }}
         {% endform %}
+
         {% if section.settings.show_social_icons %}
-          <ul class="newsletter__social-icons">
-          {% render 'social-icons', wrapper: '.newsletter__social-icons', fill_color: section.settings.text_color, hover_color: section.settings.text_color %}
-          </ul>
+          <div class="footer__social-wrap">
+            <span class="footer__social-label">Connect</span>
+            <ul class="newsletter__social-icons">
+              {% render 'social-icons',
+                wrapper: '.newsletter__social-icons',
+                fill_color: section.settings.text_color,
+                hover_color: section.settings.text_color
+              %}
+            </ul>
+          </div>
         {% endif %}
       </div>
+    </div>
+
+    <div class="footer__bottom-grid">
       <div class="footer__section_menu">
         <ul>
-          {% for link in linklists.footer-menu.links %}
-            <li>
-              <a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
-            </li>
-          {% endfor %}
+          {% if section.settings.footer_menu != blank %}
+            {% for link in linklists[section.settings.footer_menu].links %}
+              <li>
+                <a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          {% endif %}
         </ul>
-        <ul id="social-links">
+               <ul id="social-links">
           {% render 'social-icons', wrapper: '.footer-left', fill_color: 'var(--footer-color)', hover_color: 'var(--footer-color)' %}
         </ul>
       </div>
-      
-      <div class="footer__section_favicon_logo">
-        <a href="{{ routes.root_url }}">
-          {% render 'basic-responsive-image',
-            type: section.settings.favicon_logo,
-            width: 1200,
-            loading: 'eager',
-            fetchpriority: 'high'
-          %}
-        </a>
+
+      <div class="footer__branding">
+        <div class="footer__section_favicon_logo">
+          <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+            {% comment %} {% if section.settings.favicon_logo != blank %}
+              {{ section.settings.favicon_logo | image_url: width: 180 | image_tag:
+                loading: 'eager',
+                fetchpriority: 'high',
+                width: 180,
+                height: 180 | times: section.settings.favicon_logo.height | divided_by: section.settings.favicon_logo.width,
+                alt: shop.name
+              }}
+            {% endif %} {% endcomment %}
+
+            <img src="https://cdn.shopify.com/s/files/1/0653/3467/3561/files/LOGO_WITH_TYPO_BLACK2x_1.png?v=1727093974" alt="MH&Y"/>
+          </a>
+        </div>
+
+        <div class="footer__payment-methods">
+          <span class="footer__payment-label">Secure payments</span>
+
+          {% if section.settings.payment_methods_image != blank %}
+            {{ section.settings.payment_methods_image | image_url: width: 600 | image_tag:
+              loading: 'lazy',
+              width: 600,
+              height: 600 | times: section.settings.payment_methods_image.height | divided_by: section.settings.payment_methods_image.width,
+              alt: 'Accepted payment methods'
+            }}
+          {% else %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0653/3467/3561/files/2_2_7775c7aa-3d11-4611-982b-53c822c4bd88.png?v=1778839758"
+              alt="Accepted payment methods"
+              loading="lazy"
+              width="600"
+              height="120"
+            >
+          {% endif %}
+        </div>
       </div>
-        
+
+      <div></div>
     </div>
-  </section>
+
+    <div class="footer__copyright">
+      {% if section.settings.copyright_text != blank %}
+        {{ section.settings.copyright_text }}
+      {% else %}
+        © {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
+      {% endif %}
+    </div>
+  </div>
+</section>
 
 {% schema %}
 {
   "name": "Custom Footer",
   "limit": 1,
-  "settings": [{
+  "settings": [
+    {
       "type": "paragraph",
       "content": "Any customers who signup will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
     },
@@ -95,19 +395,19 @@
       "type": "color",
       "id": "text_color",
       "label": "Text color",
-      "default": "#ffffff"
+      "default": "#111111"
     },
     {
       "type": "color",
       "id": "newsletter_background",
       "label": "Background",
-      "default": "#000"
+      "default": "#f8f6f2"
     },
     {
       "type": "color",
       "id": "newsletter_button_color",
       "label": "Button text",
-      "default": "#fff"
+      "default": "#ffffff"
     },
     {
       "type": "link_list",
@@ -118,11 +418,24 @@
       "type": "image_picker",
       "id": "favicon_logo",
       "label": "Select the logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_methods_image",
+      "label": "Select payment methods image"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "© 2026 Your brand. All rights reserved."
     }
   ],
-  "presets": [{
-    "name": "Custom Footer"
-  }],
+  "presets": [
+    {
+      "name": "Custom Footer"
+    }
+  ],
   "disabled_on": {
     "groups": ["header"]
   }

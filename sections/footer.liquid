@@ -69,6 +69,8 @@
                   | image_tag:
                     class: 'mhy-footer__logo',
                     loading: 'lazy',
+                    width: 360,
+                    height: 360 | times: brand_block.settings.img.height | divided_by: brand_block.settings.img.width,
                     alt: 'MH&Y India Premium Menswear Logo'
                 }}
               </a>
@@ -243,6 +245,8 @@
                               | image_tag:
                                 class: 'disclosure__toggle__flag',
                                 loading: 'lazy',
+                                width: 32,
+                                height: 32,
                                 alt: localization.country.name
                             }}
                           </span>
@@ -262,6 +266,8 @@
                                     | image_tag:
                                       class: 'disclosure__toggle__flag',
                                       loading: 'lazy',
+                                      width: 32,
+                                      height: 32,
                                       alt: country.name
                                   }}
                                 </span>
@@ -293,6 +299,8 @@
             | image_tag:
               class: 'mhy-footer__payment-strip',
               loading: 'lazy',
+              width: 1400,
+              height: 1400 | times: section.settings.payment_strip.height | divided_by: section.settings.payment_strip.width,
               alt: payment_strip_alt_text
           }}
         </div>

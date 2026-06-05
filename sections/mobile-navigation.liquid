@@ -350,6 +350,49 @@
       }
     </style>
   </nav>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const nav = document.querySelector('.mhy-mobile-bottomnav');
+  if (!nav) return;
+
+  let lastScrollY = window.scrollY || 0;
+  let ticking = false;
+  const threshold = 8;
+
+  function updateNav() {
+    const currentY = window.scrollY || window.pageYOffset || 0;
+    const scrollingDown = currentY > lastScrollY + threshold;
+    const scrollingUp = currentY < lastScrollY - threshold;
+
+    if (currentY <= 20) {
+      nav.classList.remove('is-visible');
+      nav.classList.add('is-hidden');
+    } else if (scrollingDown) {
+      nav.classList.add('is-visible');
+      nav.classList.remove('is-hidden');
+    } else if (scrollingUp) {
+      nav.classList.remove('is-visible');
+      nav.classList.add('is-hidden');
+    }
+
+    lastScrollY = currentY;
+    ticking = false;
+  }
+
+  window.addEventListener(
+    'scroll',
+    function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateNav);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+
+  updateNav();
+});
+</script>
 {% schema %}
 {
   "name": "Mobile navigation",

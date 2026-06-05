@@ -9,46 +9,6 @@
  */
 {
   "sections": {
-    "full_video_section_JQXE4c": {
-      "type": "full-video-section",
-      "name": "Full Video Section",
-      "settings": {
-        "custom_class": "hero_baner-video",
-        "desktop_video": "shopify://files/videos/desktop-intro.mp4",
-        "mobile_video": "shopify://files/videos/mobile-intro.mp4",
-        "title": "The  ISLE OF MAN",
-        "subtitle": "",
-        "button_link": "shopify://collections/the-isle-of-man",
-        "button_text": "EXPLORE"
-      }
-    },
-    "featured_collection_xh7DWj": {
-      "type": "featured-collection",
-      "name": "Featured collection",
-      "settings": {
-        "heading": "NEW COLLECTION",
-        "collection": "the-isle-of-man",
-        "carousel": true,
-        "show_view_all": true,
-        "reduce_width": true,
-        "grid": 5,
-        "limit": 12,
-        "section_padding": "both"
-      }
-    },
-    "featured_collection_HcMDME": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "BESTSELLER",
-        "collection": "new-arrival",
-        "carousel": true,
-        "show_view_all": false,
-        "reduce_width": false,
-        "grid": 4,
-        "limit": 12,
-        "section_padding": "both"
-      }
-    },
     "slideshow_dPzTCE": {
       "type": "slideshow",
       "blocks": {
@@ -135,6 +95,34 @@
         "enable_stop_pause_on_mobile": true,
         "slide_heading_size": 22,
         "subheading_size": 14,
+        "section_padding": "both"
+      }
+    },
+    "new_feature_collection_MVqbCC": {
+      "type": "new-feature-collection",
+      "name": "Featured collection 2",
+      "settings": {
+        "heading": "Featured collection",
+        "collection": "new-arrival",
+        "carousel": true,
+        "show_view_all": true,
+        "reduce_width": false,
+        "grid": 4,
+        "limit": 12,
+        "section_padding": "both"
+      }
+    },
+    "featured_collection_HcMDME": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "heading": "BESTSELLER",
+        "collection": "new-arrival",
+        "carousel": true,
+        "show_view_all": false,
+        "reduce_width": false,
+        "grid": 4,
+        "limit": 12,
         "section_padding": "both"
       }
     },
@@ -301,6 +289,48 @@
         "desktop_hidden": false
       }
     },
+    "full_video_section_JQXE4c": {
+      "type": "full-video-section",
+      "name": "Full Video Section",
+      "settings": {
+        "custom_class": "hero_baner-video",
+        "desktop_video": "shopify://files/videos/desktop-intro.mp4",
+        "mobile_video": "shopify://files/videos/mobile-intro.mp4",
+        "title": "The  ISLE OF MAN",
+        "subtitle": "",
+        "button_link": "shopify://collections/the-isle-of-man",
+        "button_text": "EXPLORE"
+      }
+    },
+    "featured_collection_xh7DWj": {
+      "type": "featured-collection",
+      "disabled": true,
+      "name": "Featured collection",
+      "settings": {
+        "heading": "NEW COLLECTION",
+        "collection": "the-isle-of-man",
+        "carousel": true,
+        "show_view_all": true,
+        "reduce_width": true,
+        "grid": 5,
+        "limit": 12,
+        "section_padding": "both"
+      }
+    },
+    "new_feature_collection_Ch9JmQ": {
+      "type": "new-feature-collection",
+      "name": "Featured collection 2",
+      "settings": {
+        "heading": "Featured collection",
+        "collection": "casual-shirts",
+        "carousel": true,
+        "show_view_all": true,
+        "reduce_width": false,
+        "grid": 4,
+        "limit": 4,
+        "section_padding": "both"
+      }
+    },
     "grid_layout_NYDdJm": {
       "type": "grid-layout",
       "disabled": true,
@@ -316,50 +346,6 @@
         "text5": "Suits",
         "img6": "shopify://shop_images/2_637a7a11-011b-4d08-99b7-01a1ec7b1c26.png",
         "text6": "Loafers"
-      }
-    },
-    "slideshow_NLKQKp": {
-      "type": "slideshow",
-      "blocks": {
-        "image_HtrkN3": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/1107_m_rrl_c10_img.jpg",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0,
-            "caption_position": "middle_center",
-            "hide_caption_background": false,
-            "heading": "The Art Of Living Well",
-            "subheading": "",
-            "link": "shopify://collections/all",
-            "button_text": "SHOP +",
-            "second_link": "shopify://products/classic-varsity-top",
-            "second_button_text": "EXPLORE +",
-            "text_color": "#ffffff",
-            "button_color": "#ffffff",
-            "button_background": "#173250",
-            "caption_background": "rgba(0,0,0,0)"
-          }
-        }
-      },
-      "block_order": [
-        "image_HtrkN3"
-      ],
-      "disabled": true,
-      "settings": {
-        "full_width": false,
-        "slideshow_size": "fixed_height",
-        "desktop_height": 400,
-        "mobile_height": 600,
-        "caption_below": false,
-        "pager": "arrows",
-        "show_animation": false,
-        "transition": "fade",
-        "slider_speed": 4,
-        "enable_stop_pause_on_mobile": true,
-        "slide_heading_size": 23,
-        "subheading_size": 16,
-        "section_padding": "top"
       }
     },
     "guarantee": {
@@ -810,47 +796,6 @@
         "section_padding": "top"
       }
     },
-    "testimonials_8nFGQp": {
-      "type": "testimonials",
-      "blocks": {
-        "text_block_EBkNzd": {
-          "type": "text_block",
-          "settings": {
-            "heading_text": "A testimonial",
-            "stars": 5,
-            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
-          }
-        },
-        "text_block_qR8A8y": {
-          "type": "text_block",
-          "settings": {
-            "heading_text": "A testimonial",
-            "stars": 5,
-            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
-          }
-        },
-        "text_block_MWmmKQ": {
-          "type": "text_block",
-          "settings": {
-            "heading_text": "A testimonial",
-            "stars": 5,
-            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "text_block_EBkNzd",
-        "text_block_qR8A8y",
-        "text_block_MWmmKQ"
-      ],
-      "disabled": true,
-      "settings": {
-        "heading": "Testimonials",
-        "slider_speed": 5,
-        "star_color": "#ffd450",
-        "section_padding": "both"
-      }
-    },
     "scrolling_text_z43mzG": {
       "type": "scrolling-text",
       "blocks": {
@@ -930,13 +875,14 @@
   },
   "order": [
     "slideshow_dPzTCE",
+    "new_feature_collection_MVqbCC",
     "featured_collection_HcMDME",
     "slideshow",
     "collection_list_X6mgdk",
     "full_video_section_JQXE4c",
     "featured_collection_xh7DWj",
+    "new_feature_collection_Ch9JmQ",
     "grid_layout_NYDdJm",
-    "slideshow_NLKQKp",
     "guarantee",
     "background_video_zxAxbM",
     "rich_text_caamGM",
@@ -951,7 +897,6 @@
     "16267282748dfbd59a",
     "custom_shop_the_look_RRr8K7",
     "image_with_text_overlay_LjcknF",
-    "testimonials_8nFGQp",
     "scrolling_text_z43mzG",
     "mobile_full_video_CJzWBF"
   ]

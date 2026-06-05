@@ -146,6 +146,8 @@
         data-zoom-src="{{ media | image_url: width: 2400 }}"
         class="circle-zoom-image"
         alt="{{ media.alt | escape }}"
+        width="1200"
+        height="{{ 1200 | times: media.height | divided_by: media.width }}"
         loading="{{ loading }}"
         fetchpriority="{{ fetch_priority }}"
         sizes="{{ sizes }}"
@@ -156,6 +158,8 @@
   </div>
 
   <noscript>{{ media | image_url: width: 1200 | image_tag:
+  width: 1200,
+  height: 1200 | times: media.height | divided_by: media.width,
   loading: loading,
   fetchpriority: fetch_priority,
   sizes: sizes,

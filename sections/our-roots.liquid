@@ -1,0 +1,907 @@
+{% comment %}
+  Premium About / Roots Section — v2 (matches design reference)
+  File: sections/premium-roots-section.liquid
+{% endcomment %}
+
+<section id="PremiumRoots-{{ section.id }}" class="premium-roots premium-roots--{{ section.id }}">
+
+  <!-- ── Hero text band ───────────────────────────────────────────── -->
+  <div class="premium-roots__hero">
+    {% if section.settings.bg_image != blank %}
+      <div class="premium-roots__hero-bg">
+        <img
+          src="{{ section.settings.bg_image | image_url: width: 1800 }}"
+          alt=""
+          loading="eager"
+          aria-hidden="true"
+        >
+      </div>
+    {% else %}
+      <div class="premium-roots__hero-bg premium-roots__hero-bg--fallback"></div>
+    {% endif %}
+
+    <div class="premium-roots__hero-overlay"></div>
+
+    <div class="premium-roots__inner page-width">
+      {% if section.settings.heading_ornament != blank %}
+        <div class="premium-roots__ornament" aria-hidden="true">{{ section.settings.heading_ornament }}</div>
+      {% else %}
+        <div class="premium-roots__ornament" aria-hidden="true">
+          <svg width="44" height="14" viewBox="0 0 44 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7" cy="7" r="5.5" stroke="#b68a49" stroke-width="1.2"/>
+            <circle cx="7" cy="7" r="2.5" fill="#b68a49"/>
+            <line x1="13" y1="7" x2="31" y2="7" stroke="#b68a49" stroke-width="1.2"/>
+            <circle cx="37" cy="7" r="5.5" stroke="#b68a49" stroke-width="1.2"/>
+            <circle cx="37" cy="7" r="2.5" fill="#b68a49"/>
+          </svg>
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="premium-roots__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      <div class="premium-roots__heading-rule"></div>
+
+      {% if section.settings.subheading != blank %}
+        <div class="premium-roots__subheading rte">
+          {{ section.settings.subheading }}
+        </div>
+      {% endif %}
+    </div>
+  </div><!-- /.premium-roots__hero -->
+
+    <section class="roots-highlights">
+  <div class="roots-highlights__inner">
+    <div class="roots-highlights__item">
+      <div class="roots-highlights__icon">
+        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="31" fill="#F5E7D1"></circle>
+          <path d="M22 43V21" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M42 43V21" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M22 28C26 24 38 24 42 28" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M24 36C28 33 36 33 40 36" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M20 21H44" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M20 43H44" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+        </svg>
+      </div>
+      <div class="roots-highlights__content">
+        <p>
+          For generations, we’ve been at the heart of
+          <strong>India’s textile industry</strong>, supplying some of the country’s biggest retail brands.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="roots-highlights__item">
+      <div class="roots-highlights__icon">
+        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="31" fill="#F5E7D1"></circle>
+          <rect x="16" y="23" width="32" height="18" rx="3" stroke="#173250" stroke-width="2.5"></rect>
+          <path d="M20 23V19C20 17.3 21.3 16 23 16H26" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M44 23V19C44 17.3 42.7 16 41 16H38" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M32 23V16" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M24 41L22 48" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M40 41L42 48" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M28 31H36" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M28 35H38" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+        </svg>
+      </div>
+      <div class="roots-highlights__content">
+        <p>
+          With years of expertise under our belt and a deep passion for creating something meaningful,
+          we set out to build a brand that truly speaks to the <strong>modern man</strong>.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="roots-highlights__item">
+      <div class="roots-highlights__icon">
+        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="31" fill="#F5E7D1"></circle>
+          <path d="M20 22H44" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M24 26C29 29 35 29 40 26" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M24 34C29 37 35 37 40 34" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M24 42C29 45 35 45 40 42" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M23 22L18 47" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M41 22L46 47" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+          <path d="M28 18H36" stroke="#173250" stroke-width="2.5" stroke-linecap="round"></path>
+        </svg>
+      </div>
+      <div class="roots-highlights__content">
+        <p>
+          This isn’t just about clothing; it’s about
+          <strong>heritage, quality, and a commitment to excellence</strong>.
+          Every garment we create is thoughtfully designed, blending timeless craftsmanship with contemporary style.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- ── Middle band: icon columns + quote ───────────────────────── -->
+  <div class="premium-roots__mid-band">
+    <div class="premium-roots__inner page-width">
+
+      <!-- Icon columns -->
+      {% comment %} <div class="premium-roots__icon-cols">
+        {% for block in section.blocks %}
+          {% if block.type == 'icon_col' %}
+            <div class="premium-roots__icon-col" {{ block.shopify_attributes }}>
+              <div class="premium-roots__icon-badge" aria-hidden="true">
+                {% if block.settings.icon_svg != blank %}
+                  {{ block.settings.icon_svg }}
+                {% else %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                {% endif %}
+              </div>
+              <div class="premium-roots__icon-col-text rte">{{ block.settings.text }}</div>
+            </div>
+            {% unless forloop.last or forloop.index == 2 %}
+              <div class="premium-roots__col-divider" aria-hidden="true"></div>
+            {% endunless %}
+          {% endif %}
+        {% endfor %}
+      </div> {% endcomment %}
+
+      <!-- Pull-quote -->
+      {% if section.settings.quote != blank %}
+        <div class="premium-roots__quote-wrap">
+          <span class="premium-roots__qdeco premium-roots__qdeco--open" aria-hidden="true">&ldquo;</span>
+          <blockquote class="premium-roots__quote">{{ section.settings.quote }}</blockquote>
+          <span class="premium-roots__qdeco premium-roots__qdeco--close" aria-hidden="true">&rdquo;</span>
+        </div>
+      {% endif %}
+
+      {% if section.settings.closing_line != blank %}
+        <p class="premium-roots__closing">{{ section.settings.closing_line }}</p>
+      {% endif %}
+
+      
+
+      <div class="premium-roots__mid-rule"></div>
+
+    </div>
+  </div><!-- /.premium-roots__mid-band -->
+
+
+
+
+<style>
+  .roots-highlights {
+    padding: 10px 0;
+    /* background: #fffdf8; */
+  }
+
+  .roots-highlights__inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    gap: 22px;
+  }
+
+  .roots-highlights__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .roots-highlights__icon {
+    flex: 0 0 auto;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(23, 50, 80, 0.08);
+  }
+
+  .roots-highlights__icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .roots-highlights__content {
+    min-width: 0;
+  }
+
+  .roots-highlights__content p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #2a3442;
+    font-weight: 400;
+  }
+
+  .roots-highlights__content strong {
+    color: #173250;
+    font-weight: 700;
+  }
+
+  .roots-highlights__divider {
+    width: 1px;
+    height: 84px;
+    justify-self: center;
+    background: linear-gradient(
+      180deg,
+      rgba(23, 50, 80, 0),
+      rgba(23, 50, 80, 0.18),
+      rgba(23, 50, 80, 0)
+    );
+  }
+
+  @media (max-width: 990px) {
+    .roots-highlights__inner {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .roots-highlights__divider {
+      display: none;
+    }
+
+    .roots-highlights__item {
+      padding: 18px 16px;
+      border: 1px solid rgba(23, 50, 80, 0.08);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 24px rgba(23, 50, 80, 0.05);
+    }
+  }
+
+  @media (max-width: 749px) {
+    .roots-highlights {
+      padding: 18px 0;
+    }
+
+    .roots-highlights__inner {
+      padding: 0 16px;
+    }
+
+    .roots-highlights__icon {
+      width: 56px;
+      height: 56px;
+    }
+
+    .roots-highlights__content p {
+      font-size: 15px;
+      line-height: 1.65;
+    }
+  }
+</style>
+
+  <!-- ── Cards grid ──────────────────────────────────────────────── -->
+  <div class="premium-roots__cards-band">
+    <div class="premium-roots__inner page-width">
+      <div class="premium-roots__cards">
+        {% for block in section.blocks %}
+          {% if block.type == 'card' %}
+            <article class="premium-roots__card premium-roots__reveal" {{ block.shopify_attributes }}>
+              <div class="premium-roots__card-media">
+                {% if block.settings.image != blank %}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 1200 }}"
+                    alt="{{ block.settings.image.alt | escape }}"
+                    loading="lazy"
+                    width="{{ block.settings.image.width }}"
+                    height="{{ block.settings.image.height }}"
+                  >
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'premium-roots__placeholder' }}
+                {% endif %}
+              </div>
+
+              <div class="premium-roots__card-overlay">
+                <div class="premium-roots__card-inner">
+                  {% if block.settings.icon_svg != blank %}
+                    <div class="premium-roots__card-icon" aria-hidden="true">
+                      {{ block.settings.icon_svg }}
+                    </div>
+                  {% endif %}
+                  <div class="premium-roots__card-content-text">
+                    {% if block.settings.title != blank %}
+                      <h3 class="premium-roots__card-title">{{ block.settings.title }}</h3>
+                    {% endif %}
+                    {% if block.settings.text != blank %}
+                      <p class="premium-roots__card-text">{{ block.settings.text }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div><!-- /.premium-roots__cards-band -->
+
+</section>
+
+<style>
+  /* ── Base ─────────────────────────────────────────────────────── */
+  #PremiumRoots-{{ section.id }} {
+    --roots-gold:    #b68a49;
+    --roots-navy:    #173250;
+    --roots-navy-dk: #0f2238;
+    --roots-text:    #20324f;
+    --roots-muted:   #42556e;
+    --roots-bg:      #fffdf9;
+    --roots-bg2:     #f9f6f1;
+
+    position: relative;
+    background: var(--roots-bg);
+    color: var(--roots-text);
+    overflow: hidden;
+    font-family: inherit;
+  }
+
+  #PremiumRoots-{{ section.id }} .page-width {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  /* ── Hero band ────────────────────────────────────────────────── */
+  .premium-roots__hero {
+    position: relative;
+    padding: 10px 0 10px;
+    overflow: hidden;
+  }
+
+  .premium-roots__hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .premium-roots__hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: saturate(0.35) brightness(1.08);
+    opacity: 0.6;
+  }
+/* 
+  .premium-roots__hero-bg--fallback {
+    background:
+      radial-gradient(circle at 15% 50%, rgba(183,156,116,0.18) 0 28%, transparent 29%),
+      radial-gradient(circle at 85% 40%, rgba(183,156,116,0.12) 0 22%, transparent 23%),
+      linear-gradient(160deg, #f5ede0 0%, #fffdf9 55%, #f0ebe2 100%);
+  } */
+
+  .premium-roots__hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(255,253,249,0.30) 0%,
+      rgba(255,253,249,0.72) 60%,
+      rgba(255,253,249,0.96) 100%
+    );
+  }
+
+  .premium-roots__hero .premium-roots__inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  /* Ornament above heading */
+  .premium-roots__ornament {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .premium-roots__ornament svg {
+    display: block;
+  }
+
+  /* Heading */
+  .premium-roots__heading {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.0;
+    text-transform: uppercase;
+    color: var(--roots-navy);
+  }
+
+  .premium-roots__heading-rule {
+    width: 80px;
+    height: 3px;
+    margin: 14px auto 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, var(--roots-gold), transparent);
+  }
+
+  /* Subheading */
+  .premium-roots__subheading {
+    max-width: 90%;
+    margin: 22px auto 0;
+    font-size: clamp(16px, 1.6vw, 18px);
+    line-height: 1.85;
+    color: var(--roots-text);
+    text-align: center;
+  }
+
+  .premium-roots__subheading p { margin: 0; }
+
+  /* ── Mid band ─────────────────────────────────────────────────── */
+  .premium-roots__mid-band {
+    background: var(--roots-bg);
+    padding: 0 0 10px;
+  }
+
+  /* Icon columns */
+  .premium-roots__icon-cols {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: start;
+    gap: 0;
+    padding: 32px 0 28px;
+    border-top: 1px solid rgba(23,50,80,0.10);
+    border-bottom: 1px solid rgba(23,50,80,0.10);
+  }
+
+  .premium-roots__icon-col {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 0 32px;
+  }
+
+  .premium-roots__icon-badge {
+    flex: 0 0 auto;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #f5ede0, #ede3d4);
+    border: 1px solid rgba(182,138,73,0.20);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4px 16px rgba(23,50,80,0.08);
+  }
+
+  .premium-roots__icon-badge svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--roots-navy);
+    fill: none;
+    stroke-width: 1.3;
+  }
+
+  .premium-roots__icon-col-text {
+    margin: 6px 0 0;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--roots-text);
+  }
+
+  .premium-roots__icon-col-text strong {
+    color: var(--roots-navy);
+    font-weight: 700;
+  }
+
+  .premium-roots__col-divider {
+    width: 1px;
+    align-self: stretch;
+    background: rgba(23,50,80,0.12);
+    margin: 6px 0;
+  }
+
+  /* Pull-quote */
+  .premium-roots__quote-wrap {
+    position: relative;
+    max-width: 860px;
+    margin: 32px auto 0;
+    text-align: center;
+    padding: 0 48px;
+  }
+
+  .premium-roots__qdeco {
+    position: absolute;
+    font-family: Georgia, serif;
+    font-size: 80px;
+    line-height: 1;
+    color: var(--roots-navy);
+    opacity: 0.18;
+    top: -10px;
+    font-style: normal;
+  }
+
+  .premium-roots__qdeco--open  { left: 0; }
+  .premium-roots__qdeco--close { right: 0; top: auto; }
+
+  .premium-roots__quote {
+    margin: 0;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 20px);
+    line-height: 1.7;
+    color: var(--roots-text);
+  }
+
+  .premium-roots__quote strong {
+    font-weight: 700;
+    font-style: normal;
+    color: var(--roots-navy);
+  }
+
+  .premium-roots__closing {
+    margin: 16px 0 0;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--roots-text);
+  }
+
+  .premium-roots__mid-rule {
+    width: 72px;
+    height: 3px;
+    margin: 28px auto 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, var(--roots-gold), transparent);
+  }
+
+  /* ── Cards band ───────────────────────────────────────────────── */
+  .premium-roots__cards-band {
+    padding: 20px 0 64px;
+  }
+
+  .premium-roots__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  /* Card: image fills card, text overlaid at bottom */
+  .premium-roots__card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 9 / 10;
+    cursor: pointer;
+  }
+
+  .premium-roots__card-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .premium-roots__card-media img,
+  .premium-roots__card-media .premium-roots__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .55s cubic-bezier(.25,.46,.45,.94);
+    filter: grayscale(30%) sepia(20%) brightness(0.88);
+  }
+
+  .premium-roots__card:hover .premium-roots__card-media img {
+    transform: scale(1.05);
+  }
+
+  /* Gradient overlay on card */
+  .premium-roots__card-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      to bottom,
+      rgba(15,34,56,0) 40%,
+      rgba(15,34,56,0.55) 68%,
+      rgba(15,34,56,0.88) 100%
+    );
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .premium-roots__card-inner {
+    padding: 22px 24px 26px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* Circular icon in card bottom-left */
+  .premium-roots__card-icon {
+    flex: 0 0 auto;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(23,50,80,0.85);
+    border: 2px solid rgba(255,255,255,0.25);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.30);
+  }
+
+  .premium-roots__card-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: #f4e6c8;
+    fill: none;
+    stroke-width: 1.4;
+  }
+
+  .premium-roots__card-content-text {
+    flex: 1;
+  }
+
+  .premium-roots__card-title {
+    margin: 0 0 4px;
+    font-family: var(--custom-heading-family, 'Playfair Display', Georgia, serif);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  .premium-roots__card-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.82);
+    max-width: 28ch;
+  }
+
+  /* ── Reveal animation ─────────────────────────────────────────── */
+  .premium-roots__reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+
+  .premium-roots__reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Responsive ───────────────────────────────────────────────── */
+  @media (max-width: 990px) {
+    .premium-roots__icon-cols {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .premium-roots__col-divider {
+      width: 80%;
+      height: 1px;
+      margin: 0 auto;
+      align-self: auto;
+      background: rgba(23,50,80,0.12);
+    }
+
+    .premium-roots__icon-col {
+      padding: 16px 8px;
+    }
+
+    .premium-roots__cards {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .premium-roots__card {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  @media (max-width: 749px) {
+    #PremiumRoots-{{ section.id }} .page-width {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .premium-roots__hero {
+      padding: 52px 0 40px;
+    }
+
+    .premium-roots__subheading {
+      font-size: 15px;
+    }
+
+    .premium-roots__quote-wrap {
+      padding: 0 32px;
+    }
+
+    .premium-roots__qdeco {
+      font-size: 56px;
+    }
+
+    .premium-roots__card-title {
+      font-size: 18px;
+    }
+
+    .premium-roots__card-text {
+      font-size: 13px;
+    }
+
+    .premium-roots__card-icon {
+      width: 44px;
+      height: 44px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var section = document.getElementById('PremiumRoots-{{ section.id }}');
+    if (!section) return;
+    var items = section.querySelectorAll('.premium-roots__reveal');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function(el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(entry, index) {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = Math.min(index * 90, 360) + 'ms';
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function(el) { observer.observe(el); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Premium Roots Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image (hero band)",
+      "info": "Use a textile/fabric texture for best effect."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "OUR ROOTS"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading / intro text",
+      "default": "<p>Our story goes back to 1947, when our family first stepped into the world of textiles. What started as a simple fabric trading business has grown over the decades into something much bigger; a legacy of craftsmanship, quality, and innovation.</p>"
+    },
+    {
+      "type": "text",
+      "id": "heading_ornament",
+      "label": "Heading ornament (leave blank for default SVG)"
+    },
+    {
+      "type": "richtext",
+      "id": "quote",
+      "label": "Pull quote",
+      "default": "<p>Our goal? To make pieces that don't just look good but <strong>feel good, last long, and tell a story</strong>.</p>"
+    },
+    {
+      "type": "text",
+      "id": "closing_line",
+      "label": "Closing line",
+      "default": "From our family to yours, welcome to a brand built on tradition, shaped by experience, and crafted for today."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon_col",
+      "name": "Icon column",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "icon_svg",
+          "label": "Inline SVG icon",
+          "info": "Paste a small SVG. Example: <svg viewBox=\"0 0 24 24\" ...>...</svg>"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Column text",
+          "default": "<p>For generations, we've been at the heart of <strong>India's textile industry</strong>, supplying some of the country's biggest retail brands.</p>"
+        }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Story card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Craftsmanship"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Every stitch reflects precision passed down through generations."
+        },
+        {
+          "type": "textarea",
+          "id": "icon_svg",
+          "label": "Inline SVG icon (shown in card)",
+          "info": "Paste a small SVG only."
+
+          
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Premium Roots Section",
+      "blocks": [
+        {
+          "type": "icon_col",
+          "settings": {
+            "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><path d=\"M14 6h7M14 12h7M14 18h7\"/></svg>",
+            "text": "<p>For generations, we've been at the heart of <strong>India's textile industry</strong>, supplying some of the country's biggest retail brands.</p>"
+          }
+        },
+        {
+          "type": "icon_col",
+          "settings": {
+            "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\"><path d=\"M3 17l4-8 4 4 4-6 4 10\"/><path d=\"M3 21h18\"/></svg>",
+            "text": "<p>With years of expertise under our belt and a deep passion for creating something meaningful, we set out to build a brand that truly speaks to the <strong>modern man</strong>.</p>"
+          }
+        },
+        {
+          "type": "icon_col",
+          "settings": {
+            "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\"><path d=\"M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z\"/></svg>",
+            "text": "<p>This isn't just about clothing; it's about <strong>heritage, quality,</strong> and a <strong>commitment to excellence</strong>. Every garment we create is thoughtfully designed, blending timeless craftsmanship with contemporary style.</p>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Craftsmanship",
+            "text": "Every stitch reflects precision passed down through generations.",
+            "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2\"/><path d=\"M8 12h8M12 8v8\"/></svg>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Experience",
+            "text": "Decades of knowledge that shape everything we do.",
+            "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><circle cx=\"9\" cy=\"7\" r=\"3\"/><circle cx=\"15\" cy=\"7\" r=\"3\"/><path d=\"M3 21v-2a5 5 0 015-5h8a5 5 0 015 5v2\"/></svg>"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Quality",
+            "text": "Premium fabrics. Superior finish. Made to stand the test of time.",
+            "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M12 3l2 5h5l-4 3 1.5 5L12 13l-4.5 3L9 11 5 8h5z\"/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

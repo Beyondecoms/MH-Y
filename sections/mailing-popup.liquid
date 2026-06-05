@@ -70,15 +70,15 @@ endcase
       {% if has_image %}
         {% if style == 'image_top' or style == 'left_image' %}
           <div class="newsletter__popup-image">
-            {% render 'basic-responsive-image',
-              type:  section.settings.email_image,
-              width: 800,
-              sm_render: sm_render,
-              md_render: md_render,
-              lg_render: lg_render,
-              loading: loading,
-              fetchpriority: high
-            %}
+            {%- assign popup_image_alt = section.settings.email_image.alt | default: section.settings.mail_popup_title | default: 'Newsletter' | strip_html | strip -%}
+            <div class="box-ratio">
+              <div
+                role="img"
+                aria-label="{{ popup_image_alt | escape }}"
+                data-popup-bg="{{ section.settings.email_image | image_url: width: 800 }}"
+                style="height:100%;width:100%;background-size:cover;background-position:center;"
+              ></div>
+            </div>
           </div>
         {% endif %}
       {% endif %}
