@@ -134,9 +134,15 @@
                   </ul>
                 </li>
               {% else %}
-                <li>
-                  <a class="js-accordion-link c-accordion__link eeeee" href="{{ link.url }}">{{ link.title | escape }}</a>
-                </li>
+        <li>
+  <a class="js-accordion-link c-accordion__link eeeee" href="{{ link.url }}">
+    {{ link.title | escape }}
+
+    {% if link.title == 'THE ISLE OF MAN - NEW COLLECTION' %}
+      <span class="menu-new-label">New</span>
+    {% endif %}
+  </a>
+</li>
               {% endif %}
 
             {% endfor %}
