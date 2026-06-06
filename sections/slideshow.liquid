@@ -71,6 +71,8 @@
       --h2-size:  calc({{ section.settings.slide_heading_size }}px - ({{ section.settings.slide_heading_size }}px * 0.15));
       --font-size:  calc({{ section.settings.subheading_size }}px - ({{ section.settings.subheading_size }}px * 0.15));
     }
+    section.global__section.slideshow-section.aos-init.aos-animate{
+    margin-top: 0rem;}
   }
   {% for block in section.blocks %}
     #slide--{{ section.id }}-slide-{{ forloop.index0 }} {
