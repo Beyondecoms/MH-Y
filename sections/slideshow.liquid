@@ -87,12 +87,36 @@
     transition: all {{ slider_speed }}ms;
   }
   {% endunless %}
+
+  /* Mobile video styles */
+  .slideshow__slide-mobile-video {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+  @media screen and (max-width: 740px) {
+    .slideshow__slide--has-mobile-video .slideshow__slide-image img,
+    .slideshow__slide--has-mobile-video .slideshow__slide-image .box-ratio,
+    .slideshow__slide--has-mobile-video .slideshow__slide-image svg {
+      visibility: hidden;
+    }
+    .slideshow__slide--has-mobile-video .slideshow__slide-image {
+      position: relative;
+    }
+    .slideshow__slide-mobile-video {
+      display: block;
+    }
+  }
 {% endstyle %}
 
 
 
 <section
-class=" slideshow-section {{ section_padding }}"
+class="global__section slideshow-section {{ section_padding }}"
 data-section-id="{{ section.id }}"
 data-section-type="slideshow-section"
 data-aos="fade">
@@ -128,6 +152,7 @@ data-aos="fade">
           assign overlay = false
           assign has_button = false
           assign has_second_button = false
+          assign has_mobile_video = false
 
           assign heading = block.settings.heading
           assign subheading = block.settings.subheading
@@ -136,29 +161,6 @@ data-aos="fade">
           assign link = block.settings.link
           assign second_link = block.settings.second_link
           assign caption_position = block.settings.caption_position
-
-          assign alt_heading = heading | strip_html | strip
-          assign alt_subheading = subheading | strip_html | strip
-          assign slide_alt_base = alt_heading
-          if slide_alt_base == blank
-            assign slide_alt_base = alt_subheading
-          elsif alt_subheading != blank
-            assign slide_alt_base = slide_alt_base | append: ' – ' | append: alt_subheading
-          endif
-          if slide_alt_base == blank and link contains '/collections/'
-            assign collection_handle = link | split: '/collections/' | last | split: '?' | first | split: '/' | first | replace: '-', ' ' | strip
-            if collection_handle != blank
-              assign slide_alt_base = collection_handle | append: ' Collection Banner'
-            endif
-          endif
-          if slide_alt_base == blank
-            assign slide_alt_base = 'Homepage Banner ' | append: forloop.index
-          endif
-          if slide_alt_base contains 'MH&Y'
-            assign slide_alt = slide_alt_base
-          else
-            assign slide_alt = slide_alt_base | append: ' by MH&Y India'
-          endif
 
           if block.settings.link != blank and block.settings.button_text == blank
             assign image_is_link = true
@@ -196,6 +198,10 @@ data-aos="fade">
             assign has_second_button = true
           endif
 
+          if block.settings.mobile_video != blank
+            assign has_mobile_video = true
+          endif
+
           assign main_image = block.settings.image
           assign mobile_image = block.settings.mobile_image
           assign image_box_ratio = main_image.height | append: ".0" | times: 1 | divided_by: main_image.width | times: 100 | append: "%"
@@ -209,11 +215,10 @@ data-aos="fade">
 
         -%}
 
-          <div id="slide--{{ section.id }}-slide-{{ forloop.index0 }}" class="slide--{{ block.id }} slideshow__slide{% if block.settings.image == blank %} slideshow__slide-onboard{% endif %}" data-block-id="{{ block.id }}" data-slider-index="{{ forloop.index0 }}" data-sizes="auto" {{ block.shopify_attributes }}>
+          <div id="slide--{{ section.id }}-slide-{{ forloop.index0 }}" class="slide--{{ block.id }} slideshow__slide{% if block.settings.image == blank %} slideshow__slide-onboard{% endif %}{% if has_mobile_video %} slideshow__slide--has-mobile-video{% endif %}" data-block-id="{{ block.id }}" data-slider-index="{{ forloop.index0 }}" data-sizes="auto" {{ block.shopify_attributes }}>
           {% if image_is_link %}<a class="slide__image-link" href="{{ link }}">{% endif %}
             <div class="js-slideshow-slide slideshow__slide-image">
               {% liquid
-                # Determine fetch priority for LCP
                 assign loading = 'lazy'
                 assign fetch_priority = 'auto'
                 if section.index == 1 and forloop.first
@@ -230,7 +235,6 @@ data-aos="fade">
                   type: block.settings.image,
                   width: 2400,
                   class: mobile_class,
-                  alt: slide_alt,
                   loading: loading,
                   fetchpriority: fetch_priority
                 %}
@@ -239,16 +243,28 @@ data-aos="fade">
                 {%- assign placeholder = 'lifestyle-' | append: current -%}
                 {{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}
               {% endif %}
-              {% if mobile_image != blank %}
+              {% if mobile_image != blank and has_mobile_video == false %}
                 {%
                   render 'basic-responsive-image',
                   type: block.settings.mobile_image,
                   width: 2400,
                   class: 'md-hide desktop-hide',
-                  alt: slide_alt,
                   loading: loading,
                   fetchpriority: fetch_priority
                 %}
+              {% endif %}
+
+              {% if has_mobile_video %}
+                {{ block.settings.mobile_video | video_tag:
+                  image_size: '800x',
+                  controls: false,
+                  muted: true,
+                  autoplay: true,
+                  loop: true,
+                  playsinline: true,
+                  preload: 'metadata',
+                  class: 'slideshow__slide-mobile-video'
+                }}
               {% endif %}
             </div>
           {% if image_is_link %}</a>{% endif %}
@@ -278,7 +294,13 @@ data-aos="fade">
           {% endunless %}
            <style>
              @media only screen and (max-width: 740px) {
-               {% if mobile_image != blank %}
+               {% if has_mobile_video %}
+                 .slide--{{ block.id }} .slideshow__slide-image {
+                   {% if fixed_height or full_height %}
+                     padding-bottom: var(--mobile-section-height) !important;
+                   {% endif %}
+                 }
+               {% elsif mobile_image != blank %}
                  .slide--{{ block.id }} .slideshow__slide-image {
                     {% if fixed_height or full_height %}
                       padding-bottom: var(--mobile-section-height) !important;
@@ -434,10 +456,16 @@ data-aos="fade">
           "content": "Mobile Settings"
         },
         {
+          "type": "video",
+          "id": "mobile_video",
+          "label": "Mobile Video",
+          "info": "If a video is uploaded, it will play on mobile instead of the image. Recommended: portrait ratio (9:16)"
+        },
+        {
           "type": "image_picker",
           "id": "mobile_image",
           "label": "Mobile Image",
-          "info" : "800px x 1200px recommended"
+          "info": "Used on mobile if no video is uploaded. 800px x 1200px recommended"
         },
         {
           "type": "checkbox",
