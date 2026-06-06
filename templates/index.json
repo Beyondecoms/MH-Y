@@ -35,6 +35,7 @@
         },
         "image_wL87mR": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/IMG_0481.jpg",
             "overlay_color": "#000000",
@@ -56,6 +57,7 @@
         },
         "image_TAK3Dg": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/IMG_0595.jpg",
             "overlay_color": "#000000",
