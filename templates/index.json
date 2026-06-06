@@ -331,6 +331,107 @@
         "section_padding": "both"
       }
     },
+    "animating_cards_8L4tqe": {
+      "type": "animating-cards",
+      "blocks": {
+        "card_tUcMeU": {
+          "type": "card",
+          "settings": {
+            "card_image": "shopify://shop_images/MY_Y_06-09-2500184_1.jpg",
+            "card_label": "Pure Confidence"
+          }
+        },
+        "card_HxRxtE": {
+          "type": "card",
+          "settings": {
+            "card_image": "shopify://shop_images/MY_Y_06-09-2500106_2270d493-ec0b-434f-8805-45ff9b141faa.jpg",
+            "card_label": "Born Bold"
+          }
+        },
+        "card_WzCWBg": {
+          "type": "card",
+          "settings": {
+            "card_image": "shopify://shop_images/MY_Y_06-09-2532990.jpg",
+            "card_label": "Fearless Spirit"
+          }
+        },
+        "stat_6pBXrQ": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "10K+",
+            "stat_label": "Happy Customers"
+          }
+        },
+        "stat_fQ8QKP": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "4.9★",
+            "stat_label": "Avg. Rating"
+          }
+        },
+        "stat_kdzdUR": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "100%",
+            "stat_label": "Made with Love"
+          }
+        },
+        "ticker_p6dLjp": {
+          "type": "ticker",
+          "settings": {
+            "ticker_text": "WE ARE BOLD"
+          }
+        },
+        "ticker_ehNPAh": {
+          "type": "ticker",
+          "settings": {
+            "ticker_text": "WE ARE STRONG"
+          }
+        },
+        "ticker_MQ7cF6": {
+          "type": "ticker",
+          "settings": {
+            "ticker_text": "WE ARE FEARLESS"
+          }
+        },
+        "ticker_exatkz": {
+          "type": "ticker",
+          "settings": {
+            "ticker_text": "WE ARE CONFIDENT"
+          }
+        },
+        "ticker_nheneY": {
+          "type": "ticker",
+          "settings": {
+            "ticker_text": "WE ARE BEAUTIFUL"
+          }
+        }
+      },
+      "block_order": [
+        "card_tUcMeU",
+        "card_HxRxtE",
+        "card_WzCWBg",
+        "stat_6pBXrQ",
+        "stat_fQ8QKP",
+        "stat_kdzdUR",
+        "ticker_p6dLjp",
+        "ticker_ehNPAh",
+        "ticker_MQ7cF6",
+        "ticker_exatkz",
+        "ticker_nheneY"
+      ],
+      "name": "About Us — Fan Cards",
+      "settings": {
+        "heading": "ABOUT US",
+        "body_text": "Be bold, be you. Born from a belief that every Men deserves confidence in everything she wears — our products are crafted with care, purpose, and a fearless spirit.",
+        "cta_text": "Our Story",
+        "cta_url": "",
+        "background_color": "#ffffff",
+        "accent_color": "#173250",
+        "padding_top": 80,
+        "padding_bottom": 72
+      }
+    },
     "grid_layout_NYDdJm": {
       "type": "grid-layout",
       "disabled": true,
@@ -796,58 +897,6 @@
         "section_padding": "top"
       }
     },
-    "scrolling_text_z43mzG": {
-      "type": "scrolling-text",
-      "blocks": {
-        "text_PjiqjX": {
-          "type": "text",
-          "settings": {
-            "scrolling_text": "<p>Free Shipping</p>",
-            "icon": "none",
-            "image": "shopify://shop_images/ship.png"
-          }
-        },
-        "text_nfyidF": {
-          "type": "text",
-          "settings": {
-            "scrolling_text": "<p>Elevated packaging</p>",
-            "icon": "none",
-            "image": "shopify://shop_images/Packaging.png"
-          }
-        },
-        "text_ADYJne": {
-          "type": "text",
-          "settings": {
-            "scrolling_text": "<p>30 days free return</p>",
-            "icon": "none",
-            "image": "shopify://shop_images/return.png"
-          }
-        },
-        "text_i8QqMW": {
-          "type": "text",
-          "settings": {
-            "scrolling_text": "<p>Curated Shopping experience </p>",
-            "icon": "none",
-            "image": "shopify://shop_images/curated.png"
-          }
-        }
-      },
-      "block_order": [
-        "text_PjiqjX",
-        "text_nfyidF",
-        "text_ADYJne",
-        "text_i8QqMW"
-      ],
-      "disabled": true,
-      "settings": {
-        "text_size": 20,
-        "speed": 15,
-        "icon_height": 20,
-        "padding": 30,
-        "color": "#000000",
-        "background": ""
-      }
-    },
     "mobile_full_video_CJzWBF": {
       "type": "mobile-full-video",
       "disabled": true,
@@ -882,6 +931,7 @@
     "full_video_section_JQXE4c",
     "featured_collection_xh7DWj",
     "new_feature_collection_Ch9JmQ",
+    "animating_cards_8L4tqe",
     "grid_layout_NYDdJm",
     "guarantee",
     "background_video_zxAxbM",
@@ -897,7 +947,6 @@
     "16267282748dfbd59a",
     "custom_shop_the_look_RRr8K7",
     "image_with_text_overlay_LjcknF",
-    "scrolling_text_z43mzG",
     "mobile_full_video_CJzWBF"
   ]
 }
