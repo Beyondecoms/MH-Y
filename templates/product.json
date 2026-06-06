@@ -237,8 +237,14 @@
         "section_description": ""
       }
     },
+    "product_feature_svg_tAQb8G": {
+      "type": "product-feature-svg",
+      "name": "Fabric Properties",
+      "settings": {}
+    },
     "product_icon_feature_section_Y9aDmk": {
       "type": "product-icon-feature-section",
+      "disabled": true,
       "name": "Product Icon Feature Sec",
       "settings": {
         "custom_class": "product-innfo-sec",
@@ -277,9 +283,9 @@
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "sample_data",
+            "max_width": 1200,
             "show_shop_reviews": false,
-            "empty_state": "empty_widget",
-            "max_width": 1200
+            "empty_state": "empty_widget"
           }
         }
       },
@@ -348,6 +354,7 @@
     "related-products",
     "1625846216758d1de0",
     "product_icon_grid_Rx4X74",
+    "product_feature_svg_tAQb8G",
     "product_icon_feature_section_Y9aDmk",
     "product-recommendations",
     "opinew-reviews-product-page-code",
