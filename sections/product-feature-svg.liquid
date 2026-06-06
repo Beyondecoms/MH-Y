@@ -1,0 +1,125 @@
+{% schema %}
+{
+  "name": "Fabric Properties",
+  "tag": "section",
+  "class": "fabric-properties-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Fabric Properties"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="qaps-fabric-section">
+  <div class="qaps-container">
+    <ul class="qaps-fabric-properties">
+      <li>
+        <img src="{{ 'cotton.png' | asset_url }}" alt="100% Pure Cotton">
+        <span class="font-proxima qaps-content">100% Pure Cotton</span>
+      </li>
+
+      <li>
+        <img src="{{ 'needle-with-thread-to-sew-clothes.png' | asset_url }}" alt="Ultra Fine Cotton Yarn">
+        <span class="font-proxima qaps-content">Ultra Fine Cotton Yarn</span>
+      </li>
+
+      <li>
+        <img src="{{ 'levitation.png' | asset_url }}" alt="Luxuriously soft on skin">
+        <span class="font-proxima qaps-content">Luxuriously soft on skin</span>
+      </li>
+
+      <li>
+        <img src="{{ 'water.png' | asset_url }}" alt="Ultra Lightweight & Breathable">
+        <span class="font-proxima qaps-content">Ultra Lightweight & Breathable</span>
+      </li>
+
+      <li>
+        <img src="{{ 'suit.png' | asset_url }}" alt="Slow & Precise Tailoring">
+        <span class="font-proxima qaps-content">Slow & Precise Tailoring</span>
+      </li>
+
+      <li>
+        <img src="{{ 'search.png' | asset_url }}" alt="Built On Research & Innovation">
+        <span class="font-proxima qaps-content">Built On Research & Innovation</span>
+      </li>
+
+      <li>
+        <img src="{{ 'structured.png' | asset_url }}" alt="3x More Structured & Durable">
+        <span class="font-proxima qaps-content">3x More Structured & Durable</span>
+      </li>
+
+      <li>
+        <img src="{{ 'shirt.png' | asset_url }}" alt="Crisp, Structured Look">
+        <span class="font-proxima qaps-content">Crisp, Structured Look</span>
+      </li>
+
+      <li>
+        <img src="{{ 'limited.png' | asset_url }}" alt="Limited Pieces Only">
+        <span class="font-proxima qaps-content">Limited Pieces Only</span>
+      </li>
+
+      <li>
+        <img src="{{ 'clean.png' | asset_url }}" alt="Ages Beautifully">
+        <span class="font-proxima qaps-content">Ages Beautifully</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+.qaps-container {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.qaps-container ul {
+  margin-left: 0 !important;
+  padding: 0;
+  list-style: none;
+}
+
+.qaps-fabric-properties {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.qaps-fabric-properties li {
+  display: flex;
+  gap: 9px;
+  width: 100%;
+  padding: 12px 9px;
+  background: #f8f8f8;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.qaps-fabric-properties li img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.qaps-content {
+  font-size: 13px;
+  line-height: 17px;
+  width: fit-content;
+}
+
+.font-proxima {
+  font-family: "Proxima Nova", sans-serif !important;
+}
+
+@media (max-width: 767px) {
+  .qaps-fabric-properties {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .qaps-fabric-properties li {
+    width: 100%;
+  }
+}
+</style>
