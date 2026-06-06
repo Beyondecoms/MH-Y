@@ -67,6 +67,39 @@
 {%- endif -%}
 {% endcapture %}
 
+<style>
+.mobile-menu-sale-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.sale-badge {
+  position: absolute;
+  top: -10px;
+  right: -18px;
+  background: #ff2d2d;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 3px 6px;
+  border-radius: 20px;
+  z-index: 9;
+  text-transform: capitalize;
+}
+
+.sale-badge::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 8px;
+  width: 6px;
+  height: 6px;
+  background: #ff2d2d;
+  transform: rotate(45deg);
+}
+</style>
+
 <theme-header>
 <div class="header-section js-header-section" data-section-id="{{ section.id }}" data-section-type="header-section">
 
@@ -76,28 +109,32 @@
 
     <div id="identity" class="header--container row">
 
-      <div class="mobile-menu__trigger mobile-only">
-        <div class="slideout__trigger--open text-left">
-          <button
-            class="slideout__trigger-mobile-menu js-slideout-open text-left"
-            data-wau-slideout-target="mobile-navigation"
-            data-slideout-direction="left"
-            aria-label="Open navigation"
-            tabindex="0"
-            type="button"
-            name="button">
-            {% render 'snip-icons',
-               wrapper: '.slideout__trigger-mobile-menu',
-               type: 'apollo',
-               icon: 'menu-bars',
-               classes: 'slideout__trigger-mobile-menu--icon vib-center',
-               size: '16px',
-               fill: 'var(--cart-links)',
-               hover: 'var(--cart-links)' %}
-          </button>
-        </div>
-      </div>
+<div class="mobile-menu__trigger mobile-only">
+  <div class="slideout__trigger--open text-left mobile-menu-sale-wrapper">
 
+    <span class="sale-badge">Sale</span>
+
+    <button
+      class="slideout__trigger-mobile-menu js-slideout-open text-left"
+      data-wau-slideout-target="mobile-navigation"
+      data-slideout-direction="left"
+      aria-label="Open navigation"
+      tabindex="0"
+      type="button"
+      name="button">
+
+      {% render 'snip-icons',
+         wrapper: '.slideout__trigger-mobile-menu',
+         type: 'apollo',
+         icon: 'menu-bars',
+         classes: 'slideout__trigger-mobile-menu--icon vib-center',
+         size: '16px',
+         fill: 'var(--cart-links)',
+         hover: 'var(--cart-links)' %}
+
+    </button>
+  </div>
+</div>
       {% if section.settings.header_layout == 'center' %}
         <div class="large-search">
           {% if section.settings.search_layout == 'visible' %}
