@@ -852,6 +852,7 @@
     },
     "custom_shop_the_look_RRr8K7": {
       "type": "custom-shop-the-look",
+      "disabled": true,
       "custom_css": [
         "@media only screen and (min-width: 600px) {.collection--carousel_image .box-ratio {height: 700px; }}"
       ],
@@ -966,6 +967,7 @@
     "slideshow_dPzTCE",
     "new_feature_collection_MVqbCC",
     "featured_collection_HcMDME",
+    "custom_grid_collection_3de4Vk",
     "slideshow",
     "collection_list_X6mgdk",
     "full_video_section_JQXE4c",
@@ -986,7 +988,6 @@
     "e2a7b6b5-73bc-40db-bd9f-de8e3c2cf611",
     "16267282748dfbd59a",
     "custom_shop_the_look_RRr8K7",
-    "image_with_text_overlay_LjcknF",
-    "custom_grid_collection_3de4Vk"
+    "image_with_text_overlay_LjcknF"
   ]
 }
