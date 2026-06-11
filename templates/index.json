@@ -899,28 +899,62 @@
         "section_padding": "top"
       }
     },
-    "mobile_full_video_CJzWBF": {
-      "type": "mobile-full-video",
-      "disabled": true,
-      "name": "Mobile full-bleed video",
+    "custom_grid_collection_3de4Vk": {
+      "type": "custom-grid-collection",
+      "blocks": {
+        "combo_item_XYFAzA": {
+          "type": "combo_item",
+          "settings": {
+            "label": "SHIRTS UNDER",
+            "sublabel": "799",
+            "link": ""
+          }
+        },
+        "combo_item_wHGadg": {
+          "type": "combo_item",
+          "settings": {
+            "label": "CLASSIC POLOS",
+            "sublabel": "2 AT 999",
+            "link": ""
+          }
+        },
+        "combo_item_jyEWnG": {
+          "type": "combo_item",
+          "settings": {
+            "label": "SHORTS",
+            "sublabel": "",
+            "link": ""
+          }
+        },
+        "combo_item_7DFrhx": {
+          "type": "combo_item",
+          "settings": {
+            "label": "PLUS SIZE",
+            "sublabel": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "combo_item_XYFAzA",
+        "combo_item_wHGadg",
+        "combo_item_jyEWnG",
+        "combo_item_7DFrhx"
+      ],
+      "name": "High Value Combos",
       "settings": {
-        "custom_class": "",
-        "aria_label": "Background video section",
-        "autoplay": true,
-        "mobile_video": "shopify://files/videos/mobile-intro.mp4",
-        "mobile_poster": "shopify://shop_images/mobile-intro.jpg",
-        "desktop_video": "shopify://files/videos/desktop-intro.mp4",
-        "desktop_poster": "shopify://shop_images/desktop-intro.jpg",
-        "show_on_desktop": false,
-        "show_headline": true,
-        "headline": "The  ISLE OF MAN",
-        "show_subheading": false,
-        "subheading": "",
-        "text_alignment": "center",
-        "show_cta": true,
-        "cta_label": "EXPLORE",
-        "cta_link": "shopify://collections/the-isle-of-man",
-        "button_link": ""
+        "heading": "HIGH VALUE COMBOS",
+        "heading_color": "#173250",
+        "heading_size": 16,
+        "bg_color": "#ffffff",
+        "section_width": 1400,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "items_to_show": 4,
+        "grid_gap": 6,
+        "card_aspect": "3/4",
+        "card_radius": 4,
+        "label_size": 20
       }
     }
   },
@@ -949,6 +983,6 @@
     "16267282748dfbd59a",
     "custom_shop_the_look_RRr8K7",
     "image_with_text_overlay_LjcknF",
-    "mobile_full_video_CJzWBF"
+    "custom_grid_collection_3de4Vk"
   ]
 }
