@@ -182,16 +182,16 @@
   opacity: 0.25;
 }
 
-/* ─── Gradient overlay ──────────────────────────────────── */
+/* ─── Gradient overlay — subtle fade only at very bottom ── */
 .hvc-card::after {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0,0,0,0.65) 0%,
-    rgba(0,0,0,0.18) 45%,
-    rgba(0,0,0,0) 100%
+    rgba(0,0,0,0.42) 0%,
+    rgba(0,0,0,0.10) 28%,
+    rgba(0,0,0,0) 55%
   );
   pointer-events: none;
 }
@@ -203,10 +203,10 @@
   left: 0;
   right: 0;
   z-index: 2;
-  padding: 18px 16px 16px;
+  padding: 18px 16px 20px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
   color: #fff;
   font-size: var(--hvc-label-size, 20px);
   font-weight: 700;
@@ -214,12 +214,16 @@
   text-transform: uppercase;
   line-height: 1.2;
   text-align: center;
+  /* text-shadow keeps text crisp without needing a heavy overlay */
+  text-shadow:
+    0 1px 8px rgba(0,0,0,0.55),
+    0 2px 20px rgba(0,0,0,0.35);
 }
 .hvc-sublabel {
   font-size: calc(var(--hvc-label-size, 20px) * 0.72);
   font-weight: 500;
   letter-spacing: 0.08em;
-  opacity: 0.92;
+  opacity: 0.95;
 }
 
 /* ─── Mobile: 2×2 grid (matching reference) ─────────────── */
@@ -397,7 +401,7 @@
           "type": "text",
           "id": "sublabel",
           "label": "Sub-label (e.g. 2 AT 999)",
-    
+      
         },
         {
           "type": "url",
