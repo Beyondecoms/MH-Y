@@ -905,23 +905,26 @@
         "combo_item_XYFAzA": {
           "type": "combo_item",
           "settings": {
-            "label": "SHIRTS UNDER",
-            "sublabel": "799",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-04-15_at_14.31.09.webp",
+            "label": "",
+            "sublabel": "",
             "link": ""
           }
         },
         "combo_item_wHGadg": {
           "type": "combo_item",
           "settings": {
-            "label": "CLASSIC POLOS",
-            "sublabel": "2 AT 999",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-03-26_at_16.09.35.webp",
+            "label": "",
+            "sublabel": "",
             "link": ""
           }
         },
         "combo_item_jyEWnG": {
           "type": "combo_item",
           "settings": {
-            "label": "SHORTS",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-04-15_at_14.27.39.webp",
+            "label": "",
             "sublabel": "",
             "link": ""
           }
@@ -929,6 +932,7 @@
         "combo_item_7DFrhx": {
           "type": "combo_item",
           "settings": {
+            "image": "shopify://shop_images/1080X1080_03.webp",
             "label": "PLUS SIZE",
             "sublabel": "",
             "link": ""
@@ -952,9 +956,9 @@
         "padding_bottom": 40,
         "items_to_show": 4,
         "grid_gap": 6,
-        "card_aspect": "3/4",
-        "card_radius": 4,
-        "label_size": 20
+        "card_aspect": "1/1",
+        "card_radius": 0,
+        "label_size": 10
       }
     }
   },
