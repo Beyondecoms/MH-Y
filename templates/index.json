@@ -933,7 +933,7 @@
           "type": "combo_item",
           "settings": {
             "image": "shopify://shop_images/1080X1080_03.webp",
-            "label": "PLUS SIZE",
+            "label": "",
             "sublabel": "",
             "link": ""
           }
