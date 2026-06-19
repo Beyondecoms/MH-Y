@@ -1,3 +1,6 @@
+
+
+
 {%- liquid
 
   assign section_padding = ''
@@ -64,6 +67,7 @@
 }
 {% endstyle %}
 
+{% if on_sale %}
 
 <div class="global__section section-countdown {{ section_padding }}"
   data-section-id="{{ section.id }}"
@@ -144,6 +148,26 @@
     {% endif %}
   </style>
 </div>
+{% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  const countdownWrapper = document.getElementById('countdownWrapper');
+
+  function checkCountdown() {
+    const days = parseInt(document.querySelector('[data-launch-days]')?.textContent || 0);
+    const hours = parseInt(document.querySelector('[data-launch-hours]')?.textContent || 0);
+    const mins = parseInt(document.querySelector('[data-launch-mins]')?.textContent || 0);
+    const secs = parseInt(document.querySelector('[data-launch-secs]')?.textContent || 0);
+
+    if (days <= 0 && hours <= 0 && mins <= 0 && secs <= 0) {
+      countdownWrapper.closest('.section-countdown').style.display = 'none';
+    }
+  }
+
+  setInterval(checkCountdown, 1000);
+});
+</script>
 
 {% schema %}
 {

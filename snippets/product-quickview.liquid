@@ -1,14 +1,9 @@
 {%- liquid
 
-  assign quickview_type = settings.quickview_type
-  if quickview_type == 'none'
-    assign quickview_type = 'modal'
-  endif
-
-  if quickview_type == 'modal'
+  if settings.quickview_type == 'modal'
     assign quickview_class = 'js-modal-close'
     assign  quickview_data = 'aria-controls="modal-quickview-cart"'
-  elsif quickview_type == 'drawer'
+  elsif settings.quickview_type == 'drawer'
     assign quickview_class = 'js-slideout-close'
     assign quickview_data = 'aria-controls="slideout-quickview-cart" data-slideout-direction="right"'
   endif
@@ -20,9 +15,7 @@
       <div class="icn-close"></div>
     </button>
   </div>
-  <div id="quickview-form" class="product-quickview__form-wrapper js-quickview-content" aria-busy="false">
-    <div class="mhy-qv-loader js-mhy-qv-loader" hidden>
-      <div class="loading-ripple"><div></div><div></div></div>
-    </div>
+  <div id="quickview-form" class="product-quickview__form-wrapper js-quickview-content">
+
   </div>
 </section>

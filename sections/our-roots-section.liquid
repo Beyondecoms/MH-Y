@@ -176,29 +176,6 @@
 
         assign caption_position = block.settings.caption_position
 
-        assign alt_heading = block.settings.heading | strip_html | strip
-        assign alt_subheading = block.settings.subheading | strip_html | strip
-        assign roots_alt_base = alt_heading
-        if roots_alt_base == blank
-          assign roots_alt_base = alt_subheading
-        elsif alt_subheading != blank
-          assign roots_alt_base = roots_alt_base | append: ' – ' | append: alt_subheading
-        endif
-        if roots_alt_base == blank and block.settings.link contains '/collections/'
-          assign collection_handle = block.settings.link | split: '/collections/' | last | split: '?' | first | split: '/' | first | replace: '-', ' ' | strip
-          if collection_handle != blank
-            assign roots_alt_base = collection_handle | append: ' Collection Image'
-          endif
-        endif
-        if roots_alt_base == blank
-          assign roots_alt_base = 'Our Roots Lifestyle Image ' | append: forloop.index
-        endif
-        if roots_alt_base contains 'MH&Y'
-          assign roots_alt = roots_alt_base
-        else
-          assign roots_alt = roots_alt_base | append: ' by MH&Y India'
-        endif
-
         assign loading = 'lazy'
         assign fetch_priority = 'auto'
         if section.index == 1
@@ -226,7 +203,6 @@
                 md_render: md_render,
                 lg_render: lg_render,
                 width: 1200,
-                alt: roots_alt,
                 loading: loading,
                 fetchpriority: fetch_priority
               %}

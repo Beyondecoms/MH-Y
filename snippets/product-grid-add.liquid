@@ -20,12 +20,6 @@ Usage:
 %}
 
 {% endcomment %}
-{%- liquid
-  assign quickview_type = settings.quickview_type
-  if quickview_type == 'none'
-    assign quickview_type = 'modal'
-  endif
--%}
 {% if product.options.size <= 1 or product.variants.size == 1 %}
   <div class="product--grid_add">
     {% liquid
@@ -118,70 +112,57 @@ Usage:
       {% if product.variants.size <= 1 %}
         <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
       {% endif %}
-      <div class="note note-error js-error-msg" style="display: none" role="alert">
-        <b class="note__heading">{{ 'cart.general.cart_error' | t }}</b>&nbsp;&nbsp;&nbsp;<span class="note__body">{{ 'cart.general.update_qty_error' | t }}</span>
-      </div>
+      {% if settings.quickview_type != 'none' %}
 
-      {% if product.variants.size > 1 %}
-        {%- liquid
-          if quickview_type == 'modal'
-            assign quickview_classes = 'js-modal-open'
-            assign quickview_settings = 'data-wau-modal-target="quickview"'
-          else
-            assign quickview_classes = 'js-slideout-open'
-            assign quickview_settings = 'data-wau-slideout-target="quickview" data-slideout-direction="right"'
-          endif
-        -%}
-        <button class="button select--options {{ quickview_classes }} js-quickview-trigger"
-          type="button"
-          name="button"
-          {{ quickview_settings }}
-          data-product-url="{{ product.url }}?view=quick">
-          {{ 'products.product.add_to_cart' | t }}
-        </button>
-      {% else %}
-        <input
-          type="button"
-          class="button select--options add AddtoCart js-ajax-submit"
-          name="button"
-          data-quick-add
-          value="{{ 'products.product.add_to_cart' | t }}"
-        >
-        {%- liquid
-          if quickview_type == 'modal'
-            assign quickview_classes = 'js-modal-open'
-            assign quickview_settings = 'data-wau-modal-target="quickview"'
-          else
-            assign quickview_classes = 'js-slideout-open'
-            assign quickview_settings = 'data-wau-slideout-target="quickview" data-slideout-direction="right"'
-          endif
-        -%}
-        <button class="button select--options mhy-touch-qv {{ quickview_classes }} js-quickview-trigger"
-          type="button"
-          name="button"
-          {{ quickview_settings }}
-          data-product-url="{{ product.url }}?view=quick">
-          {{ 'products.product.add_to_cart' | t }}
-        </button>
-      {% endif %}
+    {%- liquid
+
+      if settings.quickview_type == 'modal'
+        assign quickview_classes = 'js-modal-open'
+        assign quickview_settings = 'data-wau-modal-target="quickview"'
+      else
+        assign quickview_classes = 'js-slideout-open'
+        assign quickview_settings = 'data-wau-slideout-target="quickview" data-slideout-direction="right"'
+      endif
+
+    -%}
+
+     <button class="quick-view-{{ product.id }} product-listing__quickview-trigger {{ quickview_classes }} js-quickview-trigger select--options"
+       type="button"
+       name="button"
+       {{ quickview_settings }}
+       data-product-url="{{ product.url }}?view=quick">{{ 'products.product.select_option' | t }}</button>
+  {% else %}
+      <a href="{{ product.url | within: collection }}" class="button select--options">
+        {{ 'products.product.select_option' | t }}
+      </a>
+  {% endif %}
     {% endform %}
   </div>
 {% else %}
 <div class="product--grid_add">
-  {%- liquid
-    if quickview_type == 'modal'
-      assign quickview_classes = 'js-modal-open'
-      assign quickview_settings = 'data-wau-modal-target="quickview"'
-    else
-      assign quickview_classes = 'js-slideout-open'
-      assign quickview_settings = 'data-wau-slideout-target="quickview" data-slideout-direction="right"'
-    endif
-  -%}
+  {% if settings.quickview_type != 'none' %}
 
-     <button class="bbbbbb quick-view-{{ product.id }} product-listing__quickview-trigger {{ quickview_classes }} js-quickview-trigger select--options"
+    {%- liquid
+
+      if settings.quickview_type == 'modal'
+        assign quickview_classes = 'js-modal-open'
+        assign quickview_settings = 'data-wau-modal-target="quickview"'
+      else
+        assign quickview_classes = 'js-slideout-open'
+        assign quickview_settings = 'data-wau-slideout-target="quickview" data-slideout-direction="right"'
+      endif
+
+    -%}
+
+     <button class="quick-view-{{ product.id }} product-listing__quickview-trigger {{ quickview_classes }} js-quickview-trigger select--options"
        type="button"
        name="button"
        {{ quickview_settings }}
-       data-product-url="{{ product.url }}?view=quick">{{ 'products.product.add_to_cart' | t }}</button>
+       data-product-url="{{ product.url }}?view=quick">{{ 'products.product.select_option' | t }}</button>
+  {% else %}
+      <a href="{{ product.url | within: collection }}" class="button select--options">
+        {{ 'products.product.select_option' | t }}
+      </a>
+  {% endif %}
 </div>
 {% endif %}

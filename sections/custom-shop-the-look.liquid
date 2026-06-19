@@ -58,7 +58,7 @@
   }
   .custom-shop--carousel-heading{
     margin-bottom: 40px;
-    max-width: 100%;
+    max-width: 60%;
     margin-left: 16px;
   }
   .custom-shop--sub-heading{
@@ -100,8 +100,11 @@
    @media (max-width: 770px){
      .custom-shop--carousel-wrapper{
         position: relative;
-        top: 148px;
+        top: 1rem;
         height: 450px;
+     }
+     .custom-shop--sub-heading{
+      padding: 0 !important;
      }
       .custom-shop--carousel-wrapper .flickity-prev-next-button.previous{
         left: -5px;
@@ -110,13 +113,9 @@
         right: -4px;
       }
       .custom-shop--carousel-wrapper .custom-shop--product-index {
-        width: 42% !important; 
+        width: 70% !important; 
         box-sizing: border-box;
       }
-      /* .custom-shop--video-container video{
-        height: auto;
-        margin-top: 40%;
-      } */
      .custom-shop--carousel-conatiner{
       flex-direction: row-reverse;
       }
@@ -128,7 +127,7 @@
       }
      .custom-shop--carousel-heading{
        position: relative;
-       top: -575px;
+       top: -550px;
      }
      }
 
@@ -144,9 +143,6 @@
       flex-direction: row-reverse;
     }
     }
-    #shopify-section-{{ section.id }} .collection--carousel .collection--carousel_wrapper {
-      order: 0;
-    }
     #shopify-section-{{ section.id }} .collection--carousel .collection--carousel_wrapper .flickity-slider {
       width: 102.5%;
     }
@@ -159,28 +155,25 @@
 <section class="custom-shop--the-look collection--carousel global__section {{ section_padding }} {{ section.settings.custom_class }}" data-section-id="{{ section.id }}" data-section-type="featured-collection" data-aos="fade">
   {% if section.settings.full_width %}<div class="gridlock-fluid"><div class="row">{% endif %}
   <div class="row grid__wrapper gr0">
-    {% capture slideshow_config %}{
-   }{% endcapture %}
     <div class="custom-shop--content collection--carousel_content span-12 auto">
-    <div class="custom-shop--carousel-conatiner collection--carousel_container span-12 auto">
-      <div class="custom-shop--content-wrapper">
-        <div class="custom-shop--carousel-heading">
-          {% if section.settings.heading != blank %}
-            <div class="custom-shop--heading collection--carousel_heading">
-              <h2 class="section-heading">{{ section.settings.heading }}</h2>
-            </div>
-        {% endif %}
-        {% if section.settings.sub_heading != blank %}
-          <div class="custom-shop--sub-heading">
-            {{ section.settings.sub_heading }}
+      <div class="custom-shop--carousel-conatiner collection--carousel_container span-12 auto">
+        <div class="custom-shop--content-wrapper">
+          <div class="custom-shop--carousel-heading">
+            {% if section.settings.heading != blank %}
+              <div class="custom-shop--heading collection--carousel_heading">
+                <h2 class="section-heading">{{ section.settings.heading }}</h2>
+              </div>
+            {% endif %}
+            {% if section.settings.sub_heading != blank %}
+              <div class="custom-shop--sub-heading">
+                {{ section.settings.sub_heading }}
+              </div>
+            {% endif %}
           </div>
-        {% endif %}
-      </div>
-      <div class="custom-shop--carousel-wrapper collection--carousel_wrapper product-loop flickity__section {{ grid_count }} span-8 sm-span-12 auto">
+          <div class="custom-shop--carousel-wrapper collection--carousel_wrapper product-loop flickity__section {{ grid_count }} span-8 sm-span-12 auto">
             {%- if collection == blank -%}
               {% render 'onboard-product', prod_limit: limit, grid: grid, aos_mod: aos_mod %}
             {%- else -%}
-
               {% for product in collection.products %}
                 <div class="custom-shop--product-index product-index js-product-listing"
                   id="product-listing-{{ product.id }}"
@@ -197,44 +190,26 @@
                       assign loading = 'eager'
                       assign fetch_priority = 'high'
                     endif
-                   %}
+                  %}
                   {% render 'product-listing', product: product, collection: collection, loading: loading, fetchpriority: fetch_priority %}
                 </div>
               {% endfor %}
-
             {%- endif -%}
-      </div>
-      </div>
-      <div class="custom-shop--video-container collection--carousel_image span-4 sm-span-12 auto"  data-aos="fade">
-        {% if section.settings.video != blank %}
-              {%- liquid
-                assign section_video_url = ''
-                for source in section.settings.video.sources
-                  if source.format == 'mp4'
-                    assign section_video_url = source.url
-                    break
-                  endif
-                endfor
-                if section_video_url == blank
-                  for source in section.settings.video.sources
-                    assign section_video_url = source.url
-                    break
-                  endfor
-                endif
-              -%}
-              <video class="section-video js-video" muted playsinline loop autoplay preload="none" data-lazy-video title="{{ section.settings.description | escape }}">
-                <source data-src="{{ section_video_url }}" type="video/mp4">
-              </video>
+          </div>
+        </div>
+        <div class="custom-shop--video-container collection--carousel_image span-4 sm-span-12 auto" data-aos="fade">
+          {% if section.settings.video != blank %}
+            {{ section.settings.video | video_tag: image_size: '2000x', controls: false, muted: true, autoplay: true, loop: true, playsinline: true, preload: 'metadata', class: 'section-video js-video', title: section.settings.description }}
           {% else %}
             <div class="onboard">
               {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
             </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
-  </div>
-  {% if section.settings.full_width %}<div></div>{% endif %}
+  {% if section.settings.full_width %}</div></div>{% endif %}
 </section>
 <div class="clear"></div>
 

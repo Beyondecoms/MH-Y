@@ -252,8 +252,44 @@
     </li>
     <!-- stop doing the math -->
   {% else %}
-    <li class="navigation__menuitem" role="none">
-      <a class="navigation__menulink js-menu-link" aria-label="{{ link.title | escape }}" href="{{ link.url }}">{{ link.title }}</a>
-    </li>
+ <li class="navigation__menuitem aaaaaa" role="none">
+  <a
+    class="navigation__menulink js-menu-link"
+    aria-label="{{ link.title | escape }}"
+    href="{{ link.url }}"
+  >
+    {{ link.title }}
+
+    {% comment %} {% if link.title == 'POLOS AND TEES' %}
+      <span class="menu-sale-badge">50% OFF</span>
+    {% endif %} {% endcomment %}
+  </a>
+</li>
+<style>
+.menu-sale-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  padding: 4px 10px;
+  background: #e8b96b;
+  color: #173250;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 20px;
+  line-height: 1;
+  position: absolute;
+    top: -14px;
+    right: 0;
+
+}
+
+@media (max-width: 767px) {
+  .menu-sale-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+}
+</style>
   {% endif %}
 {% endfor %}

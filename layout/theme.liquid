@@ -1,60 +1,14 @@
 <!DOCTYPE html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
-<head>
-  <meta charset="utf-8">
+<meta name="google-site-verification" content="lOkUI6a9GE3w3rF1befblwzvRE97rSNuxSbjKLyWWxY" /><head>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
-  <meta name="google-site-verification" content="lOkUI6a9GE3w3rF1befblwzvRE97rSNuxSbjKLyWWxY">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "MH&Y India",
-  "alternateName": "Modern Heritage and You",
-  "url": "https://mhyindia.com",
-  "logo": "https://mhyindia.com/cdn/shop/files/mhy-logo.png",
-  "description": "Premium menswear brand crafting luxury linen shirts, formal wear, casual shirts, polos, and jackets for the modern Indian man. Blending timeless craftsmanship with contemporary style.",
-  "sameAs": [
-    "https://www.instagram.com/mhyindia",
-    "https://www.facebook.com/mhyindia"
-  ],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "customer service",
-    "availableLanguage": ["English", "Hindi"]
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "addressCountry": "IN"
-  }
-}
-</script>
 
-
-  {%- comment -%}
-  ┌─────────────────────────────────────────────────────────┐
-  │  FIX 1 ▸ no-js → js INSTANTLY (root cause of flash)    │
-  │  Must be FIRST script in <head> before any CSS loads.   │
-  │  Previously at bottom of <body> — content was hidden    │
-  │  by .no-js CSS rules for the entire page render.        │
-  └─────────────────────────────────────────────────────────┘
-  {%- endcomment -%}
-  <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
-
-  {%- comment -%}
-  ┌─────────────────────────────────────────────────────────┐
-  │  FIX 2 ▸ RESOURCE HINTS                                 │
-  │  preconnect = open TCP+TLS connection early             │
-  │  dns-prefetch = resolve DNS early (fallback for older   │
-  │  browsers that ignore preconnect)                       │
-  │  Saves 100–300ms on first font/CDN/asset request        │
-  └─────────────────────────────────────────────────────────┘
-  {%- endcomment -%}
+  <!-- Establish early connection to external domains -->
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
   <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
   <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
-  <link rel="dns-prefetch" href="https://cdn.shopify.com">
-  <link rel="dns-prefetch" href="https://fonts.shopify.com">
-  <link rel="dns-prefetch" href="https://monorail-edge.shopifysvc.com">
+  <link rel="preconnect" href="//ajax.googleapis.com" crossorigin />
 
   {%- assign main_font = settings.main_font -%}
   {%- assign heading_font = settings.heading_font -%}
@@ -63,172 +17,107 @@
   {%- assign main_font_italic = main_font | font_modify: 'style', 'italic' -%}
   {%- assign main_font_bold_italic = main_font_bold | font_modify: 'style', 'italic' -%}
 
-  {% if settings.favicon %}
-    <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png">
-  {% endif %}
+  <!-- Preload onDomain stylesheets and script libraries -->
+  <link rel="preload" href="{{ 'stylesheet.css' | asset_url }}" as="style">
+  <link rel="preload" as="font" href="{{ main_font | font_url }}" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="{{ nav_font | font_url }}" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="{{ heading_font | font_url }}" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'eventemitter3.min.js' | asset_url }}" as="script">
+  {%- if settings.product_grid_video -%}
+    <link rel="preload" href="{{ 'vendor-video.js' | asset_url }}" as="script">
+  {%- endif -%}
+  <link rel="preload" href="{{ 'theme.js' | asset_url }}" as="script">
 
-  <link rel="canonical" href="{{ canonical_url }}">
+  {% if settings.favicon %}<link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png" />{% endif %}
+  <link rel="canonical" href="{{ canonical_url }}" />
 
   {%- capture site_title -%}
     {{ page_title }}
-    {%- if current_tags -%}
-      {%- assign meta_tags = current_tags | join: ', ' -%}
-      &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}
-    {%- endif -%}
-    {%- if current_page != 1 -%}
-      &ndash; {{ 'general.meta.page' | t: page: current_page }}
-    {%- endif -%}
-    {% unless page_title contains shop.name %}
-      &ndash; {{ shop.name }}
-    {% endunless %}
+    {%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }} {%- endif -%}
+    {%- if current_page != 1 -%} &ndash; {{ 'general.meta.page' | t: page: current_page }} {%- endif -%}
+    {% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
   {%- endcapture -%}
-
   <title>{{ site_title | strip }}</title>
-
-  {% if page_description %}
-    <meta name="description" content="{{ page_description | escape }}">
-  {% endif %}
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}" />{% endif %}
 
   {% render 'social-media-meta-tags' %}
   {% render 'structured-data' %}
   {% render 'css-variables' %}
 
-  {{ content_for_header }}
-
-  {%- comment -%}
-  ┌─────────────────────────────────────────────────────────┐
-  │  FIX 3 + 4 ▸ CRITICAL INLINE CSS (merged with fonts)   │
-  │                                                         │
-  │  This block does THREE things:                          │
-  │  A) Forces all key wrappers visible — overrides any     │
-  │     .no-js opacity/visibility rules before stylesheet   │
-  │     is even downloaded.                                 │
-  │  B) Sets body background immediately so there is ZERO   │
-  │     white flash even on slow connections.               │
-  │  C) font_face declarations moved here from a separate   │
-  │     <style> block — fonts declared before stylesheet    │
-  │     eliminates FOIT (invisible text) on first paint.    │
-  │                                                         │
-  │  This must come BEFORE stylesheet.css link tag.         │
-  └─────────────────────────────────────────────────────────┘
-  {%- endcomment -%}
+  <link rel="stylesheet" href="{{ 'stylesheet.css' | asset_url }}" type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <meta name="google-site-verification" content="10kUI6a9GE3w3rF1befblwzvRE97rSNuxSbjKLyWWxY" />
   <style>
-    /* A: Force visibility — no white blank space ever */
-    html,body{opacity:1!important;visibility:visible!important}
-    .js-slideout-toggle-wrapper,.js-modal-toggle-wrapper,
-    [data-section-type],.content-wrapper,.site-wrap,.page-wrap,
-    #MainContent{opacity:1!important;visibility:visible!important}
-
-    /* B: Instant background paint — matches your theme base color */
-    body{background-color:#fff}
-
-    /* C: Header layout stability — prevents CLS jump on load */
-    .site-header,#shopify-section-header,[class*="header"]{
-      display:block;
-    }
-
-    /* D: Prevent image layout shift — reserve space before load */
-    img{height:auto}
-    img[width][height]{height:auto}
-
-    /* E: font_face declarations — BEFORE stylesheet.css */
-    {{ main_font | font_face: font_display: 'swap' }}
-    {{ nav_font | font_face: font_display: 'swap' }}
-    {{ heading_font | font_face: font_display: 'swap' }}
-    {{ main_font_bold | font_face: font_display: 'swap' }}
-    {{ main_font_italic | font_face: font_display: 'swap' }}
-    {{ main_font_bold_italic | font_face: font_display: 'swap' }}
+  {{ main_font | font_face: font_display: 'swap' }}
+  {{ nav_font | font_face: font_display: 'swap' }}
+  {{ heading_font | font_face: font_display: 'swap' }}
+  {{ main_font_bold | font_face: font_display: 'swap' }}
+  {{ main_font_italic | font_face: font_display: 'swap' }}
+  {{ main_font_bold_italic | font_face: font_display: 'swap' }}
+  .ajax-cart__final-details span.vi-center.sale-color{
+   font-size: 10px !important;
+}
   </style>
 
-  {%- comment -%}
-  ┌─────────────────────────────────────────────────────────┐
-  │  FIX 5 ▸ CSS LOAD ORDER (intentionally render-blocking) │
-  │  CSS must stay synchronous — async CSS causes worse     │
-  │  flash than render-blocking. Order matters:             │
-  │  critical inline → stylesheet.css → custom.css          │
-  └─────────────────────────────────────────────────────────┘
-  {%- endcomment -%}
-  <link rel="stylesheet" href="{{ 'stylesheet.css' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
-
+  {{ content_for_header }}
+  <link rel="stylesheet" href="{{ 'custom.css' | asset_url  }}">
+   <script src="{{ 'custom.js' | asset_url }}" defer></script>
+    
 </head>
-
-{%- liquid
-  assign mhy_show_mobile_bottomnav = false
-  if settings.mhy_mobile_bottomnav_enable
-    if request.page_type == 'index' or request.page_type == 'page'
-      assign mhy_show_mobile_bottomnav = true
-    endif
-  endif
--%}
-
-<body class="gridlock template-{{ template | handleize }} {% render 'body-classes' | strip %} js-slideout-toggle-wrapper js-modal-toggle-wrapper{% if mhy_show_mobile_bottomnav %} mhy-has-mobile-bottomnav{% endif %}"
-      data-quick-add-enabled="{{ settings.quickadd | json }}">
-
-  <a class="skip-link button visually-hidden" href="#MainContent">
-    {{ 'accessibility.skip_to_text' | t }}
-  </a>
-
+<body class="gridlock template-{{ template | handleize }} {% render 'body-classes' | strip %} js-slideout-toggle-wrapper js-modal-toggle-wrapper" data-quick-add-enabled="{{ settings.quickadd | json }}">
+  <a class="skip-link button visually-hidden" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
   {% if settings.enable_age_verify %}
     {% render 'age-verification' %}
   {% endif %}
-
   <div class="js-slideout-overlay site-overlay"></div>
   <div class="js-modal-overlay site-overlay"></div>
 
-  <!-- MOBILE NAVIGATION -->
-  <aside class="slideout slideout__drawer-left"
-         data-wau-slideout="mobile-navigation"
-         id="slideout-mobile-navigation">
+
+  <aside class="slideout slideout__drawer-left" data-wau-slideout="mobile-navigation" id="slideout-mobile-navigation">
     {% section 'mobile-navigation' %}
   </aside>
+
 
   <div class="site-wrap">
     <div class="page-wrap">
 
-      <!-- HEADER -->
       {% sections 'header-group' %}
 
-      <!-- MAIN CONTENT -->
-      <main id="MainContent"
-            class="content-wrapper"
-            role="main"
-            tabindex="-1">
+      <main id="MainContent" class="content-wrapper" role="main" tabindex="-1">
+
         {{ content_for_layout }}
+
       </main>
 
-    </div>
+    </div>  <!-- close the page-wrap class -->
 
-    <!-- FOOTER -->
     {% sections 'footer-group' %}
 
-    <!-- SCROLL TOP -->
     <button class="scrollup" aria-label="Scroll to top">
       {% render 'snip-icons',
-         wrapper: '.scrollup',
-         type: 'apollo',
-         icon: 'up-carrot',
-         classes: 'scrollup--icon',
-         size: '14px',
-         fill: 'var(--text-color)',
-         hover: 'var(--text-color)' %}
+       wrapper: '.scrollup',
+       type: 'apollo',
+       icon: 'up-carrot',
+       classes: 'scrollup--icon',
+       size: '14px',
+       fill: 'var(--text-color)',
+       hover: 'var(--text-color)' %}
     </button>
 
-  </div>
+  </div> <!-- close the site-wrap class -->
 
-  <!-- CART -->
   {% liquid
     assign cart_featured_collection = false
     if settings.cart_featured_collection != blank
       assign cart_featured_collection = true
-      assign collection = settings.cart_featured_collection
+      assign collection = settings.cart_featured_collection 
     endif
   %}
 
   {%- if settings.cart_type == 'drawer' -%}
-    <aside class="slideout slideout__drawer-right mini-cart{% if cart_featured_collection %} has--featured_collection{% endif %}"
-           data-wau-slideout="ajax-cart"
-           id="slideout-ajax-cart">
+    <aside class="slideout slideout__drawer-right mini-cart{% if cart_featured_collection %} has--featured_collection{% endif %}" data-wau-slideout="ajax-cart" id="slideout-ajax-cart">
 
       {% if cart_featured_collection %}
         <div class="cart--featured_collection">
@@ -236,12 +125,12 @@
           {% for product in collection.products limit: 4 %}
             {% if product.available %}
               <div class="product-index product-listing-simple"
-                   id="product-listing-{{ product.id }}"
-                   data-product-id="{{ product.id }}"
-                   data-alpha="{{ product.title }}"
-                   data-price="{{ product.price }}">
-                {% render 'product-listing-simple',
-                  product: product,
+                id="product-listing-{{ product.id }}"
+                data-product-id="{{ product.id }}"
+                data-alpha="{{ product.title }}"
+                data-price="{{ product.price }}">
+                {% render 'product-listing-simple', 
+                  product: product, 
                   collection: collection,
                   show_quickadd: false,
                   show_quickview: false %}
@@ -249,208 +138,101 @@
             {% endif %}
           {% endfor %}
         </div>
-      {% endif %}
+      {% endif%}
 
       {% render 'cart-mini' %}
     </aside>
-
   {% elsif settings.cart_type == 'modal_cart' %}
-    <div class="modal__container"
-         data-wau-modal="ajax-cart"
-         id="modal-ajax-cart">
+    <div class="modal__container" data-wau-modal="ajax-cart" id="modal-ajax-cart">
       <div class="modal__inner-wrapper">
         {% render 'cart-mini' %}
       </div>
     </div>
   {%- endif -%}
 
-  <!-- QUICK VIEW -->
-  {%- liquid
-    assign quickview_type = settings.quickview_type
-    if quickview_type == 'none'
-      assign quickview_type = 'modal'
-    endif
-  -%}
-
-  {%- if quickview_type == 'modal' -%}
-    <div class="modal__container"
-         data-wau-modal="quickview"
-         id="modal-quickview-cart">
+  {%- if settings.quickview_type == 'modal' -%}
+    <div class="modal__container" data-wau-modal="quickview" id="modal-quickview-cart">
       <div class="modal__inner-wrapper">
         {%- render 'product-quickview' -%}
       </div>
     </div>
-  {%- elsif quickview_type == 'drawer' -%}
-    <aside class="slideout slideout__drawer-right mini-cart"
-           data-wau-slideout="quickview"
-           id="slideout-quickview-cart">
+  {%- elsif settings.quickview_type == 'drawer' -%}
+    <aside class="slideout slideout__drawer-right mini-cart" data-wau-slideout="quickview" id="slideout-quickview-cart">
       {%- render 'product-quickview' -%}
     </aside>
   {%- endif -%}
 
-  <div class="modal__container" data-wau-modal="mhy-size-guide" id="modal-mhy-size-guide">
-    <div class="modal__inner-wrapper" data-wau-modal-full>
-      <div class="mhy-size-guide__wrap">
-        <button class="mhy-size-guide__close js-modal-close" aria-controls="modal-mhy-size-guide" aria-label="Close size guide" type="button" name="button">
-          <div class="icn-close"></div>
-        </button>
-        <img class="mhy-size-guide__img" data-mhy-size-guide-img src="" alt="Size guide" loading="lazy" decoding="async">
-      </div>
-    </div>
-  </div>
-
-  {%- if mhy_show_mobile_bottomnav -%}
-    {%- liquid
-      assign mhy_home_link = settings.mhy_mobile_bottomnav_home_link | default: routes.root_url
-      assign mhy_shop_link = settings.mhy_mobile_bottomnav_shop_link | default: routes.all_products_collection_url
-      assign mhy_login_link = settings.mhy_mobile_bottomnav_login_link | default: routes.account_login_url
-      if customer
-        assign mhy_login_link = routes.account_url
-      endif
-
-      assign mhy_cart_classes = ''
-      assign mhy_cart_settings = ''
-      if settings.cart_type == 'drawer'
-        assign mhy_cart_classes = 'js-slideout-open'
-        assign mhy_cart_settings = 'data-wau-slideout-target="ajax-cart" data-slideout-direction="right"'
-      elsif settings.cart_type == 'modal_cart'
-        assign mhy_cart_classes = 'js-modal-open'
-        assign mhy_cart_settings = 'data-wau-modal-target="ajax-cart"'
-      endif
-    -%}
-
-    <nav class="mhy-mobile-bottomnav" aria-label="Mobile navigation">
-      <a class="mhy-mobile-bottomnav__item" href="{{ mhy_home_link }}" aria-label="Home">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1v-10.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        <span>Home</span>
-      </a>
-
-      <button class="mhy-mobile-bottomnav__item" type="button" data-mhy-mobile-nav-search data-fallback-url="{{ routes.search_url }}" aria-label="Search">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.8 18.2a7.4 7.4 0 1 1 0-14.8 7.4 7.4 0 0 1 0 14.8Zm6.1-1.1 3.3 3.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        <span>Search</span>
-      </button>
-
-      <a class="mhy-mobile-bottomnav__item" href="{{ mhy_shop_link }}" aria-label="Shop all">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
-        <span>Shop all</span>
-      </a>
-
-      <a class="mhy-mobile-bottomnav__item" href="{{ mhy_login_link }}" aria-label="Login">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 12a4.2 4.2 0 1 0-4.2-4.2A4.2 4.2 0 0 0 12 12Zm0 2.2c-4.4 0-8 2.2-8 4.9V21h16v-1.9c0-2.7-3.6-4.9-8-4.9Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-        <span>Login</span>
-      </a>
-
-      <button class="mhy-mobile-bottomnav__cart js-mini-cart-trigger {{ mhy_cart_classes }}" {{ mhy_cart_settings }} type="button" aria-label="Cart {{ cart.item_count }}">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.5 6.5h15l-1.6 8.1a2 2 0 0 1-2 1.6H9.2a2 2 0 0 1-2-1.6L5.6 3.5H2.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.2 21a1.1 1.1 0 1 0 0-2.2 1.1 1.1 0 0 0 0 2.2Zm8.6 0a1.1 1.1 0 1 0 0-2.2 1.1 1.1 0 0 0 0 2.2Z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
-        <span class="mhy-mobile-bottomnav__cart-count js-cart-count">{{ cart.item_count }}</span>
-      </button>
-    </nav>
-  {%- endif -%}
-
   {% render 'cart-config' %}
-
-  {%- comment -%}
-  ┌─────────────────────────────────────────────────────────┐
-  │  FIX 6 ▸ JS LOAD ORDER — all defer, dependency-ordered  │
-  │                                                         │
-  │  eventemitter3 → custom.js → vendor-video → theme.js   │
-  │  (vendor-video conditional as before)                   │
-  │  All remain deferred — zero blocking, zero functionality│
-  │  breakage. Shopify customer scripts unchanged.          │
-  └─────────────────────────────────────────────────────────┘
-  {%- endcomment -%}
-  <script src="{{ 'eventemitter3.min.js' | asset_url }}" defer></script>
-  <script src="{{ 'custom.js' | asset_url }}" defer></script>
-
+  <script src="{{ 'eventemitter3.min.js' | asset_url }}"></script>
   {%- if settings.product_grid_video -%}
     <script src="{{ 'vendor-video.js' | asset_url }}" defer></script>
   {%- endif -%}
-
-  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
   {% section 'mailing-popup' %}
 
   {%- if request.page_type contains 'customers/' or template == 'cart' -%}
-    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
   {%- endif -%}
-
   {%- if request.page_type contains 'customers/' -%}
-    <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
+    <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer="defer"></script>
   {%- endif -%}
-
-  {%- comment -%}
-  ┌─────────────────────────────────────────────────────────┐
-  │  FIX 7 ▸ REMOVED bottom-of-body no-js swap             │
-  │  (was here in original — now handled in <head>)         │
-  │  DELETED:                                               │
-  │    document.documentElement.className =                 │
-  │      document.documentElement.className                 │
-  │        .replace("no-js","js");                          │
-  └─────────────────────────────────────────────────────────┘
-  {%- endcomment -%}
-
-  <!-- PHOTOSWIPE -->
-  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="pswp__bg"></div>
-    <div class="pswp__scroll-wrap">
-      <div class="pswp__container">
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-      </div>
-      <div class="pswp__ui pswp__ui--hidden">
-
-        <button class="pswp__button pswp__button--arrow--left"
-                title="{{ 'general.pagination.prev' | t }}">
-          {% render 'snip-icons',
-             wrapper: '.pswp__button',
-             type: 'apollo',
-             icon: 'left-carrot',
-             classes: 'pswp__button--icon',
-             size: '12px',
-             fill: 'var(--directional-color)',
-             hover: 'var(--directional-hover-color)' %}
-        </button>
-
-        <button class="pswp__button pswp__button--close" title="Close (Esc)">
-          {% render 'snip-icons',
-             wrapper: '.pswp__button',
-             type: 'apollo',
-             icon: 'close',
-             classes: 'pswp__button--icon',
-             size: '12px',
-             fill: 'var(--directional-color)',
-             hover: 'var(--directional-hover-color)' %}
-        </button>
-
-        <button class="pswp__button pswp__button--arrow--right"
-                title="{{ 'general.pagination.next' | t }}">
-          {% render 'snip-icons',
-             wrapper: '.pswp__button',
-             type: 'apollo',
-             icon: 'right-carrot',
-             classes: 'pswp__button--icon',
-             size: '12px',
-             fill: 'var(--text-color)',
-             hover: 'var(--directional-hover-color)' %}
-        </button>
-
-      </div>
-    </div>
-  </div>
 
   <script>
-document.querySelectorAll('.pc-card').forEach((card) => {
-  card.querySelectorAll('.pc-swatch, .pc-pill').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const group = btn.closest('.pc-opt');
-      if (!group) return;
-      group.querySelectorAll('.pc-swatch, .pc-pill').forEach((el) => el.classList.remove('is-active'));
-      btn.classList.add('is-active');
-    });
-  });
-});
+    document.documentElement.className =
+    document.documentElement.className.replace("no-js","js");
   </script>
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+      <!-- Background of PhotoSwipe.
+           It's a separate element as animating opacity is faster than rgba(). -->
+      <div class="pswp__bg"></div>
+      <!-- Slides wrapper with overflow:hidden. -->
+      <div class="pswp__scroll-wrap">
+          <!-- Container that holds slides.
+              PhotoSwipe keeps only 3 of them in the DOM to save memory.
+              Don't modify these 3 pswp__item elements, data is added later on. -->
+          <div class="pswp__container">
+              <div class="pswp__item"></div>
+              <div class="pswp__item"></div>
+              <div class="pswp__item"></div>
+          </div>
+          <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+          <div class="pswp__ui pswp__ui--hidden">
+            <button class="pswp__button pswp__button--arrow--left" title="{{ 'general.pagination.prev' | t }}">
+              {% render 'snip-icons',
+               wrapper: '.pswp__button',
+               type: 'apollo',
+               icon: 'left-carrot',
+               classes: 'pswp__button--icon',
+               size: '12px',
+               fill: 'var(--directional-color);',
+               hover: 'var(--directional-hover-color)' %}
+            </button>
+            <button class="pswp__button pswp__button--close" title="Close (Esc)">
+              {% render 'snip-icons',
+               wrapper: '.pswp__button',
+               type: 'apollo',
+               icon: 'close',
+               classes: 'pswp__button--icon',
+               size: '12px',
+               fill: 'var(--directional-color)',
+               hover: 'var(--directional-hover-color)' %}
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="{{ 'general.pagination.next' | t }}">
+              {% render 'snip-icons',
+               wrapper: '.pswp__button',
+               type: 'apollo',
+               icon: 'right-carrot',
+               classes: 'pswp__button--icon',
+               size: '12px',
+               fill: 'var(--text-color)',
+               hover: 'var(--directional-hover-color)' %}
+            </button>
+          </div>
+      </div>
+  </div>
 
 </body>
 </html>

@@ -16,12 +16,7 @@
   assign show_quickview = false
   assign show_quickadd = false
 
-  assign quickview_type = settings.quickview_type
-  if quickview_type == 'none'
-    assign quickview_type = 'modal'
-  endif
-
-  if quickview_type != 'none'
+  if settings.quickview_type != 'none'
     assign show_quickview = true
   endif
 
@@ -137,7 +132,7 @@
             <div class="hidden">
               {%
                 render 'basic-responsive-image',
-                type: product.media[1].preview_image,
+                type: product.media[1].preview_image
                 width: 800
               %}
             </div>
@@ -147,11 +142,11 @@
      </a>
    </div>
 
-   {% if show_quickview %}
+   {% if settings.quickview_type != 'none' %}
 
     {%- liquid
 
-      if quickview_type == 'modal'
+      if settings.quickview_type == 'modal'
         assign quickview_classes = 'js-modal-open'
         assign quickview_settings = 'data-wau-modal-target="quickview"'
       else
@@ -161,7 +156,7 @@
 
     -%}
 
-     <button class="mobile-view-hide quick-view-{{ product.id }} product-listing__quickview-trigger {{ quickview_classes }} js-quickview-trigger"
+     <button class="quick-view-{{ product.id }} product-listing__quickview-trigger {{ quickview_classes }} js-quickview-trigger"
        type="button"
        name="button"
        {{ quickview_settings }}

@@ -64,9 +64,7 @@
             {% if images[basic_banner_img] != blank %}
               <div class="collection__banner-image collection__banner-image--{{ section.settings.banner_image_type }} parralax__image">
                 {{ images[basic_banner_img] | image_url: width: 2000 | image_tag: loading: loading,
-                  fetchpriority: fetch_priority,
-                  width: 2000,
-                  height: 2000 | times: images[basic_banner_img].height | divided_by: images[basic_banner_img].width }}
+                  fetchpriority: fetch_priority }}
               </div>
             {% endif %}
         {% endcase %}

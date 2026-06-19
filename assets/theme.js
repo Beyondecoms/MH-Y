@@ -138,7 +138,6 @@ WAU.Slideout = (function () {
 	function closeActiveSlideout() {
 			// Find the open slideout.
 			const activeSlideout = document.querySelector('.slideout--active');
-			if (!activeSlideout) return;
 			const activeSlideoutName = activeSlideout.getAttribute('data-wau-slideout');
 			const opener = document.querySelector('.js-slideout-open[data-wau-slideout-target="' + activeSlideoutName + '"]');
 			const direction = opener.getAttribute('data-slideout-direction');
@@ -160,13 +159,6 @@ WAU.Slideout = (function () {
 	 * @param targetSlideoutEl:Node - The slideout element that will be opened.
 	 */
 	function open(direction, targetSlideoutEl, opener) {
-		wrapper = wrapper || document.querySelector(".js-slideout-toggle-wrapper");
-		if (!wrapper || !targetSlideoutEl) return;
-		if (!opener) {
-			opener = document.createElement('button');
-			opener.setAttribute('data-wau-slideout-target', targetSlideoutEl.getAttribute('data-wau-slideout') || '');
-			opener.setAttribute('data-slideout-direction', direction || 'right');
-		}
 		wrapper.classList.add("slideout-" + direction + "--open");
 		wrapper.classList.remove("slideout-" + direction + "--closed");
 		targetSlideoutEl.classList.add('slideout--active');
@@ -247,20 +239,9 @@ WAU.Slideout = (function () {
 	 * @return void
 	 */
 	function openByName(name) {
-		const openerOverride = arguments.length > 1 ? arguments[1] : undefined;
-		const directionOverride = arguments.length > 2 ? arguments[2] : undefined;
-		let opener = openerOverride || document.querySelector('[data-wau-slideout-target="' + name + '"]');
-		if (!opener) {
-			opener = document.createElement('button');
-			opener.setAttribute('data-wau-slideout-target', name);
-		}
-		const direction = directionOverride || opener.getAttribute('data-slideout-direction') || 'right';
-		opener.setAttribute('data-slideout-direction', direction);
-		wrapper = wrapper || document.querySelector(".js-slideout-toggle-wrapper");
-		let targetSlideoutEl = document.querySelector('[data-wau-slideout="' + name + '"]');
-		if (!targetSlideoutEl && wrapper) {
-			targetSlideoutEl = createSlideoutEl(direction, name, wrapper);
-		}
+		const opener = document.querySelector('[data-wau-slideout-target="' + name + '"]')
+		const direction = opener.getAttribute('data-slideout-direction');
+		const targetSlideoutEl = document.querySelector('[data-wau-slideout="' + name + '"]');
 		open(direction, targetSlideoutEl, opener);
 	}
 
@@ -382,7 +363,7 @@ WAU.Modal = (function() {
   function closeActiveModal() {
     // Find the open modal.
     const activeModal = document.querySelector('.modal--active');
-    if (!activeModal) return;
+    const activeModalName = activeModal.getAttribute('data-wau-modal');
     const closer = activeModal.querySelector('.js-modal-close');
 
     close(closer);
@@ -400,12 +381,6 @@ WAU.Modal = (function() {
    * @param targetSlideoutEl:Node - The modal element that will be opened.
    */
   function open(targetModalEl, opener) {
-    wrapper = wrapper || document.querySelector(".js-modal-toggle-wrapper");
-    if (!wrapper || !targetModalEl) return;
-    if (!opener) {
-      opener = document.createElement('button');
-      opener.setAttribute('data-wau-modal-target', targetModalEl.getAttribute('data-wau-modal') || '');
-    }
 
     // Fix body wrapper so no scrolling on mobile
     let scrollPosition = Math.abs(0 - document.querySelector('.site-wrap').getBoundingClientRect().top);
@@ -501,21 +476,8 @@ WAU.Modal = (function() {
    * @return void
    */
   function openByName(name) {
-    const openerOverride = arguments.length > 1 ? arguments[1] : undefined;
-    let opener = openerOverride || document.querySelector('[data-wau-modal-target="' + name + '"]');
-    if (!opener) {
-      opener = document.createElement('button');
-      opener.setAttribute('data-wau-modal-target', name);
-    }
-
-    wrapper = wrapper || document.querySelector(".js-modal-toggle-wrapper");
-    let targetModalEl = document.querySelector('[data-wau-modal="' + name + '"]');
-    if (!targetModalEl) {
-      const content = document.querySelector('[data-wau-modal-content="' + name + '"]');
-      if (content && wrapper) {
-        targetModalEl = createModalEl(name, wrapper);
-      }
-    }
+    const opener = document.querySelector('[data-wau-modal-target="' + name + '"]');
+    const targetModalEl = document.querySelector('[data-wau-modal="' + name + '"]');
     open(targetModalEl, opener);
   }
   /*
@@ -2579,45 +2541,6 @@ Shopify.theme.ajaxCart = {
       body.textContent = description;
     }
   },
-  setCartNotice: function setCartNotice(config, options = {}) {
-    const notice = document.querySelector('.js-ajax-cart-notice');
-    if (!notice) return;
-
-    const titleEl = notice.querySelector('.js-ajax-cart-notice-title');
-    const bodyEl = notice.querySelector('.js-ajax-cart-notice-body');
-
-    const type = options.type || 'success';
-    const title =
-      typeof options.title === 'string' && options.title.trim().length
-        ? options.title
-        : type === 'error'
-          ? (config.cart_error || 'Error')
-          : 'Added to bag';
-    const message =
-      typeof options.message === 'string' && options.message.trim().length
-        ? options.message
-        : '';
-
-    notice.dataset.type = type;
-    if (titleEl) titleEl.textContent = title;
-    if (bodyEl) bodyEl.textContent = message;
-
-    notice.setAttribute('aria-hidden', 'false');
-    clearTimeout(notice._mhyTimeout);
-
-    const autoHideMs = typeof options.autoHideMs === 'number' ? options.autoHideMs : 0;
-    if (autoHideMs > 0) {
-      notice._mhyTimeout = setTimeout(function () {
-        Shopify.theme.ajaxCart.hideCartNotice();
-      }, autoHideMs);
-    }
-  },
-  hideCartNotice: function hideCartNotice() {
-    const notice = document.querySelector('.js-ajax-cart-notice');
-    if (!notice) return;
-    notice.setAttribute('aria-hidden', 'true');
-    clearTimeout(notice._mhyTimeout);
-  },
   addToCart: function addToCart(addToCartForm, formContext, config, isQuickview) {
     // ToDo: move selectors up to here.
     var selectors = {
@@ -2656,10 +2579,11 @@ Shopify.theme.ajaxCart = {
         // If there is a response status then that means that there is likely an error.
         if (response.status) {
           const shouldShowDrawerOnError =
+            !isQuickview &&
+            document.body.classList.contains('template-product') &&
             (config.cart_action === 'drawer' || config.cart_action === 'modal_cart') &&
             typeof response.description === 'string' &&
-            /maximum quantity|already in your cart|became unavailable|try again/i.test(response.description) &&
-            (isQuickview || document.body.classList.contains('template-product'));
+            /maximum quantity|already in your cart|became unavailable|try again/i.test(response.description);
 
           // Only works when there is a form on the page to update.
           Events.trigger("recipientform:errors", response.message, response.description, config, addToCartForm);
@@ -2668,26 +2592,22 @@ Shopify.theme.ajaxCart = {
             Shopify.theme.cart.getCart().then(Cart => {
               Shopify.theme.ajaxCart.updateView(config, Cart);
 
-              if (isQuickview) {
-                if (document.querySelector('[data-wau-modal="quickview"]')) {
-                  Shopify.theme.quickview.hideModal();
-                } else {
-                  Shopify.theme.quickview.hideSlideout();
-                }
-              }
-
               if (config.cart_action === 'drawer') {
                 Shopify.theme.ajaxCart.showDrawer(config);
               } else if (config.cart_action === 'modal_cart') {
                 Shopify.theme.ajaxCart.showModal(config);
               }
 
-              Shopify.theme.ajaxCart.setCartNotice(config, {
-                type: 'error',
-                title: response.message,
-                message: response.description,
-                autoHideMs: 6000
-              });
+              const notice = document.querySelector('.js-ajax-cart-notice');
+              if (notice) {
+                notice.textContent = response.description;
+                notice.hidden = false;
+                clearTimeout(notice._mhyTimeout);
+                notice._mhyTimeout = setTimeout(function () {
+                  notice.hidden = true;
+                  notice.textContent = '';
+                }, 4500);
+              }
             });
 
             context.querySelector(selectors.addToCart).value = config.add_to_cart;
@@ -2732,30 +2652,20 @@ Shopify.theme.ajaxCart = {
         // Update cart
         Shopify.theme.cart.getCart().then(Cart => {
 
-          const openCartFromQuickview =
-            isQuickview &&
-            (config.cart_action == 'drawer' || config.cart_action == 'modal_cart');
+          if ( isQuickview && config.cart_added_event != 'product_page') {
+            if ( document.querySelector('[data-wau-modal="quickview"]') ) {
+              // Hide modal
+              Shopify.theme.quickview.hideModal();
+            } else {
+              // Hide slideout
+              Shopify.theme.quickview.hideSlideout();
+            }
+          } else if ( isQuickview && config.cart_added_event == 'product_page') {
+            theme.Helpers.fadeIn(context.querySelector(selectors.cartAddedMsg));
 
-          if (openCartFromQuickview) {
-            if (document.querySelector('[data-wau-modal="quickview"]')) {
-              Shopify.theme.quickview.hideModal();
-            } else {
-              Shopify.theme.quickview.hideSlideout();
-            }
-          } else if (isQuickview && config.cart_added_event != 'product_page') {
-            if (document.querySelector('[data-wau-modal="quickview"]')) {
-              Shopify.theme.quickview.hideModal();
-            } else {
-              Shopify.theme.quickview.hideSlideout();
-            }
-          } else if (isQuickview && config.cart_added_event == 'product_page') {
-            const cartAddedMsg = context.querySelector(selectors.cartAddedMsg);
-            if (cartAddedMsg) {
-              theme.Helpers.fadeIn(cartAddedMsg);
-              setTimeout(function () {
-                theme.Helpers.fadeOut(cartAddedMsg);
-              }, 3000);
-            }
+            setTimeout(function(){
+              theme.Helpers.fadeOut(context.querySelector(selectors.cartAddedMsg));
+            }, 3000);
           }
 
           const forceOpenCartOnProductPage =
@@ -2763,11 +2673,7 @@ Shopify.theme.ajaxCart = {
             document.body.classList.contains('template-product') &&
             (config.cart_action == 'drawer' || config.cart_action == 'modal_cart');
 
-          if (openCartFromQuickview && config.cart_action == 'drawer') {
-            Shopify.theme.ajaxCart.showDrawer(config);
-          } else if (openCartFromQuickview && config.cart_action == 'modal_cart') {
-            Shopify.theme.ajaxCart.showModal(config);
-          } else if (forceOpenCartOnProductPage && config.cart_action == 'drawer') {
+          if (forceOpenCartOnProductPage && config.cart_action == 'drawer') {
             Shopify.theme.ajaxCart.showDrawer(config);
           } else if (forceOpenCartOnProductPage && config.cart_action == 'modal_cart') {
             Shopify.theme.ajaxCart.showModal(config);
@@ -2788,15 +2694,6 @@ Shopify.theme.ajaxCart = {
           }
 
           Shopify.theme.ajaxCart.updateView(config, Cart);
-
-          if (openCartFromQuickview) {
-            Shopify.theme.ajaxCart.setCartNotice(config, {
-              type: 'success',
-              title: 'Added to bag',
-              message: response.product_title || response.title || '',
-              autoHideMs: 8000
-            });
-          }
         });
       })
       .catch((error) => {
@@ -3119,76 +3016,8 @@ Shopify.theme.shippingCalculator = {
 
 Shopify.theme.quickview = {
   init: function init() {
-    if (this._mhyInit) return;
-    this._mhyInit = true;
-    this._mhyTemplateCache = new Map();
-    this._mhyPendingFetches = new Map();
-    this._mhyOpenId = 0;
-
-    if (document.querySelector('[data-wau-modal="quickview"]')) {
-      WAU.Modal.init("quickview");
-    } else {
-      WAU.Slideout.init("quickview");
-    }
 
     this.handleEvents();
-    this.initScrollLock();
-  },
-  initScrollLock: function initScrollLock() {
-    if (this._mhyScrollLockBound) return;
-    this._mhyScrollLockBound = true;
-
-    const getIsOpen = () => {
-      const modal = document.querySelector('#modal-quickview-cart');
-      const drawer = document.querySelector('#slideout-quickview-cart');
-      return (modal && modal.classList.contains('modal--active')) || (drawer && drawer.classList.contains('slideout--active'));
-    };
-
-    const lock = () => {
-      if (this._mhyScrollLocked) return;
-      this._mhyScrollLocked = true;
-      this._mhyScrollY = window.scrollY || window.pageYOffset || 0;
-      document.documentElement.classList.add('mhy-quickview-open');
-      document.body.classList.add('mhy-quickview-open');
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${this._mhyScrollY}px`;
-      document.body.style.left = '0';
-      document.body.style.right = '0';
-      document.body.style.width = '100%';
-    };
-
-    const unlock = () => {
-      if (!this._mhyScrollLocked) return;
-      this._mhyScrollLocked = false;
-      document.documentElement.classList.remove('mhy-quickview-open');
-      document.body.classList.remove('mhy-quickview-open');
-      document.body.style.removeProperty('position');
-      document.body.style.removeProperty('top');
-      document.body.style.removeProperty('left');
-      document.body.style.removeProperty('right');
-      document.body.style.removeProperty('width');
-      window.scrollTo(0, this._mhyScrollY || 0);
-    };
-
-    const sync = () => {
-      if (getIsOpen()) lock();
-      else unlock();
-    };
-
-    const observer = new MutationObserver(sync);
-    const modalEl = document.querySelector('#modal-quickview-cart');
-    const drawerEl = document.querySelector('#slideout-quickview-cart');
-    if (modalEl) observer.observe(modalEl, { attributes: true, attributeFilter: ['class'] });
-    if (drawerEl) observer.observe(drawerEl, { attributes: true, attributeFilter: ['class'] });
-
-    document.addEventListener('click', function () {
-      setTimeout(sync, 0);
-    }, true);
-    document.addEventListener('keyup', function () {
-      setTimeout(sync, 0);
-    }, true);
-
-    sync();
   },
   checkIfActiveModal: function() {
     const activeModals = document.querySelectorAll('.modal--active');
@@ -3198,27 +3027,7 @@ Shopify.theme.quickview = {
     return false;
   },
   handleEvents: function() {
-    if (this._mhyEventsBound) return;
-    this._mhyEventsBound = true;
-    this._mhyHandleClicksBound = this.handleClicks.bind(this);
-    document.addEventListener('click', this._mhyHandleClicksBound, true);
-
-    const prefetchHandler = this.handlePrefetch.bind(this);
-    document.addEventListener('mouseover', prefetchHandler, true);
-    document.addEventListener('focusin', prefetchHandler, true);
-    document.addEventListener('touchstart', prefetchHandler, { passive: true, capture: true });
-  },
-  handlePrefetch: function(event) {
-    var selectors = {
-      quickviewButton: '.js-quickview-trigger'
-    }
-    let element = event.target && (event.target.matches(selectors.quickviewButton) ? event.target : event.target.closest(selectors.quickviewButton));
-    if (!element || !element.matches(selectors.quickviewButton)) return;
-
-    var productUrl = element.dataset.productUrl;
-    if (!productUrl) return;
-    productUrl = Shopify.theme.quickview.cleanUrl(productUrl, 'variant');
-    Shopify.theme.quickview.prefetchTemplate(productUrl);
+    document.addEventListener('click', this.handleClicks.bind(this), true);
   },
   handleClicks: function(event) {
     var selectors = {
@@ -3234,22 +3043,20 @@ Shopify.theme.quickview = {
 
     if (this.checkIfActiveModal()) WAU.Modal._closeByName("search-modal");
 
+    // Init modal
+    if ( document.querySelector('[data-wau-modal="quickview"]') ) {
+      // Init modal
+      WAU.Modal.init("quickview");
+    } else {
+      // Init slideout
+      WAU.Slideout.init("quickview");
+    }
+
     // Get template
     var productUrl = element.dataset.productUrl,
         productUrl = Shopify.theme.quickview.cleanUrl(productUrl, 'variant');
 
-    this._mhyOpenId += 1;
-    const openId = this._mhyOpenId;
-
-    Shopify.theme.quickview.showLoading();
-
-    if (document.querySelector('[data-wau-modal="quickview"]')) {
-      Shopify.theme.quickview.showModal(element);
-    } else {
-      Shopify.theme.quickview.showSlideout(element);
-    }
-
-    Shopify.theme.quickview.getTemplate(productUrl, openId);
+    Shopify.theme.quickview.getTemplate(productUrl);
   },
   formatTemplate: function getAjaxCart(response) {
     const el = document.createElement('div');
@@ -3268,13 +3075,13 @@ Shopify.theme.quickview = {
 
     return html;
   },
-  showModal: function showModal(opener) {
+  showModal: function showModal() {
 
-    WAU.Modal._openByName("quickview", opener);
+    WAU.Modal._openByName("quickview");
   },
-  showSlideout: function showModal(opener) {
+  showSlideout: function showModal() {
 
-    WAU.Slideout._openByName("quickview", opener, "right");
+    WAU.Slideout._openByName("quickview");
   },
   hideModal: function hideModal() {
 
@@ -3291,95 +3098,65 @@ Shopify.theme.quickview = {
   cleanUrl: function cleanUrl(url, key) {
     return url.split('?')[0] + '?view=quick';
   },
-  showLoading: function showLoading() {
-    const container = document.querySelector('.js-quickview-content');
-    if (!container) return;
-    container.setAttribute('aria-busy', 'true');
-    container.innerHTML = '<div class="mhy-qv-loader"><div class="loading-ripple"><div></div><div></div></div></div>';
-  },
-  hideLoading: function hideLoading() {
-    const container = document.querySelector('.js-quickview-content');
-    if (!container) return;
-    container.setAttribute('aria-busy', 'false');
-  },
-  prefetchTemplate: function prefetchTemplate(productUrl) {
-    if (!productUrl) return;
-    if (this._mhyTemplateCache && this._mhyTemplateCache.has(productUrl)) return;
-    if (this._mhyPendingFetches && this._mhyPendingFetches.has(productUrl)) return;
-    return this._fetchTemplate(productUrl);
-  },
-  _fetchTemplate: function _fetchTemplate(productUrl) {
-    if (this._mhyPendingFetches.has(productUrl)) return this._mhyPendingFetches.get(productUrl);
-    const p = fetch(productUrl)
-      .then(res => res.text())
-      .then(response => {
-        const html = Shopify.theme.quickview.formatTemplate(response);
-        this._mhyTemplateCache.set(productUrl, html);
-        this._mhyPendingFetches.delete(productUrl);
-        return html;
-      })
-      .catch(error => {
-        this._mhyPendingFetches.delete(productUrl);
-        throw error;
+  getTemplate: function getTemplate(productUrl) {
+    let data, url;
+    url = productUrl;
+
+    fetch(url, data)
+    .then(res => res.text())
+    .then(response => {
+      let html = Shopify.theme.quickview.formatTemplate(response);
+
+      // Replace modal content
+      document.querySelector('.js-quickview-content').innerHTML = html.content;
+
+    }).then(response => {
+
+      let context = document.querySelector('.js-quickview-wrapper');
+
+      // Trigger quickview event
+      theme.Product(context);
+
+    }).then(response => {
+
+      let context = document.querySelector('.js-quickview-wrapper');
+
+      // Load Payment Buttons
+      if (context.dataset.paymentButton == 'true' && Shopify.PaymentButton) {
+        Shopify.PaymentButton.init()
+      }
+    }).then(response => {
+
+      let context = document.querySelector('.js-quickview-wrapper');
+
+      // Trigger event for add to cart
+      context.querySelector('.js-ajax-submit').addEventListener('click', function (e) {
+        e.preventDefault();
+
+        var addToCartForm = this.closest('form');
+
+        let cartConfig = document.getElementById('cart-config');
+        if ( !cartConfig ) return false;
+        cartConfig = JSON.parse(cartConfig.innerHTML || '{}');
+
+        Shopify.theme.ajaxCart.addToCart(addToCartForm, null, cartConfig, true);
+
+        return false;
       });
-    this._mhyPendingFetches.set(productUrl, p);
-    return p;
-  },
-  getTemplate: function getTemplate(productUrl, openId) {
-    const container = document.querySelector('.js-quickview-content');
-    if (!container) return;
+    }).then(response => {
 
-    const applyTemplate = (html) => {
-      if (!html || !html.content) return;
-      if (openId && openId !== this._mhyOpenId) return;
+      if ( document.querySelector('[data-wau-modal="quickview"]') ) {
+        // Show modal
+        Shopify.theme.quickview.showModal();
+      } else {
+        // Show modal
+        Shopify.theme.quickview.showSlideout();
+      }
 
-      container.innerHTML = html.content;
-
-      requestAnimationFrame(() => {
-        if (openId && openId !== this._mhyOpenId) return;
-
-        let context = document.querySelector('.js-quickview-wrapper');
-        if (context) theme.Product(context);
-
-        context = document.querySelector('.js-quickview-wrapper');
-        if (context && context.dataset.paymentButton == 'true' && Shopify.PaymentButton) {
-          Shopify.PaymentButton.init();
-        }
-
-        const submit = context ? context.querySelector('.js-ajax-submit') : null;
-        if (submit && submit.dataset.mhyQvAtcBound !== 'true') {
-          submit.dataset.mhyQvAtcBound = 'true';
-          submit.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            var addToCartForm = this.closest('form');
-
-            let cartConfig = document.getElementById('cart-config');
-            if (!cartConfig) return false;
-            cartConfig = JSON.parse(cartConfig.innerHTML || '{}');
-
-            Shopify.theme.ajaxCart.addToCart(addToCartForm, null, cartConfig, true);
-
-            return false;
-          });
-        }
-
-        Shopify.theme.quickview.hideLoading();
-      });
-    };
-
-    if (this._mhyTemplateCache.has(productUrl)) {
-      applyTemplate(this._mhyTemplateCache.get(productUrl));
-      return;
-    }
-
-    this._fetchTemplate(productUrl)
-      .then(applyTemplate)
-      .catch(() => {
-        if (openId && openId !== this._mhyOpenId) return;
-        container.innerHTML = '';
-        Shopify.theme.quickview.hideLoading();
-      });
+    })
+    .catch(error => {
+      console.log(error)
+    });
   }
 }
 
@@ -4349,22 +4126,12 @@ document.addEventListener("DOMContentLoaded", function(){
   /* Initialize Accordions */
   WAU.Accordion.init();
 
-  (function(){
-    const initAOS = function() {
-      if (typeof AOS === 'undefined' || !AOS || typeof AOS.init !== 'function') return;
-      AOS.init({
-        easing: 'ease-out-quad',
-        once: true,
-        mirror: false,
-        offset: 50
-      });
-    };
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(initAOS, { timeout: 1200 });
-    } else {
-      setTimeout(initAOS, 0);
-    }
-  })();
+  AOS.init({
+    easing: 'ease-out-quad',
+    once: true,
+    mirror: false,
+    offset: 50
+  });
 
   document.addEventListener('shopify:block:select', function(e){
     AOS.refreshHard();
@@ -8107,20 +7874,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
   document.addEventListener('shopify:block:deselect', function(event){
     Events.trigger("editor:block:deselect", event);
   });
-  const bgVideoWrappers = document.querySelectorAll('.js-bg-video-wrapper');
-  if (bgVideoWrappers && bgVideoWrappers.length) {
+  if ( document.querySelectorAll('.js-bg-video-wrapper') ) {
     WAU.ProductGridVideo.init();
   }
   const isQuickAddEnabled = document.body.getAttribute('data-quick-add-enabled') === 'true' ? true : false;
   if (isQuickAddEnabled) {
-    const initQuickAdd = function() {
-      WAU.ProductGridQuickAdd.init();
-    };
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(initQuickAdd, { timeout: 1200 });
-    } else {
-      setTimeout(initQuickAdd, 0);
-    }
+    WAU.ProductGridQuickAdd.init();
   }
 });
 

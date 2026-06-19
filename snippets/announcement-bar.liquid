@@ -146,7 +146,7 @@ endif
                 <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="currency-list_header" aria-describedby="currency-heading_header" data-disclosure-toggle>
                   {% if section.settings.show_flag %}
                     <span class="country--flag">
-                      {{ localization.country | image_url: width: 32 | image_tag: class: 'disclosure__toggle__flag', loading: 'eager', fetchpriority: 'high', alt: localization.country.name, width: 32, height: 32 }}
+                      {{ localization.country | image_url: width: 32 | image_tag: class: 'disclosure__toggle__flag', loading: 'eager', image_alt: country.name, fetchpriority: 'high' }}
                     </span>
                   {% endif %}
                   {{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }}
@@ -157,7 +157,7 @@ endif
                       <a class="disclosure-list__option" href="#" {% if country.iso_code == localization.country.iso_code %}aria-current="true"{% endif %} data-value="{{ country.iso_code }}" data-disclosure-option>
                         {% if section.settings.show_flag %}
                           <span class="country--flag">
-                            {{ country | image_url: width: 32 | image_tag: class: 'disclosure__toggle__flag', loading: 'lazy', alt: country.name, width: 32, height: 32 }}
+                            {{ country | image_url: width: 32 | image_tag: class: 'disclosure__toggle__flag', loading: 'lazy', alt: country.name }}
                           </span>
                         {% endif %}
                           <span class="country--name">

@@ -9,7 +9,7 @@
   <div id="age-check-prompt" class="modal-prompt grid__wrapper a-center">
     <div class="site-logo span-12 auto relative">
       {% if settings.age_logo != blank %}
-        <a class="inline-block" href="{{ routes.root_url }}"><img style="max-width: {{ settings.logo_max_width }}px;" src="{{ settings.age_logo | image_url: width: 800 }}" alt="{{ shop.name }}" loading="eager" fetchpriority="high" width="800" height="{{ 800 | times: settings.age_logo.height | divided_by: settings.age_logo.width }}"></a>
+        <a class="inline-block" href="{{ routes.root_url }}"><img style="max-width: {{ settings.logo_max_width }}px;" src="{{ settings.age_logo | image_url: width: 800 }}" alt="{{ shop.name }}" loading="eager" fetchpriority="high"></a>
       {% else %}
         <a class="inline-block" style="font-size: {{ settings.logo_size }}px; color: var(--age-text-color) !important;" href="{{ routes.root_url }}">{{ shop.name }}</a>
       {% endif %}

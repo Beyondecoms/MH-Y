@@ -11,6 +11,56 @@
   "name": "Header",
   "type": "header",
   "sections": {
+    "countdown_fAJeJE": {
+      "type": "countdown",
+      "blocks": {
+        "text_T7bY4N": {
+          "type": "text",
+          "settings": {
+            "heading": "Hurry up! Sale ends in :",
+            "countdown_text": "<p>Up to 50% OFF</p>",
+            "hide_after_countdown": true
+          }
+        },
+        "countdown_VD8xnT": {
+          "type": "countdown",
+          "settings": {
+            "year": "2026",
+            "month": "june",
+            "day": "15",
+            "hour": "0",
+            "minute": "0",
+            "after_countdown_message": "Countdown has ended"
+          }
+        },
+        "button_yaA3DJ": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "countdown_button": "Shop now",
+            "countdown_link": "",
+            "hide_after_countdown": true
+          }
+        }
+      },
+      "block_order": [
+        "text_T7bY4N",
+        "countdown_VD8xnT",
+        "button_yaA3DJ"
+      ],
+      "name": "Countdown",
+      "settings": {
+        "full_width": true,
+        "section_padding": "none",
+        "heading_size": 20,
+        "subheading_size": 14,
+        "countdown_size": 20,
+        "background_color": "#faf4e8",
+        "text_color": "#173250",
+        "button_color": "#ffffff",
+        "button_background": "#333333"
+      }
+    },
     "header": {
       "type": "header",
       "blocks": {
@@ -82,6 +132,7 @@
     }
   },
   "order": [
+    "countdown_fAJeJE",
     "header"
   ]
 }

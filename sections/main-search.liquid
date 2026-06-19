@@ -112,7 +112,7 @@
                             assign feat_image = feat_image[1] | split: '"' | first | replace: '//cdn', 'http://cdn' | replace: 'http:http://', 'http://' | remove: 'https:'
                           -%}
                           <div class="search__page_results--img">
-                            <img src="{{ feat_image }}" alt="{{ item.title }}" loading="eager" fetchpriority="high" width="400" height="300" decoding="async">
+                            <img src="{{ feat_image }}" alt="{{ item.title }}" loading="eager" fetchpriority="high">
                           </div>
                         {% endif %}
                         <div class="search__page_results--text">

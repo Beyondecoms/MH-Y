@@ -50,55 +50,17 @@
 }
 {% endschema %}
 
-{%- liquid
-  assign desktop_video_url = ''
-  if section.settings.desktop_video != blank
-    for source in section.settings.desktop_video.sources
-      if source.format == 'mp4'
-        assign desktop_video_url = source.url
-        break
-      endif
-    endfor
-    if desktop_video_url == blank
-      for source in section.settings.desktop_video.sources
-        assign desktop_video_url = source.url
-        break
-      endfor
-    endif
-  endif
-
-  assign mobile_video_url = ''
-  if section.settings.mobile_video != blank
-    for source in section.settings.mobile_video.sources
-      if source.format == 'mp4'
-        assign mobile_video_url = source.url
-        break
-      endif
-    endfor
-    if mobile_video_url == blank
-      for source in section.settings.mobile_video.sources
-        assign mobile_video_url = source.url
-        break
-      endfor
-    endif
-  endif
--%}
-
 <a href="{{ section.settings.button_link }}" class="video-section1 {{ section.settings.custom_class }}" role="button" aria-label="Play Video">
   <div class="video-container">
     {% if section.settings.desktop_video %}
       <div class="video-desktop">
-        <video class="video-background" loop muted playsinline preload="none" autoplay data-lazy-video>
-          <source data-src="{{ desktop_video_url }}" type="video/mp4">
-        </video>
+        {{ section.settings.desktop_video | video_tag: loop: true, autoplay: true, muted: true, playsinline: true, class: 'video-background' }}
       </div>
     {% endif %}
 
     {% if section.settings.mobile_video %}
       <div class="video-mobile">
-        <video class="video-background" loop muted playsinline preload="none" autoplay data-lazy-video>
-          <source data-src="{{ mobile_video_url }}" type="video/mp4">
-        </video>
+        {{ section.settings.mobile_video | video_tag: loop: true, autoplay: true, muted: true, playsinline: true, class: 'video-background' }}
       </div>
     {% endif %}
   </div>
@@ -129,7 +91,7 @@
 .video-container {
   position: relative;
   width: 100%;
-  /* height: 100vh; */
+  height: 100vh;
   overflow: hidden;
 }
 
