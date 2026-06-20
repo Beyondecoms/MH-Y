@@ -768,7 +768,7 @@
           }
         ],
         "default": "default-color",
-        "info": "Learn more about [color swatch styles](https:\/\/www.weareunderground.com\/blogs\/theme-support\/how-to-add-product-swatch-images)"
+        "info": "Learn more about [color swatch styles](https://www.weareunderground.com/blogs/theme-support/how-to-add-product-swatch-images)"
       },
       {
         "type": "text",
@@ -807,7 +807,7 @@
         "type": "checkbox",
         "id": "show_payment_button",
         "label": "Show dynamic checkout button",
-        "info": "Lets customers check out directly using a familiar payment method. [Learn more](https:\/\/help.shopify.com\/manual\/using-themes\/change-the-layout\/dynamic-checkout)",
+        "info": "Lets customers check out directly using a familiar payment method. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
         "default": true
       },
       {
@@ -1108,13 +1108,13 @@
         "type": "text",
         "id": "tiktok",
         "label": "Tiktok",
-        "info": "Example: \/\/www.tiktok.com\/@shopify"
+        "info": "Example: //www.tiktok.com/@shopify"
       },
       {
         "type": "text",
         "id": "etsy",
         "label": "Etsy",
-        "info": "Example: \/\/www.etsy.com\/shop\/shopify"
+        "info": "Example: //www.etsy.com/shop/shopify"
       }
     ]
   }

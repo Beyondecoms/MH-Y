@@ -46,7 +46,7 @@
   data-aos="fade"
   data-aos-delay="{{ forloop.index | minus: 1 | modulo: aos_mod | times: 100 }}"
   data-alpha="{{ collection.title }}">
-  <div class="collection__item-image">
+  <div class="collection__item-image collection-card__image">
     {%- if floating_text -%}
       {{ collection_details }}
     {%- endif -%}

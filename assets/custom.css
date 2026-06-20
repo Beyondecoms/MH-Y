@@ -428,20 +428,23 @@
   z-index: 10;
   cursor: zoom-in;
 }
-.box-ratio {
-  overflow: hidden;
-  position: relative;
-}
+/* NOTE: .box-ratio base styles are defined in theme.liquid critical CSS (height:0 + padding-bottom trick).
+   Do NOT override position/overflow/height here — that breaks position:absolute images inside. */
 
 .circle-zoom-container {
+  /* Must be block-level so the absolutely-positioned img fills the .box-ratio height correctly */
   position: relative;
-  display: inline-block;
+  display: block;
+  width: 100%;
+  height: 100%;
   cursor: crosshair;
 }
 
 .circle-zoom-image {
   width: 100%;
+  height: 100%;
   display: block;
+  object-fit: cover;
 }
 
 .circle-zoom-lens {
@@ -852,3 +855,106 @@ button.flickity-button.flickity-prev-next-button.next {
     display: inline-flex !important;
   }
 }
+
+.header--scrolling {
+  will-change: transform;
+}
+
+/* =========================================================
+   PERFORMANCE: CLS PREVENTION — Space Reservation
+   ========================================================= */
+
+/* 1. Slideshow — reserve space before Flickity loads (natural ratio: 800/1800 = 44.4%) */
+.slideshow-section,
+[data-section-type="slideshow-section"] {
+  min-height: 44.4vw;
+}
+/* Also target the Flickity element itself before JS initializes */
+.slideshow-section .slideshow.flickity__section,
+.slideshow-section .js-slideshow {
+  min-height: 44.4vw;
+}
+@media screen and (max-width: 749px) {
+  .slideshow-section,
+  [data-section-type="slideshow-section"],
+  .slideshow-section .slideshow.flickity__section,
+  .slideshow-section .js-slideshow {
+    min-height: 150vw; /* Mobile banner is 800x1200 = 2:3 ratio */
+  }
+}
+
+/* 2. Product listing cards — reserve 4:5 portrait ratio (matches actual product images) */
+/* Scoped to listing snippet classes only — NOT .box-ratio globally */
+.product-index .prod-image {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.product-index .prod-image .box-ratio {
+  /* Override padding-bottom trick with aspect-ratio for stability */
+  height: auto !important;
+  padding-bottom: 0 !important;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  position: relative;
+}
+.product-index .prod-image .box-ratio img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 3. Collection list images — reserve square ratio */
+.collection-image.box-ratio {
+  aspect-ratio: 4 / 5;
+  height: auto !important;
+  padding-bottom: 0 !important;
+  overflow: hidden;
+  position: relative;
+}
+.collection-image.box-ratio img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* 4. Image gallery items — reserve ratio */
+.image-gallery__image-wrapper {
+  overflow: hidden;
+}
+
+/* 5. Product detail gallery — keep height: 0 trick intact, just ensure image shows */
+.product-media-container .box-ratio {
+  /* Do NOT set aspect-ratio here — the padding-bottom from inline style controls this */
+  overflow: hidden;
+  position: relative;
+}
+.product-media-container .box-ratio .circle-zoom-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.product-media-container .box-ratio .circle-zoom-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================================================
+   PERFORMANCE: BELOW-FOLD SECTION VISIBILITY
+   ========================================================= */
+
+/* Image with text overlay — prevent layout shift */
+.image-with-text-overlay {
+  overflow: hidden;
+}
+
+
+

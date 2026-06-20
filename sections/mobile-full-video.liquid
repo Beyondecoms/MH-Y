@@ -126,7 +126,7 @@ Usage: Add the section to a template (e.g., index.liquid) or via Online Store > 
     });
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
+  window.addEventListener('load', function(){
     document.querySelectorAll('[data-section-id]').forEach(init);
   });
 })();

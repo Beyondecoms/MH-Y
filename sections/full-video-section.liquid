@@ -54,13 +54,15 @@
   <div class="video-container">
     {% if section.settings.desktop_video %}
       <div class="video-desktop">
-        {{ section.settings.desktop_video | video_tag: loop: true, autoplay: true, muted: true, playsinline: true, class: 'video-background' }}
+        {%- assign desktop_poster = section.settings.desktop_video.preview_image | image_url: width: 900 -%}
+        {{ section.settings.desktop_video | video_tag: loop: true, autoplay: false, muted: true, playsinline: true, class: 'video-background', preload: 'none', poster: desktop_poster }}
       </div>
     {% endif %}
 
     {% if section.settings.mobile_video %}
       <div class="video-mobile">
-        {{ section.settings.mobile_video | video_tag: loop: true, autoplay: true, muted: true, playsinline: true, class: 'video-background' }}
+        {%- assign mobile_poster = section.settings.mobile_video.preview_image | image_url: width: 600 -%}
+        {{ section.settings.mobile_video | video_tag: loop: true, autoplay: false, muted: true, playsinline: true, class: 'video-background', preload: 'none', poster: mobile_poster }}
       </div>
     {% endif %}
   </div>

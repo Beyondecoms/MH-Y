@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
-<meta name="google-site-verification" content="lOkUI6a9GE3w3rF1befblwzvRE97rSNuxSbjKLyWWxY" /><head>
+<meta name="google-site-verification" content="lOkUI6a9GE3w3rF1befblwzvRE97rSNuxSbjKLyWWxY" />
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
 
   <!-- Establish early connection to external domains -->
-  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.shopify.com">
+  <link rel="dns-prefetch" href="https://cdn.shopify.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.shopify.com" crossorigin>
   <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
   <link rel="preconnect" href="//ajax.googleapis.com" crossorigin />
+
+  <!-- Responsive Preload for LCP Hero Banner Image -->
+  {%- if template.name == 'index' -%}
+    {%- assign hero = sections['slideshow'] -%}
+    {%- assign first_block = hero.blocks | first -%}
+    {%- if first_block.settings.image != blank -%}
+      {%- assign hero_img = first_block.settings.image -%}
+      <link rel="preload" as="image" fetchpriority="high"
+        imagesrcset="
+          {{ hero_img | image_url: width: 750, format: 'webp' }} 750w,
+          {{ hero_img | image_url: width: 1100, format: 'webp' }} 1100w,
+          {{ hero_img | image_url: width: 1500, format: 'webp' }} 1500w"
+        imagesizes="100vw">
+    {%- endif -%}
+  {%- endif -%}
 
   {%- assign main_font = settings.main_font -%}
   {%- assign heading_font = settings.heading_font -%}
@@ -44,10 +63,130 @@
   {% render 'structured-data' %}
   {% render 'css-variables' %}
 
+  <!-- Critical CSS Inlined (Above-the-fold rules) -->
+  <style>
+    /* Critical: Announcement bar */
+    .announcement__bar-section {
+      position: relative;
+      border-bottom: 1px solid var(--top-bar-border);
+      max-height: 38px;
+    }
+    #top-bar {
+      text-align: center;
+      line-height: 40px;
+      background: var(--top-bar-background);
+      color: var(--top-bar-color);
+      font-size: var(--announcement-size);
+    }
+    #top-bar .top-bar-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+    }
+    .announcement__text {
+      display: block;
+      grid-column: 2 / span 1;
+    }
+    .announcement__text.text-only {
+      grid-column: 1 / span 3;
+    }
+    @media screen and (max-width: 980px) {
+      .announcement__text {
+        grid-column: 1 / span 3 !important;
+      }
+    }
+    .announcement__carousel-item {
+      width: 100%;
+    }
+
+    /* Critical: Header */
+    .header-section {
+      background: var(--header-background);
+      position: relative;
+      z-index: 1;
+    }
+    header.theme-header {
+      background: var(--header-background);
+      position: relative;
+    }
+    header.theme-header.stickynav {
+      width: 100%;
+      z-index: 11;
+    }
+    #identity {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1em;
+    }
+    #logo {
+      line-height: initial;
+      padding: 0;
+    }
+    #logo a {
+      text-decoration: none;
+      color: var(--cart-links);
+      display: inline-block;
+      border-bottom: 0;
+    }
+    ul.shopping--cart_links {
+      text-align: right;
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    ul.shopping--cart_links > li {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    ul.shopping--cart_links > li a,
+    ul.shopping--cart_links > li button {
+      display: inline-block;
+      color: var(--cart-links);
+      height: 60px;
+      line-height: 60px;
+    }
+
+    /* Critical: Hero slideshow container */
+    .slideshow {
+      position: relative;
+      overflow: hidden;
+    }
+    .slideshow__slide {
+      width: 100%;
+    }
+    .slideshow__slide-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .slideshow-img-el {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .box-ratio {
+      display: block;
+      height: 0;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .box-ratio img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+
+  <!-- Reverted to blocking stylesheet loading to prevent CLS/FOUC -->
   <link rel="stylesheet" href="{{ 'stylesheet.css' | asset_url }}" type="text/css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"></noscript>
+
   <meta name="google-site-verification" content="10kUI6a9GE3w3rF1befblwzvRE97rSNuxSbjKLyWWxY" />
   <style>
   {{ main_font | font_face: font_display: 'swap' }}
@@ -62,9 +201,9 @@
   </style>
 
   {{ content_for_header }}
-  <link rel="stylesheet" href="{{ 'custom.css' | asset_url  }}">
-   <script src="{{ 'custom.js' | asset_url }}" defer></script>
-    
+  
+  <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}" type="text/css">
+  <script src="{{ 'custom.js' | asset_url }}" defer></script>
 </head>
 <body class="gridlock template-{{ template | handleize }} {% render 'body-classes' | strip %} js-slideout-toggle-wrapper js-modal-toggle-wrapper" data-quick-add-enabled="{{ settings.quickadd | json }}">
   <a class="skip-link button visually-hidden" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
@@ -163,7 +302,7 @@
   {%- endif -%}
 
   {% render 'cart-config' %}
-  <script src="{{ 'eventemitter3.min.js' | asset_url }}"></script>
+  <script src="{{ 'eventemitter3.min.js' | asset_url }}" defer="defer"></script>
   {%- if settings.product_grid_video -%}
     <script src="{{ 'vendor-video.js' | asset_url }}" defer></script>
   {%- endif -%}

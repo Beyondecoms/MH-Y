@@ -189,26 +189,27 @@ data-aos="fade">
           <div id="slide--{{ section.id }}-slide-{{ forloop.index0 }}" class="slide--{{ block.id }} slideshow__slide{% if block.settings.image == blank %} slideshow__slide-onboard{% endif %}" data-block-id="{{ block.id }}" data-slider-index="{{ forloop.index0 }}" data-sizes="auto" {{ block.shopify_attributes }}>
           {% if image_is_link %}<a class="slide__image-link" href="{{ link }}">{% endif %}
             <div class="js-slideshow-slide slideshow__slide-image">
-              {% liquid
-                # Determine fetch priority for LCP
+              {%- liquid
+                assign is_first = forloop.first
                 assign loading = 'lazy'
                 assign fetch_priority = 'auto'
-                if section.index == 1 and forloop.first
+                assign decoding = 'async'
+                if is_first
                   assign loading = 'eager'
                   assign fetch_priority = 'high'
+                  assign decoding = 'sync'
                 endif
-                if forloop.first
-                  assign loading = 'eager'
-                endif
-               %}
+              -%}
               {% if has_image %}
                 {%
                   render 'basic-responsive-image',
                   type: block.settings.image,
-                  width: 2400,
+                  width: 1800,
                   class: mobile_class,
                   loading: loading,
-                  fetchpriority: fetch_priority
+                  fetchpriority: fetch_priority,
+                  decoding: decoding,
+                  sizes: '100vw'
                 %}
               {% else %}
                 {% capture current %}{% cycle 1, 2 %}{% endcapture %}
@@ -219,10 +220,12 @@ data-aos="fade">
                 {%
                   render 'basic-responsive-image',
                   type: block.settings.mobile_image,
-                  width: 2400,
+                  width: 900,
                   class: 'md-hide desktop-hide',
                   loading: loading,
-                  fetchpriority: fetch_priority
+                  fetchpriority: fetch_priority,
+                  decoding: decoding,
+                  sizes: '100vw'
                 %}
               {% endif %}
             </div>

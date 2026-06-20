@@ -27,4 +27,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // Autoplay video only when in viewport using IntersectionObserver
+  const videoEls = document.querySelectorAll('.video-container video, .video-section1 video, .custom-shop--video-container video, .section-video, .js-video');
+  if (videoEls.length > 0 && 'IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.play().catch(() => {});
+        } else {
+          entry.target.pause();
+        }
+      });
+    }, { threshold: 0.3 });
+    videoEls.forEach(video => videoObserver.observe(video));
+  }
 });

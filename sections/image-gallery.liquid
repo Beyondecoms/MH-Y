@@ -166,7 +166,7 @@
 
       -%}
 
-      <div class="image_gallery__section_block gallery__section-block {% if section.settings.full_width and block.settings[image_size] == '100%' %} centered{% endif %} {{ image_width }} {% unless is_swipe %}sm-span-12 {% endunless %} auto promo-{{ block.id }}{% if forloop.last %} last-block{% endif %}" 
+      <div class="image_gallery__section_block gallery__section-block image-gallery__item {% if section.settings.full_width and block.settings[image_size] == '100%' %} centered{% endif %} {{ image_width }} {% unless is_swipe %}sm-span-12 {% endunless %} auto promo-{{ block.id }}{% if forloop.last %} last-block{% endif %}" 
         data-aos="fade"
         data-aos-delay="{{ forloop.index | times: 100 }}"
         {{ block.shopify_attributes }}>

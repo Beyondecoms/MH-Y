@@ -3326,9 +3326,11 @@ theme.Header = (function() {
           if (window.pageYOffset > stickyToScroll) {
             this.elements.navigation.classList.add(this.navigationStickyClass);
             this.elements.clearElement.style.marginTop = this.elements.navigation.clientHeight + "px";
+            this.elements.navigation.classList.add('header--scrolling');
           } else {
             this.elements.navigation.classList.remove(this.navigationStickyClass);
             this.elements.clearElement.style.marginTop = "0px";
+            this.elements.navigation.classList.remove('header--scrolling');
           }
         }
 
@@ -3338,9 +3340,11 @@ theme.Header = (function() {
           if (window.pageYOffset > amountToScroll) {
             this.elements.themeHeader.classList.add(this.headerStickyClass);
             this.elements.clearElement.style.marginTop = this.elements.themeHeader.clientHeight + "px";
+            this.elements.themeHeader.classList.add('header--scrolling');
           } else {
             this.elements.themeHeader.classList.remove(this.headerStickyClass);
             this.elements.clearElement.style.marginTop = "0px";
+            this.elements.themeHeader.classList.remove('header--scrolling');
           }
         }
 
@@ -8054,7 +8058,7 @@ theme.MailingPopup = (function() {
 
       const popupDelayAttribute = document.querySelector(settings.selectors.popupContainer).getAttribute('data-popup-delay');
 
-      let popupDelay = Number(popupDelayAttribute) * 1000;
+      let popupDelay = Math.max(Number(popupDelayAttribute) * 1000 || 0, 5000);
 
       const popupCloseEl = document.querySelector(settings.selectors.popupCloseButton);
 
