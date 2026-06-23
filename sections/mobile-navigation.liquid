@@ -79,7 +79,7 @@
                 -%}
 
                 <li class="js-accordion-header c-accordion__header">
-                  <a class="js-accordion-link c-accordion__link" href="{{ link.url }}">{{ link.title | escape }}</a>
+                  <a class="js-accordion-link c-accordion__link aaaaaaa" href="{{ link.url }}">{{ link.title | escape }}</a>
                   <button class="dropdown-arrow" aria-label="{{  link.title | escape }}" data-toggle="accordion" aria-expanded="false" aria-controls="{{ accordion_content_id }}" >
                     {% render 'snip-icons',
                      wrapper: '.c-accordion__header',
@@ -104,7 +104,7 @@
                         -%}
 
                         <li class="js-accordion-header c-accordion__header">
-                          <a class="js-accordion-link c-accordion__link" href="{{ sub_link.url }}">{{ sub_link.title | escape }}</a>
+                          <a class="js-accordion-link c-accordion__link bbbbb" href="{{ sub_link.url }}">{{ sub_link.title | escape }}</a>
                           <button class="dropdown-arrow" aria-label="{{  sub_link.title | escape }}" data-toggle="accordion" aria-expanded="false" aria-controls="{{ level_two_accordion_content_id }}" >
                             {% render 'snip-icons',
                              wrapper: '.c-accordion__header',
@@ -120,24 +120,68 @@
                             <ul>
                               {% for sub_sub_link in sub_link.links %}
                                 <li>
-                                  <a class="js-accordion-link c-accordion__link" href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a>
+                                  <a class="js-accordion-link c-accordion__link ccccccc" href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a>
                                 </li>
                               {% endfor %}
                             </ul>
                           </li>
                       {% else %}
                         <li>
-                          <a class="js-accordion-link c-accordion__link" href="{{ sub_link.url }}">{{ sub_link.title | escape }}</a>
+                          <a class="js-accordion-link c-accordion__link dddddd" href="{{ sub_link.url }}">{{ sub_link.title | escape }}</a>
                         </li>
                       {% endif %}
                     {% endfor %}
                   </ul>
                 </li>
-              {% else %}
-                <li>
-                  <a class="js-accordion-link c-accordion__link" href="{{ link.url }}">{{ link.title | escape }}</a>
-                </li>
-              {% endif %}
+      {% else %}
+<li>
+  <a class="js-accordion-link c-accordion__link eeeee" href="{{ link.url }}">
+    {{ link.title | escape }}
+
+    {% if link.title == 'THE ISLE OF MAN - NEW COLLECTION' %}
+      <span class="menu-new-label">New</span>
+    {% endif %}
+  </a>
+</li>
+
+{% if forloop.index == 4 %}
+  <li class="mobile-menu-banner">
+    <a href="/collections/sale">
+      <img
+        src="https://myraymond.com/cdn/shop/files/Sale_image.png?v=1710850876&width=832"
+        alt="Online Exclusive"
+        loading="lazy">
+    </a>
+  </li>
+{% endif %}
+
+<style>
+  .menu-new-label {
+    color: #ff0000;
+    font-size: 12px;
+    margin-left: 6px;
+    vertical-align: top;
+  }
+
+  .mobile-menu-banner {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .mobile-menu-banner a {
+    display: block;
+    width: 100%;
+  }
+
+  .mobile-menu-banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>
+{% endif %}
 
             {% endfor %}
             {% if shop.customer_accounts_enabled %}
@@ -350,6 +394,49 @@
       }
     </style>
   </nav>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const nav = document.querySelector('.mhy-mobile-bottomnav');
+  if (!nav) return;
+
+  let lastScrollY = window.scrollY || 0;
+  let ticking = false;
+  const threshold = 8;
+
+  function updateNav() {
+    const currentY = window.scrollY || window.pageYOffset || 0;
+    const scrollingDown = currentY > lastScrollY + threshold;
+    const scrollingUp = currentY < lastScrollY - threshold;
+
+    if (currentY <= 20) {
+      nav.classList.remove('is-visible');
+      nav.classList.add('is-hidden');
+    } else if (scrollingDown) {
+      nav.classList.add('is-visible');
+      nav.classList.remove('is-hidden');
+    } else if (scrollingUp) {
+      nav.classList.remove('is-visible');
+      nav.classList.add('is-hidden');
+    }
+
+    lastScrollY = currentY;
+    ticking = false;
+  }
+
+  window.addEventListener(
+    'scroll',
+    function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateNav);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+
+  updateNav();
+});
+</script>
 {% schema %}
 {
   "name": "Mobile navigation",

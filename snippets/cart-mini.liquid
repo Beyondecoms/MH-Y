@@ -31,6 +31,17 @@
       <p class="mb0"><span class="js-cart-count inline-block">{{ cart.item_count }}</span> {{ 'cart.general.items' | t }}</p>
     </div>
   </div>
+  <div class="ajax-cart__notice js-ajax-cart-notice" role="status" aria-live="polite" aria-hidden="true">
+    <div class="ajax-cart__notice-inner">
+      <div class="ajax-cart__notice-title js-ajax-cart-notice-title"></div>
+      <div class="ajax-cart__notice-body js-ajax-cart-notice-body"></div>
+      <div class="ajax-cart__notice-actions">
+        <a class="ajax-cart__notice-btn button" href="{{ routes.cart_url }}">{{ 'products.product.view_cart' | t }}</a>
+        <a class="ajax-cart__notice-btn button" href="/checkout">{{ 'cart.general.checkout' | t }}</a>
+        <button class="ajax-cart__notice-link {{ cart_class }}" {{ cart_data }} type="button" name="button">{{ 'products.product.continue' | t }}</button>
+      </div>
+    </div>
+  </div>
 
   <div class="ajax-cart__form-wrapper cart-wrapper js-ajax-cart-content">
 

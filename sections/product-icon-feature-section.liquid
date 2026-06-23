@@ -54,7 +54,7 @@
   {% for block in section.blocks %}
     <div class="icon-feature-item">
       {% if block.settings.icon_image != blank %}
-        <img src="{{ block.settings.icon_image | img_url: '150x150' }}" alt="{{ block.settings.heading }}" />
+        {{ block.settings.icon_image | image_url: width: 150 | image_tag: loading: 'lazy', alt: block.settings.heading, width: 150, height: 150 | times: block.settings.icon_image.height | divided_by: block.settings.icon_image.width }}
       {% endif %}
       <h4>{{ block.settings.heading }}</h4>
       <p>{{ block.settings.content }}</p>
@@ -76,7 +76,7 @@
   {% if img != blank or heading != blank or content != blank %}
     <div class="icon-feature-item">
       {% if img != blank %}
-        <img src="{{ img | img_url: '150x150' }}" alt="{{ heading }}" />
+        {{ img | image_url: width: 150 | image_tag: loading: 'lazy', alt: heading, width: 150, height: 150 | times: img.height | divided_by: img.width }}
       {% endif %}
       {% if heading != blank %}
         <h4>{{ heading }}</h4>

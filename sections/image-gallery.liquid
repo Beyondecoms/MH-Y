@@ -157,6 +157,32 @@
 
         assign caption_position = block.settings.caption_position
 
+        assign alt_heading = block.settings.heading | strip_html | strip
+        assign alt_subheading = block.settings.subheading | strip_html | strip
+        assign gallery_alt_base = alt_heading
+        if gallery_alt_base == blank
+          assign gallery_alt_base = alt_subheading
+        elsif alt_subheading != blank
+          assign gallery_alt_base = gallery_alt_base | append: ' – ' | append: alt_subheading
+        endif
+        if gallery_alt_base == blank and section.settings.heading != blank
+          assign gallery_alt_base = section.settings.heading | strip_html | strip | append: ' Image ' | append: forloop.index
+        endif
+        if gallery_alt_base == blank and block.settings.link contains '/collections/'
+          assign collection_handle = block.settings.link | split: '/collections/' | last | split: '?' | first | split: '/' | first | replace: '-', ' ' | strip
+          if collection_handle != blank
+            assign gallery_alt_base = collection_handle | append: ' Collection Image'
+          endif
+        endif
+        if gallery_alt_base == blank
+          assign gallery_alt_base = 'Lifestyle Image ' | append: forloop.index
+        endif
+        if gallery_alt_base contains 'MH&Y'
+          assign gallery_alt = gallery_alt_base
+        else
+          assign gallery_alt = gallery_alt_base | append: ' by MH&Y India'
+        endif
+
         assign loading = 'lazy'
         assign fetch_priority = 'auto'
         if section.index == 1
@@ -184,6 +210,7 @@
                 md_render: md_render,
                 lg_render: lg_render,
                 width: 1200,
+                alt: gallery_alt,
                 loading: loading,
                 fetchpriority: fetch_priority
               %}

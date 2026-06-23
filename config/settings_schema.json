@@ -1117,5 +1117,31 @@
         "info": "Example: \/\/www.etsy.com\/shop\/shopify"
       }
     ]
+  },
+  {
+    "name": "Mobile bottom nav",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "mhy_mobile_bottomnav_enable",
+        "label": "Enable mobile bottom navigation (home + pages only)",
+        "default": true
+      },
+      {
+        "type": "url",
+        "id": "mhy_mobile_bottomnav_home_link",
+        "label": "Home link"
+      },
+      {
+        "type": "url",
+        "id": "mhy_mobile_bottomnav_shop_link",
+        "label": "Shop all link"
+      },
+      {
+        "type": "url",
+        "id": "mhy_mobile_bottomnav_login_link",
+        "label": "Login link"
+      }
+    ]
   }
 ]

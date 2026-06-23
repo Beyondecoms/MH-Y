@@ -75,7 +75,7 @@
                       {{ comment.author }}: {{ comment.created_at | date: "%B %d, %Y" }}
                     </div>
                     <div class="gravatar desktop-1 mobile-1">
-                      <img title="{{ comment.author }}" src="//www.gravatar.com/avatar/{{ comment.email | remove: ' ' | strip_newlines | downcase | md5 }}" />
+                      <img title="{{ comment.author }}" src="//www.gravatar.com/avatar/{{ comment.email | remove: ' ' | strip_newlines | downcase | md5 }}" width="40" height="40" loading="lazy" decoding="async" />
                     </div>
                     <div class="comment desktop-11 mobile-2">
                       {{ comment.content }}

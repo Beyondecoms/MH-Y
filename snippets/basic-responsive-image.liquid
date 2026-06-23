@@ -13,6 +13,7 @@ Accepts:
 - class:         {String} CSS Classes added to the parent .box-ratio element. (optional)
 - loading:       {String} Set the loading attribute. By default is 'lazy'. (optional)
 - fetch_priority {String} Set the fetchpriority attribute. By defaul is 'auto'. (optional)
+- alt:           {String} Alt text for the image. Falls back to the image's alt. (optional)
 
 Usage:
 {%
@@ -27,44 +28,51 @@ Usage:
 %}
 {% endcomment %}
 {%- liquid
-  assign image_alt = type.alt | default: custom_alt | default: shop.name
+  assign image_alt = alt | default: type.alt | default: custom_alt | default: shop.name | strip_html | strip
   assign webp_format = nil
   if skip_webp != true
     assign webp_format = 'webp'
   endif
+  assign image_box_ratio = type.height | append: ".0" | times: 1 | divided_by: type.width | times: 100 | append: "%"
+  assign img_width = width | default: 1200
+  assign img_height = img_width | times: type.height | divided_by: type.width
 -%}
-{% assign image_box_ratio = type.height | append: ".0" | times: 1 | divided_by: type.width | times: 100 | append: "%" %}
 {%- capture sizes -%}
   (min-width: 1601px) {{ lg_render | default: '2000px' }},
   (min-width: 768px) and (max-width: 1600px) {{ md_render | default: '1200px' }},
   (max-width: 767px) {{ sm_render | default: '100vw' }}, 900px
 {%- endcapture -%}
 {% capture loading %}{{ loading | default: 'lazy' }}{% endcapture %}
-{% capture fetch_priority %}{{ fetchpriority | default: 'auto' }}{% endcapture %}
+{% capture fetch_priority %}{{ fetch_priority | default: fetchpriority | default: 'auto' }}{% endcapture %}
 <div class="box-ratio {{ class }}" style="padding-bottom: {{ image_box_ratio }};">
   {%- if webp_format -%}
-    {{ type | image_url: width: width, format: webp_format | default: 1200 | image_tag:
+    {{ type | image_url: width: img_width, format: webp_format | image_tag:
       loading: loading,
+      decoding: 'async',
       fetchpriority: fetch_priority,
       sizes: sizes,
       widths: '200, 300, 400, 500, 600, 700, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000',
       class: img_class,
-      alt: image_alt }}
+      alt: image_alt,
+      width: img_width,
+      height: img_height }}
   {%- else -%}
-    {{ type | image_url: width: width | default: 1200 | image_tag:
+    {{ type | image_url: width: img_width | image_tag:
       loading: loading,
+      decoding: 'async',
       fetchpriority: fetch_priority,
       sizes: sizes,
       widths: '200, 300, 400, 500, 600, 700, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000',
       class: img_class,
-      alt: image_alt }}
+      alt: image_alt,
+      width: img_width,
+      height: img_height }}
   {%- endif -%}
 </div>
 <noscript>
   {%- if webp_format -%}
-    {{ type | image_url: width: width, format: webp_format | image_tag: alt: image_alt }}
+    {{ type | image_url: width: img_width, format: webp_format | image_tag: alt: image_alt, width: img_width, height: img_height }}
   {%- else -%}
-    {{ type | image_url: width: width | image_tag: alt: image_alt }}
+    {{ type | image_url: width: img_width | image_tag: alt: image_alt, width: img_width, height: img_height }}
   {%- endif -%}
 </noscript>
-

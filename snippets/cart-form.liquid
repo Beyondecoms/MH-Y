@@ -310,7 +310,7 @@
       </div>
     </div>
     <div class="ajax-cart__buttons">
-      <a class="ajax-cart__button-view_cart button secondary-button" href="{{ routes.cart_url }}">{{ 'products.product.view_cart' | t }}</a>
+      {% comment %} <a class="ajax-cart__button-view_cart button secondary-button" href="{{ routes.cart_url }}">{{ 'products.product.view_cart' | t }}</a> {% endcomment %}
       <input class="ajax-cart__button-submit" type="submit" name="checkout" id="checkout" value="{{ 'cart.general.checkout' | t }}" />
     </div>
   </div>

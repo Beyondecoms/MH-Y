@@ -21,7 +21,7 @@ Usage: Add the section to a template (e.g., index.liquid) or via Online Store > 
           muted
           playsinline
           preload="auto"
-          poster="{{ section.settings.mobile_poster | img_url: '2048x' }}"
+          poster="{{ section.settings.mobile_poster | image_url: width: 2048 }}"
           data-autoplay-fallback
           {% if section.settings.autoplay %}autoplay{% endif %}
         >
@@ -29,7 +29,7 @@ Usage: Add the section to a template (e.g., index.liquid) or via Online Store > 
           Your browser does not support the video tag.
         </video>
       {% elsif section.settings.mobile_poster != blank %}
-        <div class="mfv-poster" style="background-image: url('{{ section.settings.mobile_poster | img_url: '2048x' }}')" role="img" aria-label="{{ section.settings.aria_label }}"></div>
+        <div class="mfv-poster" style="background-image: url('{{ section.settings.mobile_poster | image_url: width: 2048 }}')" role="img" aria-label="{{ section.settings.aria_label }}"></div>
       {% endif %}
 
       {% if section.settings.desktop_video != blank and section.settings.show_on_desktop %}
@@ -39,7 +39,7 @@ Usage: Add the section to a template (e.g., index.liquid) or via Online Store > 
           muted
           playsinline
           preload="auto"
-          poster="{{ section.settings.desktop_poster | img_url: '2048x' }}"
+          poster="{{ section.settings.desktop_poster | image_url: width: 2048 }}"
           {% if section.settings.autoplay %}autoplay{% endif %}
         >
           <source src="{{ section.settings.desktop_video | file_url }}" type="video/mp4">

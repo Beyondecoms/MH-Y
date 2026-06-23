@@ -14,9 +14,19 @@
             class="item product-index collection__page-product js-product-listing"
             data-aos="fade"
             data-aos-delay="{{ forloop.index | times: 100 }}">
+            {% liquid
+              assign loading = 'lazy'
+              assign fetch_priority = 'auto'
+              if section.index == 1 and forloop.index <= grid
+                assign loading = 'eager'
+                assign fetch_priority = 'high'
+              endif
+            %}
             {% render 'product-listing',
               product: product,
-              collection: 'all' %}
+              collection: 'all',
+              loading: loading,
+              fetchpriority: fetch_priority %}
           </div>
         {%- endfor -%}
         <style>

@@ -55,7 +55,7 @@
   }
 
   .no-js .parallax-{{ section.id }} {
-    background-image: url('{{ section.settings.image | image_url: width: 1800, format: 'webp' }}');
+    background-image: url('{{ section.settings.image | image_url: width: 1800 }}');
   }
   .parallax-{{ section.id }} .parallax__container,
   .parallax-{{ section.id }} .parralax__image--wrapper,
@@ -99,7 +99,7 @@
               assign fetch_priority = 'high'
             endif
            %}
-          {% render 'basic-responsive-image', type: section.settings.image, width: 3000, loading: loading, fetchpriority: fetch_priority, custom_alt: section.settings.heading | default: shop.name | append: ' - MH&Y India Premium Menswear' %}
+          {% render 'basic-responsive-image', type: section.settings.image, width: 3000, loading: loading, fetchpriority: fetch_priority %}
         {%- endif -%}
       </div>
       {%- if section.settings.image == blank -%}

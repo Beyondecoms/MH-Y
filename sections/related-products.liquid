@@ -25,6 +25,7 @@ data-section-type="related-products">
 
     <div class="related__products grid__wrapper grid__wrapper-nest product-loop span-12 auto">
 
+        {% assign grid = section.blocks.size | plus: 0 %}
         {% for block in section.blocks %}
         {% assign related_product = block.settings.product %}
           {% unless related_product == blank %}
@@ -35,7 +36,15 @@ data-section-type="related-products">
               data-price="{{ product.price }}"
               data-aos="fade"
               data-aos-delay="{{ forloop.index | times: 100 }}">
-              {% render 'product-listing', product: related_product %}
+              {% liquid
+                assign loading = 'lazy'
+                assign fetch_priority = 'auto'
+                if section.index == 1 and forloop.index <= grid
+                  assign loading = 'eager'
+                  assign fetch_priority = 'high'
+                endif
+              %}
+              {% render 'product-listing', product: related_product, loading: loading, fetchpriority: fetch_priority %}
             </div>
           {% endunless %}
         {% endfor %}

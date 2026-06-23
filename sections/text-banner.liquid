@@ -17,7 +17,7 @@
       -%}
 
       <div class="usp__content usp-{{ block.id }} {{ grid }} auto">
-        <img src="{{ block.settings.image | image_url: width: 800, format: 'webp' }}" alt="{{ block.settings.image_alt | default: block.settings.heading | default: shop.name }}" class="textcol-image" />
+        {{ block.settings.image | image_url: width: 160 | image_tag: class: 'textcol-image', loading: 'lazy', alt: block.settings.image_alt, width: 160, height: 160 | times: block.settings.image.height | divided_by: block.settings.image.width }}
         <h3>{{ block.settings.heading | escape }}</h3>
         {{ block.settings.textarea }}
       </div>

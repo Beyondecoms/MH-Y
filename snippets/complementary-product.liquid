@@ -65,19 +65,31 @@ Usage:
           data-product-id="{{ product.id }}"
           data-alpha="{{ product.title }}"
           data-price="{{ product.price }}">
+          {% liquid
+            assign loading = 'lazy'
+            assign fetch_priority = 'auto'
+            if section.index < 3 and forloop.first
+              assign loading = 'eager'
+              assign fetch_priority = 'high'
+            endif
+          %}
           {% if block.settings.appearance == 'simple' %}
             {%
               render 'complementary-product-listing',
               product: product,
               section: section,
-              block: block
+              block: block,
+              loading: loading,
+              fetchpriority: fetch_priority
             %}
           {% else %}
             {%
               render 'product-listing',
               product: product,
               section: section,
-              block: block
+              block: block,
+              loading: loading,
+              fetchpriority: fetch_priority
             %}
           {% endif %}
         </div>

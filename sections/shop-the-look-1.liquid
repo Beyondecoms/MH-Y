@@ -1,0 +1,534 @@
+{% comment %}
+  Premium About / Roots Section
+  File: sections/premium-roots-section.liquid
+{% endcomment %}
+
+<section id="PremiumRoots-{{ section.id }}" class="premium-roots premium-roots--{{ section.id }}">
+  <div class="premium-roots__decor premium-roots__decor--left" aria-hidden="true"></div>
+  <div class="premium-roots__decor premium-roots__decor--right" aria-hidden="true"></div>
+
+  <div class="premium-roots__inner page-width">
+    {% if section.settings.kicker != blank %}
+      <p class="premium-lookbook__eyebrow">{{ section.settings.kicker }}</p>
+    {% endif %}
+
+    <div class="premium-lookbook__grid">
+      <div class="premium-lookbook__visual premium-lookbook__reveal">
+        <div class="premium-lookbook__media">
+          {% if section.settings.left_video != blank %}
+            <video class="premium-lookbook__video" autoplay muted loop playsinline preload="metadata" poster="{{ section.settings.left_poster | image_url: width: 1400 }}">
+              <source src="{{ section.settings.left_video.sources[0].url }}" type="{{ section.settings.left_video.sources[0].mime_type }}">
+            </video>
+          {% elsif section.settings.left_image != blank %}
+            <img
+              src="{{ section.settings.left_image | image_url: width: 1400 }}"
+              alt="{{ section.settings.left_image.alt | escape }}"
+              loading="lazy"
+              width="{{ section.settings.left_image.width }}"
+              height="{{ section.settings.left_image.height }}"
+            >
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'premium-lookbook__placeholder' }}
+          {% endif %}
+        </div>
+
+        {% if section.settings.left_badge_title != blank or section.settings.left_badge_text != blank %}
+          <div class="premium-lookbook__badge">
+            <span class="premium-lookbook__badge-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 7V17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M17 7V17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M7 10C9 8 15 8 17 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M8 14C10 13 14 13 16 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+            </span>
+            <div>
+              {% if section.settings.left_badge_title != blank %}
+                <strong>{{ section.settings.left_badge_title }}</strong>
+              {% endif %}
+              {% if section.settings.left_badge_text != blank %}
+                <span>{{ section.settings.left_badge_text }}</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="premium-lookbook__content premium-lookbook__reveal">
+        {% if section.settings.heading != blank %}
+          <h2 class="premium-lookbook__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="premium-lookbook__text rte">{{ section.settings.text }}</div>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+          <div class="premium-lookbook__features">
+            {% for block in section.blocks %}
+              <div class="premium-lookbook__feature" {{ block.shopify_attributes }}>
+                <div class="premium-lookbook__feature-image">
+                  {% if block.settings.image != blank %}
+                    <img
+                      src="{{ block.settings.image | image_url: width: 900 }}"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      loading="lazy"
+                      width="{{ block.settings.image.width }}"
+                      height="{{ block.settings.image.height }}"
+                    >
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'premium-lookbook__placeholder' }}
+                  {% endif %}
+                </div>
+                <div class="premium-lookbook__feature-body">
+                  {% if block.settings.badge != blank %}
+                    <div class="premium-lookbook__sale">{{ block.settings.badge }}</div>
+                  {% endif %}
+                  {% if block.settings.title != blank %}
+                    <h3 class="premium-lookbook__product-title">{{ block.settings.title }}</h3>
+                  {% endif %}
+                  {% if block.settings.price != blank or block.settings.compare_price != blank %}
+                    <div class="premium-lookbook__prices">
+                      {% if block.settings.price != blank %}
+                        <span class="premium-lookbook__price">{{ block.settings.price }}</span>
+                      {% endif %}
+                      {% if block.settings.compare_price != blank %}
+                        <s class="premium-lookbook__compare">{{ block.settings.compare_price }}</s>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                  {% if block.settings.link != blank and block.settings.link_label != blank %}
+                    <a class="premium-lookbook__button" href="{{ block.settings.link }}">
+                      <span>{{ block.settings.link_label }}</span>
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+          <div class="premium-lookbook__cta-wrap">
+            <a class="premium-lookbook__cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #PremiumRoots-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    padding: 64px 0 72px;
+    background: linear-gradient(180deg, #ffffff 0%, #fbf8f2 100%);
+    color: #173250;
+  }
+
+  #PremiumRoots-{{ section.id }} .page-width {
+    max-width: 1460px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .premium-lookbook__eyebrow {
+    text-align: center;
+    margin: 0 0 12px;
+    font-size: 12px;
+    letter-spacing: 0.26em;
+    color: #ab7841;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .premium-lookbook__grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1.1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .premium-lookbook__visual {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(17, 32, 50, 0.12);
+    min-height: 760px;
+    background: #f2ece4;
+  }
+
+  .premium-lookbook__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .premium-lookbook__media img,
+  .premium-lookbook__video,
+  .premium-lookbook__placeholder {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .premium-lookbook__badge {
+    position: absolute;
+    left: 22px;
+    bottom: 22px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 340px;
+    padding: 18px 20px;
+    background: linear-gradient(135deg, rgba(23, 50, 80, 0.96), rgba(35, 62, 95, 0.88));
+    color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 18px 42px rgba(12, 23, 38, 0.24);
+    backdrop-filter: blur(10px);
+  }
+
+  .premium-lookbook__badge-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.06);
+  }
+
+  .premium-lookbook__badge-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: #f2e7d2;
+  }
+
+  .premium-lookbook__badge strong {
+    display: block;
+    font-size: 18px;
+    line-height: 1.25;
+    font-family: var(--custom-heading-family, Georgia, serif);
+    font-weight: 600;
+  }
+
+  .premium-lookbook__badge span {
+    display: block;
+    margin-top: 3px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.86);
+  }
+
+  .premium-lookbook__content {
+    padding-top: 8px;
+  }
+
+  .premium-lookbook__heading {
+    margin: 0 0 18px;
+    font-family: var(--custom-heading-family, Georgia, serif);
+    font-size: clamp(42px, 4.3vw, 72px);
+    line-height: 0.98;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #173250;
+  }
+
+  .premium-lookbook__heading::after {
+    content: "";
+    display: block;
+    width: 74px;
+    height: 3px;
+    margin-top: 18px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ab7841, #f0d7b0, #ab7841);
+  }
+
+  .premium-lookbook__text {
+    max-width: 760px;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #38485d;
+  }
+
+  .premium-lookbook__text p {
+    margin: 0;
+  }
+
+  .premium-lookbook__features {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .premium-lookbook__feature {
+    background: rgba(255,255,255,0.82);
+    border: 1px solid rgba(23, 50, 80, 0.08);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 16px 36px rgba(15, 28, 44, 0.08);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+
+  .premium-lookbook__feature:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 44px rgba(15, 28, 44, 0.12);
+  }
+
+  .premium-lookbook__feature-image {
+    aspect-ratio: 0.82;
+    background: #f5efe7;
+  }
+
+  .premium-lookbook__feature-image img,
+  .premium-lookbook__feature-image svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .premium-lookbook__feature-body {
+    padding: 14px 16px 16px;
+  }
+
+  .premium-lookbook__sale {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: #ab7841;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .premium-lookbook__product-title {
+    margin: 0 0 8px;
+    font-size: 17px;
+    line-height: 1.35;
+    font-weight: 500;
+    color: #173250;
+  }
+
+  .premium-lookbook__prices {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .premium-lookbook__price {
+    font-size: 18px;
+    font-weight: 600;
+    color: #8b4f21;
+  }
+
+  .premium-lookbook__compare {
+    font-size: 14px;
+    color: #7f8894;
+  }
+
+  .premium-lookbook__button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(23,50,80,0.12);
+    text-decoration: none;
+    color: #173250;
+    background: linear-gradient(180deg, #fff, #fbf8f3);
+    transition: all .28s ease;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .premium-lookbook__button svg {
+    width: 18px;
+    height: 18px;
+    transition: transform .25s ease;
+  }
+
+  .premium-lookbook__button:hover {
+    border-color: #173250;
+    box-shadow: 0 10px 24px rgba(23, 50, 80, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .premium-lookbook__button:hover svg {
+    transform: translateX(4px);
+  }
+
+  .premium-lookbook__cta-wrap {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .premium-lookbook__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 240px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    background: #173250;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 0 16px 34px rgba(23, 50, 80, 0.18);
+    transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+  }
+
+  .premium-lookbook__cta:hover {
+    background: #0f2238;
+    transform: translateY(-2px);
+    box-shadow: 0 20px 42px rgba(23, 50, 80, 0.24);
+  }
+
+  .premium-lookbook__reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+
+  .premium-lookbook__reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 1100px) {
+    .premium-lookbook__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .premium-lookbook__visual {
+      min-height: 640px;
+    }
+
+    .premium-lookbook__features {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 749px) {
+    #PremiumRoots-{{ section.id }} .page-width {
+      padding: 0 16px;
+    }
+
+    #PremiumRoots-{{ section.id }} {
+      padding: 46px 0 56px;
+    }
+
+    .premium-lookbook__visual {
+      min-height: 520px;
+      border-radius: 20px;
+    }
+
+    .premium-lookbook__badge {
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      max-width: none;
+      padding: 16px;
+    }
+
+    .premium-lookbook__heading {
+      font-size: 34px;
+      line-height: 1.02;
+    }
+
+    .premium-lookbook__text {
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .premium-lookbook__feature-body {
+      padding: 12px 14px 14px;
+    }
+
+    .premium-lookbook__cta {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const section = document.getElementById('PremiumRoots-{{ section.id }}');
+    if (!section || !('IntersectionObserver' in window)) {
+      section?.querySelectorAll('.premium-lookbook__reveal').forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    section.querySelectorAll('.premium-lookbook__reveal').forEach((el) => observer.observe(el));
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Premium Roots Lookbook",
+  "settings": [
+    {"type":"text","id":"kicker","label":"Top text","default":"EFFORTLESS ELEGANCE"},
+    {"type":"text","id":"heading","label":"Heading","default":"SHOP THE LOOK"},
+    {"type":"richtext","id":"text","label":"Description","default":"<p>Bold in blue, sharp in white, and grounded in camel. The perfect balance of power and poise, walk in, take over. A look that perfectly defines your stature.</p>"},
+    {"type":"image_picker","id":"left_image","label":"Left image fallback"},
+    {"type":"video","id":"left_video","label":"Left side video"},
+    {"type":"image_picker","id":"left_poster","label":"Video poster image"},
+    {"type":"text","id":"left_badge_title","label":"Badge title","default":"Designed for the modern gentleman."},
+    {"type":"text","id":"left_badge_text","label":"Badge text","default":"Timeless style with premium comfort."},
+    {"type":"text","id":"cta_label","label":"CTA label","default":"EXPLORE ALL COLLECTIONS"},
+    {"type":"url","id":"cta_link","label":"CTA link"}
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product card",
+      "settings": [
+        {"type":"image_picker","id":"image","label":"Product image"},
+        {"type":"text","id":"badge","label":"Badge","default":"SAVE 36%"},
+        {"type":"text","id":"title","label":"Title","default":"White Solid Linen Shirt"},
+        {"type":"text","id":"price","label":"Price","default":"₹ 2,943.00"},
+        {"type":"text","id":"compare_price","label":"Compare at price","default":"₹ 4,599.00"},
+        {"type":"text","id":"link_label","label":"Button label","default":"SHOP NOW"},
+        {"type":"url","id":"link","label":"Button link"}
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Premium Roots Lookbook",
+      "blocks": [
+        {"type":"product"},
+        {"type":"product"},
+        {"type":"product"}
+      ]
+    }
+  ]
+}
+{% endschema %}

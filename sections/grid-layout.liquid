@@ -117,13 +117,13 @@
     <div class="mm_grid {% if section.settings.img1 == blank or section.settings.img2 == blank %} mm_image_blank {% endif %}">
       {% if section.settings.img1 != blank %}
       <div class="mm_item knitwear">
-      <img src="{{ section.settings.img1 | image_url: width: 600, format: 'webp' }}" alt="{{ section.settings.text1 | default: shop.name }}">
+      <img src="{{ section.settings.img1 | image_url: width: 600 }}" alt="{{ section.settings.text1 | default: 'Knitwear' | escape }} for Men by MH&Y India" loading="lazy" width="600" height="{{ 600 | times: section.settings.img1.height | divided_by: section.settings.img1.width }}">
       <div class="overlay">{{ section.settings.text1 }}</div>
     </div>
       {% endif %}
       {% if section.settings.img2 != blank %}
     <div class="mm_item formal-shirts">
-      <img src="{{ section.settings.img2 | image_url: width: 600, format: 'webp' }}" alt="{{ section.settings.text2 | default: shop.name }}">
+      <img src="{{ section.settings.img2 | image_url: width: 600 }}" alt="{{ section.settings.text2 | default: 'Formal Shirts' | escape }} for Men by MH&Y India" loading="lazy" width="600" height="{{ 600 | times: section.settings.img2.height | divided_by: section.settings.img2.width }}">
       <div class="overlay">{{ section.settings.text2 }}</div>
     </div>
       {% endif %}
@@ -131,13 +131,13 @@
   <div class="mm_grid {% if section.settings.img3 == blank or section.settings.img4 == blank %} mm_image_blank {% endif %}">
     {% if section.settings.img3 != blank %}
     <div class="mm_item trousers">
-     <img src="{{ section.settings.img3 | image_url: width: 600, format: 'webp' }}" alt="{{ section.settings.text3 | default: shop.name }}">
+     <img src="{{ section.settings.img3 | image_url: width: 600 }}" alt="{{ section.settings.text3 | default: 'Trousers' | escape }} for Men by MH&Y India" loading="lazy" width="600" height="{{ 600 | times: section.settings.img3.height | divided_by: section.settings.img3.width }}">
       <div class="overlay">{{ section.settings.text3 }}</div>
     </div>
     {% endif %}
     {% if section.settings.img4 != blank %}
     <div class="mm_item polos">
-      <img src="{{ section.settings.img4 | image_url: width: 600, format: 'webp' }}" alt="{{ section.settings.text4 | default: shop.name }}">
+      <img src="{{ section.settings.img4 | image_url: width: 600 }}" alt="{{ section.settings.text4 | default: 'Polos' | escape }} for Men by MH&Y India" loading="lazy" width="600" height="{{ 600 | times: section.settings.img4.height | divided_by: section.settings.img4.width }}">
       <div class="overlay">{{ section.settings.text4 }}</div>
     </div>
     {% endif %}
@@ -145,13 +145,13 @@
   <div class="mm_grid_2 mm_grid {% if section.settings.img5 == blank or section.settings.img6 == blank %} mm_image_blank {% endif %}">
     {% if section.settings.img5 != blank %}
     <div class="mm_item suits">
-   <img src="{{ section.settings.img5 | image_url: width: 600, format: 'webp' }}" alt="{{ section.settings.text5 | default: shop.name }}">
+   <img src="{{ section.settings.img5 | image_url: width: 600 }}" alt="{{ section.settings.text5 | default: 'Suits' | escape }} for Men by MH&Y India" loading="lazy" width="600" height="{{ 600 | times: section.settings.img5.height | divided_by: section.settings.img5.width }}">
       <div class="overlay">{{ section.settings.text5 }}</div>
   </div>
     {% endif %}
     {% if section.settings.img6 != blank %}
   <div class="mm_item loafers">
-   <img src="{{ section.settings.img6 | image_url: width: 600, format: 'webp' }}" alt="{{ section.settings.text6 | default: shop.name }}">
+   <img src="{{ section.settings.img6 | image_url: width: 600 }}" alt="{{ section.settings.text6 | default: 'Loafers' | escape }} for Men by MH&Y India" loading="lazy" width="600" height="{{ 600 | times: section.settings.img6.height | divided_by: section.settings.img6.width }}">
       <div class="overlay">{{ section.settings.text6 }}</div>
   </div>
     {% endif %}
