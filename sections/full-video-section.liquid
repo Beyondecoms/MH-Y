@@ -1,0 +1,267 @@
+{% schema %}
+{
+  "name": "Full Video WITH TEXT",
+  "settings": [
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS Class"
+    },
+    {
+      "type": "video",
+      "id": "desktop_video",
+      "label": "Desktop Video"
+    },
+    {
+      "type": "video",
+      "id": "mobile_video",
+      "label": "Mobile Video"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Your Title Here"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Your subtitle or description goes here."
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Learn More"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Full Video Section",
+      "category": "Video"
+    }
+  ]
+}
+{% endschema %}
+
+<a href="{{ section.settings.button_link }}" class="video-section1 {{ section.settings.custom_class }}" role="button" aria-label="Play Video">
+  <div class="video-container">
+    {% if section.settings.desktop_video %}
+      <div class="video-desktop">
+        {{ section.settings.desktop_video | video_tag: loop: true, autoplay: true, muted: true, playsinline: true, class: 'video-background' }}
+      </div>
+    {% endif %}
+
+    {% if section.settings.mobile_video %}
+      <div class="video-mobile">
+        {{ section.settings.mobile_video | video_tag: loop: true, autoplay: true, muted: true, playsinline: true, class: 'video-background' }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="video-overlay">
+    <div class="video-content">
+      {% if section.settings.title %}
+        <h1 class="video-title">{{ section.settings.title }}</h1>
+      {% endif %}
+      {% if section.settings.subtitle %}
+        <p class="video-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      {% if section.settings.button_link and section.settings.button_text %}
+        <span class="video-button">{{ section.settings.button_text }}</span>
+      {% endif %}
+    </div>
+  </div>
+</a>
+
+<style>
+.video-section1 {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: block;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hide both videos initially */
+.video-desktop,
+.video-mobile {
+  display: none;
+}
+
+/* Show desktop video */
+@media (min-width: 768px) {
+  .video-desktop {
+    display: block;
+  }
+}
+
+/* Show mobile video */
+@media (max-width: 767px) {
+  .video-mobile {
+    display: block;
+  }
+}
+
+/* Overlay Styles */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  z-index: 2;
+  background: transparent;
+}
+
+.video-content {
+  max-width: 90%;
+  padding: 20px;
+  color: #fff;
+  margin-top:260px;
+}
+
+/* Typography */
+.video-title {
+  font-size: 36px !important;
+  font-weight: 400;
+  margin-bottom: 30px;
+  letter-spacing: .15em;
+  color:#fff;
+  text-transform: capitalize;
+  font-family: "Pinyon Script", cursive;
+}
+
+.video-title>span {
+  font-size: 32px !important;
+  font-weight: 400;
+  margin-bottom: 30px;
+  letter-spacing: .15em;
+  color:#fff;
+  text-transform: capitalize;
+  font-family: "Playfair Display", serif;
+}
+
+.video-subtitle {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.video-button {
+  padding: 14px 28px;
+  line-height: normal;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: .2em;
+  font-weight: 400;
+  color: #fff;
+  transition: color .45s cubic-bezier(.785,.135,.15,.86), border .45s cubic-bezier(.785,.135,.15,.86);
+  z-index: 1;
+  background: #173250;
+}
+
+.video-button:hover {
+  background-color: #173250;
+}
+/* ===== iPhone & Mobile Fixes ===== */
+@supports (-webkit-touch-callout: none) {
+  .video-section1,
+  .video-background {
+    height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Hide video controls on Safari */
+video::-webkit-media-controls,
+video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 1024px) {
+  .video-title {
+    font-size: 34px;
+  }
+  .video-subtitle {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .video-section1 {
+    height: 100dvh;
+    position: relative;
+  }
+
+  .video-background {
+    width: 100%;
+    height: 100dvh;
+    object-fit: cover;
+    display: block;
+}
+
+  .video-content {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+    margin-top: 0;
+  }
+
+  .video-title {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+
+  .video-subtitle {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .video-button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 12px;
+  }
+}
+
+/* ===== iPhone 14 Pro / Pro Max Specific Fix ===== */
+@media only screen
+  and (device-width: 430px)
+  and (device-height: 932px)
+  and (-webkit-device-pixel-ratio: 3) {
+  .video-content {
+    top: 80%;
+    margin-top: 0;
+  }
+}
+</style>

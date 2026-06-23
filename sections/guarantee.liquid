@@ -1,0 +1,217 @@
+<div class="mm_container featured__collection-carousel" id="featured_collection--{{ section.id }}">
+  <div class="guarantee-section">
+    <div class="guarantee-content">
+     
+      <div class="text-content">
+        <h2>MH&Y GUARANTEE</h2>
+        <p>
+          Go on, explore risk-free convenience and luxury: every purchase is covered for free shipping. 
+          And 60 days free returns, for any reason on non-sale product(s). Because our guarantee is the north star to our moral compass.
+        </p>
+      </div>
+    </div>
+    <div class="benefits">
+      <div class="benefit-item">
+        <img src="{{ section.settings.img1 | image_url: width: 200, format: 'webp' }}" alt="60 Days Returns">
+        <h3>60 DAYS RETURNS*</h3>
+      </div>
+      <div class="benefit-item">
+        <img src="{{ section.settings.img2 | image_url: width: 200, format: 'webp' }}" alt="Free Shipping">
+        <h3>FREE SHIPPING</h3>
+      </div>
+      <div class="benefit-item">
+        <img src="{{ section.settings.img3 | image_url: width: 200, format: 'webp' }}" alt="First Order Benefits">
+        <h3>FIRST ORDER BENEFITS</h3>
+      </div>
+      <div class="benefit-item">
+        <img src="{{ section.settings.img4 | image_url: width: 200, format: 'webp' }}" alt="Earn per Referral">
+        <h3>EARN INR 500 PER REFERRAL</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <style>
+    /* styles.css */
+.guarantee-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width:100%;
+  padding: 25px;
+  background:#f2f2f2;
+  margin: 30px 0;
+}
+
+.guarantee-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo_2 img {
+  width: 80px;
+}
+
+.text-content {
+  margin-top: 10px;
+}
+
+.text-content h2 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.text-content p {
+  font-size: 1em;
+  color: #555;
+  max-width: 600px;
+}
+
+.benefits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45%;
+  text-align: center;
+}
+
+.benefit-item img {
+  width: 40px;
+  height: auto;
+}
+
+.benefit-item h3 {
+  font-size: 0.7em;
+  margin-top: 8px;
+  color: #333;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .guarantee-section {
+    flex-direction: column;
+    justify-content: space-between;
+  
+  }
+  
+  .guarantee-content {
+    flex: 1;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .benefits {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-content h2 {
+    font-size: 1.5em;
+  }
+
+  .benefit-item h3 {
+    font-size: 0.8em;
+  }
+}
+ @media screen and (min-width: 741px) {
+    #featured_collection--{{ section.id }} {
+        max-width: 73%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+  }
+    @media only screen and (max-width: 600px) {
+    #featured_collection--{{ section.id }} {
+        max-width: 91% !important;
+    }
+}
+  </style>
+
+
+{% schema %}
+  {
+  "name": "Guarantee",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "img1",
+      "label": "Knitwear Image"
+    },
+    {
+      "type": "text",
+      "id": "text1",
+      "label": "Knitwear Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "img2",
+      "label": "Formal Shirts Image"
+    },
+    {
+      "type": "text",
+      "id": "text2",
+      "label": "Formal Shirts Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "img3",
+      "label": "Trousers Image"
+    },
+    {
+      "type": "text",
+      "id": "text3",
+      "label": "Trousers Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "img4",
+      "label": "Polos Image"
+    },
+    {
+      "type": "text",
+      "id": "text4",
+      "label": "Polos Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "img5",
+      "label": "Suits Image"
+    },
+    {
+      "type": "text",
+      "id": "text5",
+      "label": "Suits Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "img6",
+      "label": "Loafers Image"
+    },
+    {
+      "type": "text",
+      "id": "text6",
+      "label": "Loafers Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Guarantee"
+    }
+  ]
+}
+
+{% endschema %}

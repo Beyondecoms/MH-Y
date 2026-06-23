@@ -1,0 +1,166 @@
+{% comment %}
+Shopify section: Mobile Full Video with CSS presets
+Place this file in: /sections/mobile-full-video.liquid
+Features:
+- Mobile-first full-bleed video (autoplay, muted, loop, playsinline)
+- Desktop fallback image or desktop video
+- Overlay content (heading, subheading, button)
+- Accessibility & iOS autoplay fallback (click-to-play if autoplay blocked)
+- Schema with theme editor settings & presets
+
+Usage: Add the section to a template (e.g., index.liquid) or via Online Store > Themes > Customize.
+{% endcomment %}
+
+<section class="mobile-full-video-section {{ section.settings.custom_class }}" aria-label="{{ section.settings.aria_label }}" data-section-id="{{ section.id }}">
+  <a href="{{ section.settings.button_link }}" class="video-section2 {{ section.settings.custom_class }}">
+    <div class="mfv-media">
+      {% if section.settings.mobile_video != blank %}
+        <video
+          class="mfv-video mfv-video--mobile"
+          loop
+          muted
+          playsinline
+          preload="auto"
+          poster="{{ section.settings.mobile_poster | img_url: '2048x' }}"
+          data-autoplay-fallback
+          {% if section.settings.autoplay %}autoplay{% endif %}
+        >
+          <source src="{{ section.settings.mobile_video }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      {% elsif section.settings.mobile_poster != blank %}
+        <div class="mfv-poster" style="background-image: url('{{ section.settings.mobile_poster | img_url: '2048x' }}')" role="img" aria-label="{{ section.settings.aria_label }}"></div>
+      {% endif %}
+
+      {% if section.settings.desktop_video != blank and section.settings.show_on_desktop %}
+        <video
+          class="mfv-video mfv-video--desktop"
+          loop
+          muted
+          playsinline
+          preload="auto"
+          poster="{{ section.settings.desktop_poster | img_url: '2048x' }}"
+          {% if section.settings.autoplay %}autoplay{% endif %}
+        >
+          <source src="{{ section.settings.desktop_video | file_url }}" type="video/mp4">
+        </video>
+      {% endif %}
+    </div>
+
+    <div class="mfv-overlay mfv-overlay--{{ section.settings.text_alignment }}">
+      <div class="mfv-content">
+        {% if section.settings.show_headline %}
+          <h2 class="mfv-heading">{{ section.settings.headline }}</h2>
+        {% endif %}
+        {% if section.settings.show_subheading %}
+          <p class="mfv-subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+        {% if section.settings.show_cta and section.settings.cta_label != blank %}
+          <a href="{{ section.settings.cta_link }}" class="mfv-cta button">{{ section.settings.cta_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <button class="mfv-play-toggle" aria-hidden="true" tabindex="-1">
+      <span class="visually-hidden">Play background video</span>
+    </button>
+  </a>
+</section>
+
+<style>
+.mobile-full-video-section { position: relative; overflow: hidden; }
+.mfv-media { position: absolute; inset: 0; height: 100%; width: 100%; z-index: 0; }
+.mfv-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mfv-poster { width: 100%; height: 100%; background-size: cover; background-position: center; }
+
+.mfv-overlay { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; padding: 2rem; min-height: 60vh; }
+.mfv-content { text-align: center; max-width: 1100px; width: 100%; }
+.mfv-heading { font-size: 2rem; margin-bottom: 0.5rem; color: var(--mfv-heading-color, #fff); text-shadow: 0 6px 20px rgba(0,0,0,0.45); }
+.mfv-subheading { font-size: 1rem; margin-bottom: 1rem; color: var(--mfv-subheading-color, #fff); }
+.mfv-cta.button { display: inline-block; padding: 0.75rem 1.25rem; border-radius: 8px; background: var(--mfv-cta-bg, rgba(255,255,255,0.12)); color: var(--mfv-cta-color, #fff); text-decoration: none; }
+
+.mfv-play-toggle { position: absolute; inset: auto 1rem 1rem auto; z-index: 3; background: rgba(0,0,0,0.45); border: none; border-radius: 999px; width: 56px; height: 56px; display: none; align-items: center; justify-content: center; }
+.mfv-play-toggle:focus { outline: 2px solid #fff; }
+
+.mfv-overlay--left { justify-content: flex-start; align-items: flex-end; }
+.mfv-overlay--center { justify-content: center; align-items: center; }
+.mfv-overlay--right { justify-content: flex-end; align-items: flex-end; }
+
+@media (max-width: 899px) {
+  .mobile-full-video-section { height: 100vh; }
+  .mfv-overlay { min-height: 100vh; }
+}
+
+@media (min-width: 900px) {
+  .mobile-full-video-section { height: 60vh; }
+  .mfv-video--mobile { display: none; }
+}
+
+.visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+</style>
+
+<script>
+(function(){
+  function init(section){
+    var el = section.querySelector('.mfv-video--mobile');
+    var playBtn = section.querySelector('.mfv-play-toggle');
+    if(!el) return;
+
+    var playAttempt = el.play();
+    if(playAttempt !== undefined){
+      playAttempt.catch(function(){
+        playBtn.style.display = 'flex';
+        playBtn.setAttribute('aria-hidden','false');
+        playBtn.tabIndex = 0;
+        playBtn.addEventListener('click', function(){
+          el.muted = false;
+          el.play();
+          playBtn.style.display = 'none';
+        }, { once: true });
+      });
+    }
+
+    section.addEventListener('click', function(e){
+      if(e.target.closest('a')) return;
+      if(el.paused) { el.play(); } else { el.pause(); }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('[data-section-id]').forEach(init);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Mobile Full Video",
+  "settings": [
+    { "type": "text", "id": "custom_class", "label": "Custom CSS class" },
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Background video section" },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay video?", "default": true },
+
+    { "type": "video", "id": "mobile_video", "label": "Mobile video (MP4 recommended)" },
+    { "type": "image_picker", "id": "mobile_poster", "label": "Mobile poster / fallback image" },
+
+    { "type": "video", "id": "desktop_video", "label": "Desktop video (optional)" },
+    { "type": "image_picker", "id": "desktop_poster", "label": "Desktop poster image" },
+    { "type": "checkbox", "id": "show_on_desktop", "label": "Show desktop video", "default": false },
+
+    { "type": "checkbox", "id": "show_headline", "label": "Show headline", "default": true },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Your headline here" },
+    { "type": "checkbox", "id": "show_subheading", "label": "Show subheading", "default": true },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Short supporting text" },
+
+    { "type": "select", "id": "text_alignment", "label": "Text alignment", "options": [ {"value":"left","label":"Left"}, {"value":"center","label":"Center"}, {"value":"right","label":"Right"} ], "default": "center" },
+
+    { "type": "checkbox", "id": "show_cta", "label": "Show CTA button", "default": false },
+    { "type": "text", "id": "cta_label", "label": "CTA label" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "url", "id": "button_link", "label": "Entire section link (optional)" }
+  ],
+  "presets": [
+    { "name": "Mobile full-bleed video", "category": "Video" }
+  ]
+}
+{% endschema %}

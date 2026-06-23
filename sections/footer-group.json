@@ -1,0 +1,99 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "custom_footer_section_MimxG9": {
+      "type": "custom-footer-section",
+      "settings": {
+        "show_social_icons": false,
+        "heading": "Honoring people through The Art of Living Well, a lifestyle that celebrates elegance, balance, and mindful luxury.",
+        "newsletter_subheading": "",
+        "text_color": "#000000",
+        "newsletter_background": "#f5f5f5",
+        "newsletter_button_color": "rgba(0,0,0,0)",
+        "footer_menu": "footer-menu",
+        "favicon_logo": "shopify://shop_images/1_2.png"
+      }
+    },
+    "6e1e7f0e-a8ab-4b5d-b533-03e147b1d76c": {
+      "type": "newsletter",
+      "disabled": true,
+      "settings": {
+        "show_social_icons": true,
+        "heading": "Subscribe to our newsletter",
+        "newsletter_subheading": "<p>Signup for our newsletter to stay up to date on sales and events.</p>",
+        "text_color": "#ffffff",
+        "newsletter_background": "#4a4a4a",
+        "newsletter_button_color": "#ffffff"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "1480973024958": {
+          "type": "text",
+          "settings": {
+            "heading": "",
+            "img": "shopify://shop_images/MH_Y_HorizontalLogo-01_1.png",
+            "footer_text": "<p>Inspired by the philosophy of<strong> </strong><em><strong>The Art of Living Well</strong></em>, our brand celebrates the idea of appreciating the finer things in life and finding joy in everyday. Whether it's a day at the office, a weekend getaway or an evening out, our versatile pieces are a perfect companion.<br/></p><p></p><p></p><p></p><p></p><p><strong>Free Shipping  |  COD Available</strong></p>"
+          }
+        },
+        "1480972996114": {
+          "type": "menu",
+          "disabled": true,
+          "settings": {
+            "footer_nav": "mobile-menu",
+            "heading": ""
+          }
+        },
+        "menu_dNqfB6": {
+          "type": "menu",
+          "settings": {
+            "footer_nav": "footer",
+            "heading": ""
+          }
+        },
+        "contact_QYqtX8": {
+          "type": "contact",
+          "settings": {
+            "heading_2": "",
+            "footer_text": "<p>Add some text to your footer.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "1480973024958",
+        "1480972996114",
+        "menu_dNqfB6",
+        "contact_QYqtX8"
+      ],
+      "disabled": true,
+      "settings": {
+        "footer_text_align": "left",
+        "footer_title_transform": "uppercase",
+        "footer_title_size": 14,
+        "show_credit_cards": true,
+        "show_social_icons": true,
+        "enable_follow_on_shop": true,
+        "show_copyright": true,
+        "show_locale_selector": false,
+        "show_country_selector": false,
+        "show_flag": false
+      }
+    }
+  },
+  "order": [
+    "custom_footer_section_MimxG9",
+    "6e1e7f0e-a8ab-4b5d-b533-03e147b1d76c",
+    "footer"
+  ]
+}

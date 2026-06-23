@@ -1,0 +1,87 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "blocks": {
+        "announcement_text_YHyR3R": {
+          "type": "announcement_text",
+          "settings": {
+            "announcement_text": "<p>\"The Isle of Man\" is now live </p>"
+          }
+        },
+        "announcement_text_gUKMw6": {
+          "type": "announcement_text",
+          "settings": {
+            "announcement_text": "<p><strong>FREE SHIPPING</strong></p>"
+          }
+        },
+        "mega_menu_rG7ktK": {
+          "type": "mega_menu",
+          "disabled": true,
+          "settings": {
+            "menu_item": "SHOP",
+            "nav_image": "shopify://shop_images/2570.jpg",
+            "nav_promo_link": "",
+            "image_position": "left"
+          }
+        },
+        "links_with_images_WtijpW": {
+          "type": "links_with_images",
+          "settings": {
+            "menu_item": "SHOP",
+            "image_ratio": "portrait",
+            "image_1": "shopify://shop_images/1500X1700_4.jpg",
+            "link_1": "shopify://collections/formal-shirts",
+            "image_2": "shopify://shop_images/1500X1700_1.jpg",
+            "link_2": "shopify://collections/shackets-1",
+            "image_3": "shopify://shop_images/1500X1700_2.jpg",
+            "link_3": "shopify://collections/casual-shirts",
+            "image_4": "shopify://shop_images/1500X1700_3.jpg",
+            "link_4": "shopify://collections/linen-living"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_text_YHyR3R",
+        "announcement_text_gUKMw6",
+        "mega_menu_rG7ktK",
+        "links_with_images_WtijpW"
+      ],
+      "custom_css": [
+        ".logo--default {display: none;}"
+      ],
+      "settings": {
+        "full_width_announcement_bar": false,
+        "show_social_icons": false,
+        "show_locale_selector": false,
+        "show_country_selector": false,
+        "show_flag": false,
+        "header_layout": "inline",
+        "floating_header": false,
+        "logo": "shopify://shop_images/2_1_03ddd433-d08e-4456-b766-4c27e2942f84.png",
+        "logo_hover": "shopify://shop_images/2_2_a21200e0-0fb2-43ae-93ab-51470981b63a.png",
+        "logo_max_width": 80,
+        "logo_max_width_mobile": 80,
+        "icons_only": true,
+        "search_layout": "modal",
+        "main_nav": "main-menu",
+        "nav_height": 30,
+        "linklist_breakpoint": 4
+      }
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

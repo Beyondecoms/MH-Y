@@ -1,0 +1,168 @@
+{% schema %}
+{
+  "name": "Product Icon Feature Sec",
+  "settings": [
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS Class"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Heading",
+      "default": "Product Heading Information"
+    },
+    {
+      "type": "textarea",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "Product Information Description"
+    },
+    {
+  "type": "checkbox",
+  "id": "enable_metafields",
+  "label": "Enable Product Metafield Icons",
+  "default": true
+}
+  ],
+  "presets": [
+    {
+      "name": "Product Icon Feature Sec",
+      "category": "Custom Sections",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
+
+
+<div class="icon-feature-grid-wrapper {{ section.settings.custom_class }}">
+  
+  {% if section.settings.section_heading != blank %}
+    <h3 class="icon-feature-heading">{{ section.settings.section_heading }}</h3>
+  {% endif %}
+
+  {% if section.settings.section_description != blank %}
+    <p class="icon-feature-description">{{ section.settings.section_description }}</p>
+  {% endif %}
+<div class="icon-feature-grid">
+
+  {%- comment -%}
+  Static Blocks Loop
+  {%- endcomment -%}
+  {% for block in section.blocks %}
+    <div class="icon-feature-item">
+      {% if block.settings.icon_image != blank %}
+        <img src="{{ block.settings.icon_image | img_url: '150x150' }}" alt="{{ block.settings.heading }}" />
+      {% endif %}
+      <h4>{{ block.settings.heading }}</h4>
+      <p>{{ block.settings.content }}</p>
+    </div>
+  {% endfor %}
+
+  {%- comment -%}
+  Dynamic Metafield Icons Loop
+  {%- endcomment -%}
+  {% for i in (1..4) %}
+  {% assign img_key = 'icon_image_' | append: i %}
+  {% assign heading_key = 'icon_heading_' | append: i %}
+  {% assign content_key = 'icon_content_' | append: i %}
+
+  {% assign img = product.metafields.custom[img_key] %}
+  {% assign heading = product.metafields.custom[heading_key] %}
+  {% assign content = product.metafields.custom[content_key] %}
+
+  {% if img != blank or heading != blank or content != blank %}
+    <div class="icon-feature-item">
+      {% if img != blank %}
+        <img src="{{ img | img_url: '150x150' }}" alt="{{ heading }}" />
+      {% endif %}
+      {% if heading != blank %}
+        <h4>{{ heading }}</h4>
+      {% endif %}
+      {% if content != blank %}
+        <p>{{ content }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+{% endfor %}
+
+
+</div>
+ 
+</div>
+<style>
+  .product-innfo-sec{
+    background: #faf9f8;
+    padding: 60px 0;
+  }
+.icon-feature-grid-wrapper {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.icon-feature-heading {
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.icon-feature-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.icon-feature-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  text-align: center;
+}
+
+.icon-feature-item {
+  flex: 1 1 150px;
+  max-width: 300px;
+  padding: 20px;
+}
+
+.icon-feature-item img {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.icon-feature-item h4 {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.icon-feature-item p {
+  font-size: 18px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .icon-feature-grid {
+    gap: 20px;
+  }
+  
+  .icon-feature-item {
+     flex: 0 0 calc(50% - 10px); /* 2 items per row with spacing adjustment */
+    max-width: calc(50% - 10px);
+    padding: 10px;
+  }
+
+  .icon-feature-item img {
+    width: 45px;
+    height: 45px;
+  }
+}
+</style>

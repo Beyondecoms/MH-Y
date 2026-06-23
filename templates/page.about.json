@@ -1,0 +1,265 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "banner-image",
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/1_3a0de806-201a-48aa-89d9-843cfc227b79.jpg"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "page_alignment": "a-left"
+      }
+    },
+    "background_video_qnRedD": {
+      "type": "background-video",
+      "settings": {
+        "display_wide": true,
+        "video": "shopify://files/videos/MH&Y more b_w.mp4",
+        "overlay": false,
+        "height": "medium",
+        "heading": "",
+        "subheading_text": "",
+        "button_text": "",
+        "link": "",
+        "heading_font_size": 30,
+        "subheading_font_size": 16,
+        "text_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_color": "#000000",
+        "section_padding": "both"
+      }
+    },
+    "rich_text_WxTckQ": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "OUR STORY & PHILOSOPHY",
+        "rich_text": "<p>Inspired by the philosophy of The Art of Living Well, the brand appreciates the finer things in life and finding joy in everyday. Whether it's a day at the office, a weekend getaway or an evening out, our versatile pieces are your perfect companion. Our brand is more than just a label; it's a sweet way of living life, cultivating connections, balancing work and life pleasures and embracing imperfections.</p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "rgba(0,0,0,0)",
+        "color": "#000000",
+        "width": 80,
+        "align_text": "center",
+        "section_padding": "both"
+      }
+    },
+    "image_gallery_NTQDi9": {
+      "type": "image-gallery",
+      "blocks": {
+        "image_jEUPmX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/DSC06204_New.jpg",
+            "image_width": "50%",
+            "link": "",
+            "heading": "",
+            "subheading": "",
+            "button_text": "",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "rgba(0,0,0,0)",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "image_bPeQGY": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/DSC06273.jpg",
+            "image_width": "50%",
+            "link": "",
+            "heading": "",
+            "subheading": "",
+            "button_text": "",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "rgba(0,0,0,0)",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_jEUPmX",
+        "image_bPeQGY"
+      ],
+      "settings": {
+        "heading": "",
+        "full_width": false,
+        "image_height": "fixed_height",
+        "desktop_height": 600,
+        "mobile_height": 600,
+        "swipe": false,
+        "images_touching": false,
+        "heading_size": 22,
+        "subheading_size": 14,
+        "section_padding": "top"
+      }
+    },
+    "rich_text_VUjeLB": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "MODERN",
+        "rich_text": "<p>Our design ethos is inspired by contemporary aesthetics presenting clothing that is both current and classic. Each piece is designed to reflect modern Indian sensibilities bringing forth an expression that is cultured and sophisticated. Our every collection is designed seamlessly to integrate your everyday life, providing versatility and elegance for every occasion.</p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "rgba(0,0,0,0)",
+        "color": "#000000",
+        "width": 80,
+        "align_text": "center",
+        "section_padding": "both"
+      }
+    },
+    "image_gallery_NwdBJJ": {
+      "type": "image-gallery",
+      "blocks": {
+        "image_8qbcMD": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/DSC06223.jpg",
+            "image_width": "100%",
+            "link": "",
+            "heading": "",
+            "subheading": "",
+            "button_text": "",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "rgba(0,0,0,0)",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_8qbcMD"
+      ],
+      "settings": {
+        "heading": "",
+        "full_width": true,
+        "image_height": "fixed_height",
+        "desktop_height": 600,
+        "mobile_height": 600,
+        "swipe": false,
+        "images_touching": false,
+        "heading_size": 22,
+        "subheading_size": 14,
+        "section_padding": "top"
+      }
+    },
+    "rich_text_LjTcWm": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "HERITAGE",
+        "rich_text": "<p>We strive to create wardrobes that is a reflection of a progressive mindset, with deep roots in tradition. Our designs are a manifestation of cultured modernist perspective, celebrating the simplicity and richness of heritage. It is a celebration of the past woven into the fabric of the present.</p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "rgba(0,0,0,0)",
+        "color": "#000000",
+        "width": 80,
+        "align_text": "center",
+        "section_padding": "both"
+      }
+    },
+    "image_gallery_wMAAUp": {
+      "type": "image-gallery",
+      "blocks": {
+        "image_Gmiq7e": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/DSC06248_New.jpg",
+            "image_width": "33%",
+            "link": "",
+            "heading": "",
+            "subheading": "",
+            "button_text": "",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "rgba(0,0,0,0)",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "image_rg4BU8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/DSC06515.jpg",
+            "image_width": "66%",
+            "link": "",
+            "heading": "",
+            "subheading": "",
+            "button_text": "",
+            "caption_position": "middle_center",
+            "hover_caption": false,
+            "caption_background": "rgba(0,0,0,0)",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_Gmiq7e",
+        "image_rg4BU8"
+      ],
+      "settings": {
+        "heading": "",
+        "full_width": false,
+        "image_height": "fixed_height",
+        "desktop_height": 600,
+        "mobile_height": 600,
+        "swipe": false,
+        "images_touching": false,
+        "heading_size": 22,
+        "subheading_size": 14,
+        "section_padding": "top"
+      }
+    },
+    "rich_text_RiFGpV": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "YOU",
+        "rich_text": "<p>We believe in creating clothing that resonates with your unique identity and style. Designed for individuals with a strong belief in tradition, yet possessing a progressive outlook. Our collection is tailored to compliment and enhance your lifestyle offering a sophisticated wardrobe that speaks to your refined sense. Whether you are dressing for a professional outing, a sophisticated event, our garments ensure that you are always impeccably dressed. Modern, Heritage and You is a convergence for contemporary design, traditional craft and personal expression.</p>",
+        "page": "",
+        "link": "",
+        "link_text": "",
+        "background": "#e5e5e5",
+        "color": "#000000",
+        "width": 70,
+        "align_text": "center",
+        "section_padding": "both"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main",
+    "background_video_qnRedD",
+    "rich_text_WxTckQ",
+    "image_gallery_NTQDi9",
+    "rich_text_VUjeLB",
+    "image_gallery_NwdBJJ",
+    "rich_text_LjTcWm",
+    "image_gallery_wMAAUp",
+    "rich_text_RiFGpV"
+  ]
+}

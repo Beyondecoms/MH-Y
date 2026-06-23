@@ -1,0 +1,414 @@
+{%- liquid
+
+  assign collection = collections[section.settings.collection]
+  assign product_count = collection.products.size | plus: 0
+
+  assign limit = section.settings.limit
+  if collection != blank and limit > product_count
+    assign limit = product_count
+  else
+    assign limit = section.settings.limit
+  endif
+
+  assign grid = section.settings.grid
+
+  case grid
+    when 2
+      assign grid_count = 'two-up'
+    when 3
+      assign grid_count = 'three-up'
+    when 4
+      assign grid_count = 'four-up'
+  endcase
+
+  assign aos_mod = 2
+
+  assign section_padding = ''
+  if section.settings.section_padding == 'top'
+    assign section_padding = 'pb0'
+  elsif section.settings.section_padding == 'bottom'
+    assign section_padding = 'mt0'
+  elsif section.settings.section_padding == 'none'
+    assign section_padding = 'mt0 pb0'
+  endif
+
+  assign hide_caption = false
+  if section.settings.caption_heading == blank and section.settings.caption == blank and section.settings.button_text == blank
+   assign hide_caption = true
+  endif
+
+  assign caption_position = section.settings.caption_position
+
+-%}
+
+{% style %}
+  .custom-shop--carousel-wrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    flex-wrap: nowrap;
+    overflow: scroll;
+    scrollbar-width: none;
+  }
+  #shopify-section-{{ section.id }} .collection--carousel .collection--carousel_image {
+    --section-overlay-color: {{ section.settings.overlay_color | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    --section-overlay-opacity: {{ section.settings.overlay_opacity | plus: 0 | divided_by: 100.0  }};
+    --caption-background: {{ section.settings.caption_background }};
+    --text-color: {{ section.settings.text_color }};
+  }
+  .custom-shop--carousel-heading{
+    margin-bottom: 40px;
+    max-width: 60%;
+    margin-left: 16px;
+  }
+  .custom-shop--sub-heading{
+      color: #173250;
+      text-align: left;
+    }
+  .collection--carousel_heading{
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      margin-right: 70%;
+    } 
+    .custom-shop--video-container video{
+      width: 100%;
+      height: 700px;
+      object-fit: cover;
+    }
+    .custom-shop--sub-heading {
+        padding: 0 10px;
+    }
+  .custom-shop--carousel-wrapper{
+    padding: 0 20px;
+  }
+  .custom-shop--product-index {
+    min-width: 1px;
+    flex-shrink: 0;
+  }
+   @media (max-width: 420px){
+     .custom-shop--video-container video{
+        height: auto;
+        margin-top: 40%;
+      }
+   }
+     @media (min-width: 420px) and (max-width: 770px){
+     .custom-shop--video-container video{
+        height: auto;
+        margin-top: 30%;
+      }
+   }
+   @media (max-width: 770px){
+     .custom-shop--carousel-wrapper{
+        position: relative;
+        top: 148px;
+        height: 450px;
+     }
+      .custom-shop--carousel-wrapper .flickity-prev-next-button.previous{
+        left: -5px;
+      }
+      .custom-shop--carousel-wrapper .flickity-prev-next-button.next{
+        right: -4px;
+      }
+      .custom-shop--carousel-wrapper .custom-shop--product-index {
+        width: 42% !important; 
+        box-sizing: border-box;
+      }
+      /* .custom-shop--video-container video{
+        height: auto;
+        margin-top: 40%;
+      } */
+     .custom-shop--carousel-conatiner{
+      flex-direction: row-reverse;
+      }
+      .custom-shop--carousel-heading{
+        max-width: 100%;
+      }
+      .collection--carousel_heading{
+        margin-right: 0;
+      }
+     .custom-shop--carousel-heading{
+       position: relative;
+       top: -550px;
+     }
+     }
+
+  {% if section.settings.image_first %}
+    #shopify-section-{{ section.id }} .collection--carousel .collection--carousel_image {
+      order: -1;
+    }
+    @media screen and (max-width: 740px) {
+      #shopify-section-{{ section.id }} .collection--carousel .collection--carousel_image {
+        margin-bottom: 20px;
+      }
+     .custom-shop--carousel-conatiner{
+      flex-direction: row-reverse;
+    }
+    }
+    #shopify-section-{{ section.id }} .collection--carousel .collection--carousel_wrapper {
+      order: 0;
+    }
+    #shopify-section-{{ section.id }} .collection--carousel .collection--carousel_wrapper .flickity-slider {
+      width: 102.5%;
+    }
+  {% endif %}
+  #shopify-section-{{ section.id }} .collection--carousel .collection--carousel_wrapper .flickity-slider {
+      width: 104.5%;
+    }
+{% endstyle %}
+
+<section class="custom-shop--the-look collection--carousel global__section {{ section_padding }} {{ section.settings.custom_class }}" data-section-id="{{ section.id }}" data-section-type="featured-collection" data-aos="fade">
+  {% if section.settings.full_width %}<div class="gridlock-fluid"><div class="row">{% endif %}
+  <div class="row grid__wrapper gr0">
+    {% capture slideshow_config %}{
+   }{% endcapture %}
+    <div class="custom-shop--content collection--carousel_content span-12 auto">
+    <div class="custom-shop--carousel-conatiner collection--carousel_container span-12 auto">
+      <div class="custom-shop--content-wrapper">
+        <div class="custom-shop--carousel-heading">
+          {% if section.settings.heading != blank %}
+            <div class="custom-shop--heading collection--carousel_heading">
+              <h2 class="section-heading">{{ section.settings.heading }}</h2>
+            </div>
+        {% endif %}
+        {% if section.settings.sub_heading != blank %}
+          <div class="custom-shop--sub-heading">
+            {{ section.settings.sub_heading }}
+          </div>
+        {% endif %}
+      </div>
+      <div class="custom-shop--carousel-wrapper collection--carousel_wrapper product-loop flickity__section {{ grid_count }} span-8 sm-span-12 auto">
+            {%- if collection == blank -%}
+              {% render 'onboard-product', prod_limit: limit, grid: grid, aos_mod: aos_mod %}
+            {%- else -%}
+
+              {% for product in collection.products %}
+                <div class="custom-shop--product-index product-index js-product-listing"
+                  id="product-listing-{{ product.id }}"
+                  data-product-id="{{ product.id }}"
+                  data-alpha="{{ product.title }}"
+                  data-price="{{ product.price }}"
+                  data-index="{{ forloop.index }}"
+                  data-aos="fade"
+                  data-aos-delay="{{ forloop.index | minus: 1 | modulo: aos_mod | times: 100 }}">
+                  {% liquid
+                    assign loading = 'lazy'
+                    assign fetch_priority = 'auto'
+                    if section.index == 1 and forloop.index <= grid
+                      assign loading = 'eager'
+                      assign fetch_priority = 'high'
+                    endif
+                   %}
+                  {% render 'product-listing', product: product, collection: collection, loading: loading, fetchpriority: fetch_priority %}
+                </div>
+              {% endfor %}
+
+            {%- endif -%}
+      </div>
+      </div>
+      <div class="custom-shop--video-container collection--carousel_image span-4 sm-span-12 auto"  data-aos="fade">
+        {% if section.settings.video != blank %}
+              {{ section.settings.video | video_tag: image_size: '2000x', controls: false, muted: true, autoplay: true, loop: true, playsinline: true, preload: 'metadata', class: 'section-video js-video', title: section.settings.description }}
+          {% else %}
+            <div class="onboard">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  </div>
+  {% if section.settings.full_width %}<div></div>{% endif %}
+</section>
+<div class="clear"></div>
+
+{% schema %}
+{
+  "name": "Custom shop the look",
+  "settings": [
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS Class"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop The Look"
+    },
+    {
+      "type": "text",
+      "id": "sub_heading",
+      "label": "Sub heading"
+    },
+    {
+      "type":"checkbox",
+      "id":"full_width",
+      "label":"Full width"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Products visible",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 2,
+      "max": 28,
+      "step": 2,
+      "label": "Total number of products",
+      "default": 12
+    },
+    {
+      "type":"header",
+      "content":"Image"
+    },
+    {
+      "type":"paragraph",
+      "content":"Select an image that will be positioned alongside the products. Image will scale and crop to meet the height of the products"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Select the video"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_first",
+      "label": "Video before products"
+    },
+    {
+      "type":"header",
+      "content":"Caption"
+    },
+    {
+      "type": "text",
+      "id": "caption_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "caption",
+      "label": "Caption"
+    },
+    {
+      "id": "button_text",
+      "type": "text",
+      "label": "Button text",
+      "default": "Button",
+      "info": "Visible only if a link is chosen"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "caption_position",
+      "label": "Caption position",
+      "default": "middle_center",
+      "options": [
+        {
+          "value": "top_left",
+          "label": "Top left"
+        },
+        {
+          "value": "top_center",
+          "label": "Top center"
+        },
+        {
+          "value": "top_right",
+          "label": "Top right"
+        },
+        {
+          "value": "middle_left",
+          "label": "Middle left"
+        },
+        {
+          "value": "middle_center",
+          "label": "Middle center"
+        },
+        {
+          "value": "middle_right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom_left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom_center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom_right",
+          "label": "Bottom right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "label": "Section spacing",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Both"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "both"
+    }
+  ],
+  "presets": [{
+    "name": "Custom shop the look"
+  }],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}
