@@ -484,6 +484,7 @@
         "ticker_exatkz",
         "ticker_nheneY"
       ],
+      "disabled": true,
       "name": "About Us — Fan Cards",
       "settings": {
         "heading": "ABOUT US",
